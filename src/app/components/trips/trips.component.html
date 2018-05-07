@@ -1,0 +1,12 @@
+<h1>Your Trips</h1>
+
+<ul class="trips-list">
+  <li *ngFor="let trip of trips">
+    <img src="../../../assets/images/{{trip.image}}">
+    <div>
+      <h2><a routerLink="/trip/{{trip.id}}">{{trip.destination}}</a></h2>
+      <p>Travel Dates: {{trip.startdate}} - {{trip.leavedate}}</p>
+      <p>Total Travel Costs: ${{trip.cost}}</p>
+    </div>
+  </li>
+</ul>
