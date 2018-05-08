@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Trip } from '../../models/trip';
+import { TripService } from '../../service/trip.service';
 
 @Component({
   selector: 'app-trip-detail',
@@ -8,17 +12,36 @@ import { Trip } from '../../models/trip';
 })
 export class TripDetailComponent implements OnInit {
 
+  trip: Trip;
+
   show: boolean;
 
   back() {
     window.history.back();
   }
 
-  constructor() {
+  constructor(
+    private route: ActivatedRoute,
+    private tripService: TripService,
+    private location: Location
+  ) {
     this.show = false;
+
+
+
+
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    
+    const id = this.route.snapshot.params.id;
+    const response = await this.tripService.getTrip(id);
+
+
+
+    this.trip = response.json();
+    // this.trip.cost = 200;
+    
   }
 
 }

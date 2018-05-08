@@ -12,17 +12,18 @@ export class TripsComponent implements OnInit {
 
   trips: Trip[];
 
-  getTrips(): void {
-    console.log(this);
-    this.tripService.getTrips()
-      .subscribe(trips => this.trips = trips);
-  }
+  // getTrips(): void {
+  //   console.log(this);
+  //   this.tripService.getTrips()
+  //     .subscribe(trips => this.trips = trips);
+  // }
 
   constructor(private tripService: TripService) {
   }
 
-  ngOnInit() {
-    this.getTrips();
+  async ngOnInit() {
+    const response = await this.tripService.getTrips();
+    this.trips = response.json();
   }
 
 }

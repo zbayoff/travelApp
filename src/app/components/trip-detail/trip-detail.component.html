@@ -1,58 +1,70 @@
 <div class="wrap">
 
-        <button (click)="show = !show">Edit</button>
+  <button (click)="show = !show">Edit</button>
 
-  <h2>Trip to: Madrid, Spain<span><input *ngIf="show" type="text" value="Madrid, Spain"></span></h2>
-  
-  <p>From: May 2 - 5, 2018</p>
+
+  <h2>Trip to: {{trip?.destination}}
+    <span>
+      <input *ngIf="show" type="text" value="{{trip?.destination}}">
+    </span>
+  </h2>
+
+  <p>From: {{trip?.startdate}} - {{trip?.leavedate}}</p>
   <h3>Travel Details</h3>
   <div class="card">
     <h4>Methods of Travel</h4>
     <p>Plane
-      <span>$500</span>
+      <span>${{trip?.travelCosts[0].plane}}</span>
     </p>
     <p>Bus
-      <span>$20</span>
+      <span>${{trip?.travelCosts[0].bus}}</span>
     </p>
     <p>Car
-      <span>$120</span>
+      <span>${{trip?.travelCosts[0].car}}</span>
     </p>
   </div>
   <div class="card">
     <h4>Lodging</h4>
     <p>Hotel
-      <span>$500</span>
+      <span>${{trip?.lodgingCosts[0].hotel}}</span>
     </p>
-    <p>AirBnB
-      <span>$200</span>
+    <p>AirBnb
+      <span>${{trip?.lodgingCosts[0].airBnB}}</span>
+    </p>
+    <p>Other
+      <span>${{trip?.lodgingCosts[0].other}}</span>
     </p>
   </div>
   <div class="card">
-        <h4>Miscallaneous</h4>
-        <p>Food<span>$500</span></p>
-        <p>Ferry Ride<span>$100</span></p>
-        <p>Hike<span>$10</span></p>
-    </div>
-    <div class="card">
-            <h4>Links</h4>
-            <p><a href="https://www.google.com/flights/#flt=/m/02_286..2018-05-23*./m/02_286.2018-05-27;c:USD;e:1;sd:1;t:h" target="_blank">Google Flights</a></p>
-            <p><a href="https://www.expedia.com/" target="_blank">Expedia</a></p>
-        </div>
-    <div class="card">
-        <h4>Total Trip Cost: <span>$3000</span></h4>
-    </div>
+    <h4>Miscallaneous</h4>
+    <p>Fun
+        <span>${{trip?.miscCosts[0].fun}}</span>
+      </p>
+      <p>Other
+          <span>${{trip?.miscCosts[0].other}}</span>
+        </p>
+  </div>
+  <!-- <div class="card">
+    <h4>Links</h4>
+    <p>
+      <a href="https://www.google.com/flights/#flt=/m/02_286..2018-05-23*./m/02_286.2018-05-27;c:USD;e:1;sd:1;t:h" target="_blank">Google Flights</a>
+    </p>
+    <p>
+      <a href="https://www.expedia.com/" target="_blank">Expedia</a>
+    </p>
+  </div> -->
+  <div class="card">
+    <h4>Total Trip Cost:
+        <span>${{trip?.miscCosts[0].other + trip?.miscCosts[0].fun }}</span>
+    </h4>
+  </div>
 
-    <button (click)="back()">Back</button>
-    
-    <button>Save</button>
-    <button>Cancel</button>
+  <button (click)="back()">Back</button>
+
+  <button>Save</button>
+  <button>Cancel</button>
 </div>
 
 <div class="wrap">
 
 </div>
-
-
-
-
-
