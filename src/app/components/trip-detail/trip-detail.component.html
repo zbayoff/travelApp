@@ -58,7 +58,7 @@
   </div> -->
       <div class="card">
         <h4>Total Trip Cost:
-          <span>${{totalCost }}</span>
+          <span>${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</span>
         </h4>
       </div>
     </div>
@@ -67,7 +67,7 @@
   <div *ngIf="formEnabled">
     <div *ngIf="trip">
       <div class="form-wrapper">
-        <form (submit)="editTrip()">
+        <form (submit)="saveTrip()">
           <fieldset>
             <legend>Edit Trip</legend>
             <div>
@@ -111,7 +111,13 @@
               <input [(ngModel)]="trip.miscCosts[0].misc" type="number" name="misccost" required placeholder="Misc Cost">
             </div>
             <div>
-              <button type="submit">Save Trip</button>
+                <p>Total Cost</p>
+                <label for="totalcost">Total Cost</label>
+                <input [(ngModel)]="trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc" type="number" name="totalcost" disabled placeholder="Total Cost">
+              </div>
+            <div>
+              <button *ngIf="formEnabled" type="submit">Save Trip</button>
+              <button *ngIf="formEnabled" (click)="cancel()">Cancel</button>
             </div>
           </fieldset>
         </form>
@@ -122,11 +128,7 @@
 
 
   <button (click)="back()">Back</button>
-  <button (click)="toggleForm()">Edit</button>
+  <button *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
 
-  <button (click)="cancel()">Cancel</button>
-</div>
-
-<div class="wrap">
-
+  
 </div>

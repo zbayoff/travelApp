@@ -51,6 +51,7 @@ exports.import = function (req, res) {
   // Recipe below refers to the mongoose schema. create() is a mongoose method
   Trip.create({
       'destination': 'Madrid, Spain',
+      'totalCost': 0,
       'startdate': 'May 15',
       'leavedate': 'May 20',
       'image': 'madrid.png',
@@ -72,6 +73,7 @@ exports.import = function (req, res) {
       }
     }, {
       'destination': 'Geneva, Switzerland',
+      'totalCost': 0,
       'startdate': 'May 15',
       'leavedate': 'May 20',
       'image': 'madrid.png',
@@ -93,6 +95,7 @@ exports.import = function (req, res) {
       }
     }, {
       'destination': 'Rome, Italy',
+      'totalCost': 0,
       'startdate': 'May 15',
       'leavedate': 'May 20',
       'image': 'madrid.png',

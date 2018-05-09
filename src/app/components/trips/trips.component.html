@@ -4,9 +4,67 @@
   <li *ngFor="let trip of trips">
     <img src="../../../assets/images/{{trip.image}}">
     <div>
-      <h2><a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a></h2><span (click)="deleteTrip(trip._id)">X</span>
+      <h2>
+        <a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a>
+      </h2>
+      <span class="deleteTrip" (click)="deleteTrip(trip._id)">X</span>
       <p>Travel Dates: {{trip.startdate}} - {{trip.leavedate}}</p>
-      <p>Total Travel Costs: </p>
+      <p>Total Travel Costs: ${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</p>
     </div>
   </li>
 </ul>
+
+<div *ngIf="add">
+  <div class="form-wrapper">
+    <form (ngSubmit)="addTrip(f)" #f="ngForm">
+      <fieldset>
+        <legend>Add Trip</legend>
+        <div>
+          <label for="destination">Destination</label>
+          <input ngModel minlength="3" type="text" name="destination" placeholder="Destination">
+        </div>
+        <div>
+          <label for="startdate">Start Date</label>
+          <input ngModel minlength="3" type="text" name="startdate" placeholder="Start Date">
+        </div>
+        <div>
+          <label for="leavedate">Leave Date</label>
+          <input ngModel minlength="3" type="text" name="leavedate" placeholder="Leave Date">
+        </div>
+        <div>
+          <p>Travel Costs</p>
+          <label for="planecost">Plane</label>
+          <input ngModel type="number" name="planecost" required placeholder="Plane Cost">
+          <label for="carcost">Car</label>
+          <input ngModel type="number" name="carcost" required placeholder="Car Cost">
+          <label for="buscost">Bus</label>
+          <input ngModel type="number" name="buscost" required placeholder="Bus Cost">
+          <label for="traincost">Train</label>
+          <input ngModel type="number" name="traincost" required placeholder="Train Cost">
+          <label for="boatcost">Boat</label>
+          <input ngModel type="number" name="boatcost" required placeholder="Boat Cost">
+          <label for="othertravelcost">Other</label>
+          <input ngModel type="number" name="othertravelcost" required placeholder="Other Cost">
+        </div>
+        <div>
+          <p>Lodging Costs</p>
+          <label for="hotelmotelcost">Hotel/Motel</label>
+          <input ngModel type="number" name="hotelmotelcost" required placeholder="Hotel/Motel Cost">
+          <label for="airbnbcost">AirBnB</label>
+          <input ngModel type="number" name="airbnbcost" required placeholder="AirBnB Cost">
+          <label for="otherlodgingcost">Other</label>
+          <input ngModel type="number" name="otherlodgingcost" required placeholder="Other Cost">
+        </div>
+        <div>
+          <p>Miscallaneous Costs</p>
+          <label for="misccost">Misc Cost</label>
+          <input ngModel type="number" name="misccost" required placeholder="Misc Cost">
+        </div>
+        <div>
+          <button type="submit">Add Trip</button>
+        </div>
+      </fieldset>
+
+    </form>
+  </div>
+</div>

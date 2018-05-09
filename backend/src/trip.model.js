@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const TripSchema = new Schema({
   destination: String,
-  cost: Number,
+  totalCost: Number,
   startdate: String,
   leavedate: String,
   image: String,

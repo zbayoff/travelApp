@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -14,7 +14,7 @@ export class TripDetailComponent implements OnInit {
 
   trip: Trip;
   totalCost: Number;
-
+  orginData: any;
   formEnabled: boolean;
 
   back() {
@@ -31,47 +31,40 @@ export class TripDetailComponent implements OnInit {
 
   }
 
+
   toggleForm() {
     this.formEnabled = !this.formEnabled;
+    this.orginData = JSON.parse(JSON.stringify(this.trip));
+    console.log(this.orginData);
   }
 
   cancel() {
-    this.formEnabled = false;
+    this.formEnabled = !this.formEnabled;
+    this.trip = this.orginData;
+    console.log(this.trip);
   }
+
+  editTrip() {
+    this.formEnabled = !this.formEnabled;
+    // this.trip = JSON.parse(JSON.stringify(this.trip));
+  }
+
 
   async ngOnInit() {
 
     const id = this.route.snapshot.params.id;
     const response = await this.tripService.getTrip(id);
-    console.log(response);
+    // console.log(response);
     this.trip = response.json();
-
-    const travelCosts: any = Object.values(this.trip.travelCosts[0]).reduce((accumulator: number, currentValue: number) => {
-      return accumulator + currentValue;
-    });
-
-    console.log(typeof travelCosts);
-
-    const lodgingCosts: any = Object.values(this.trip.lodgingCosts[0]).reduce((accumulator: number, currentValue: number) => {
-      return accumulator + currentValue;
-    });
-
-    const miscCosts: any = Object.values(this.trip.miscCosts[0]).reduce((accumulator: number, currentValue: number) => {
-      return accumulator + currentValue;
-    });
-
-    this.totalCost = travelCosts + lodgingCosts + miscCosts;
+    // this.orginData = response.json();
+    // this.orginData = JSON.parse(JSON.stringify(this.trip));
 
   }
 
-
-  async editTrip() {
+  async saveTrip() {
     const response = await this.tripService.putTrip(this.trip);
     this.toggleForm();
   }
-
-
-
 
 
 }

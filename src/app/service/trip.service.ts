@@ -42,6 +42,10 @@ export class TripService {
     return this.http.get('http://localhost:3006/api/trip/' + id).toPromise();
   }
 
+  addTrip(trip) {
+    return this.http.post('http://localhost:3006/api/trip/', trip).toPromise();
+  }
+
   putTrip(trip) {
     return this.http.put('http://localhost:3006/api/trip/' + trip._id, trip).toPromise();
   }

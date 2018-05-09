@@ -1,7 +1,7 @@
 export class Trip {
     id: string;
     destination: string;
-    cost: number;
+    totalCost: number;
     startdate: string;
     leavedate: string;
     image: string;

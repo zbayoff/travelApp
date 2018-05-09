@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { Trip } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
@@ -12,6 +13,8 @@ export class TripsComponent implements OnInit {
 
   trip: Trip;
   trips: Trip[];
+  add: boolean;
+  travelCosts: any;
   totalCost: any;
 
   // getTrips(): void {
@@ -21,13 +24,59 @@ export class TripsComponent implements OnInit {
   // }
 
   constructor(private tripService: TripService) {
+    this.add = true;
   }
+
+
+  async addTrip(form: NgForm) {
+    console.log(form.value);
+
+    const formData = {
+      'destination': form.value.destination,
+      'startdate': form.value.startdate,
+      'leavedate': form.value.leavedate,
+      'image': 'madrid.png',
+      'travelCosts': {
+        'plane': form.value.planecost,
+        'car': form.value.carcost,
+        'bus': form.value.buscost,
+        'train': form.value.traincost,
+        'boat': form.value.boatcost,
+        'other': form.value.othertravelcost
+      },
+      'lodgingCosts': {
+        'hotelMotel': form.value.hotelmotelcost,
+        'airBnB': form.value.airbnbcost,
+        'other': form.value.otherlodgingcost,
+      },
+      'miscCosts': {
+        'misc': form.value.misccost,
+      }
+    };
+
+    const response = await this.tripService.addTrip(formData);
+    const responseGet = await this.tripService.getTrips();
+    this.trips = responseGet.json();
+  }
+
+
 
   async ngOnInit() {
     const response = await this.tripService.getTrips();
     this.trips = response.json();
-
     console.log(this.trips);
+
+    // for (const trip of this.trips) {
+    //   trip.totalCost = Object.values(trip.travelCosts[0]).reduce((accumulator: number, currentValue: number) => {
+    //       return accumulator + currentValue;
+    //     }) + Object.values(trip.lodgingCosts[0]).reduce((accumulator: number, currentValue: number) => {
+    //       return accumulator + currentValue;
+    //     }) + Object.values(trip.miscCosts[0]).reduce((accumulator: number, currentValue: number) => {
+    //       return accumulator + currentValue;
+    //     });
+
+    // }
+
 
     // this.totalCost = Object.values(this.trips.travelCosts[0]).reduce((accumulator: number, currentValue: number) => {
     //   return accumulator + currentValue;
