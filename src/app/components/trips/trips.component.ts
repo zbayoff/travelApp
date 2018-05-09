@@ -10,7 +10,9 @@ import { TripService } from '../../service/trip.service';
 })
 export class TripsComponent implements OnInit {
 
+  trip: Trip;
   trips: Trip[];
+  totalCost: any;
 
   // getTrips(): void {
   //   console.log(this);
@@ -24,6 +26,20 @@ export class TripsComponent implements OnInit {
   async ngOnInit() {
     const response = await this.tripService.getTrips();
     this.trips = response.json();
+
+    console.log(this.trips);
+
+    // this.totalCost = Object.values(this.trips.travelCosts[0]).reduce((accumulator: number, currentValue: number) => {
+    //   return accumulator + currentValue;
+    // });
   }
+
+  async deleteTrip(tripID) {
+    const response = await this.tripService.deleteTrip(tripID);
+    const responseGet = await this.tripService.getTrips();
+    this.trips = responseGet.json();
+  }
+
+
 
 }

@@ -4,9 +4,9 @@
   <li *ngFor="let trip of trips">
     <img src="../../../assets/images/{{trip.image}}">
     <div>
-      <h2><a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a></h2>
+      <h2><a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a></h2><span (click)="deleteTrip(trip._id)">X</span>
       <p>Travel Dates: {{trip.startdate}} - {{trip.leavedate}}</p>
-      <p>Total Travel Costs: ${{trip.cost}}</p>
+      <p>Total Travel Costs: </p>
     </div>
   </li>
 </ul>

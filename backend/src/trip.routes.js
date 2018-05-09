@@ -6,7 +6,7 @@ const tripRoutes = function(app) {
     app.post('/api/trip', trips.add);
     app.put('/api/trip/:id', trips.update);
     app.delete('/api/trip/:id', trips.delete);
-
+    
     app.get('/api/import', trips.import);
 }
 

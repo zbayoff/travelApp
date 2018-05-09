@@ -30,7 +30,7 @@ export class TripService {
   //   return of(TRIPS);
   // }
 
-  getTrips(){
+  getTrips() {
     return this.http.get('http://localhost:3006/api/trip').toPromise();
   }
 
@@ -38,8 +38,16 @@ export class TripService {
   //   return of (TRIPS.find(trip => trip.id === id));
   // }
 
-  getTrip(id){
+  getTrip(id) {
     return this.http.get('http://localhost:3006/api/trip/' + id).toPromise();
+  }
+
+  putTrip(trip) {
+    return this.http.put('http://localhost:3006/api/trip/' + trip._id, trip).toPromise();
+  }
+
+  deleteTrip(tripID) {
+    return this.http.delete('http://localhost:3006/api/trip/' + tripID).toPromise();
   }
 
   constructor(private http: Http) { }

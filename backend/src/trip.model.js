@@ -7,9 +7,9 @@ const TripSchema = new Schema({
   startdate: String,
   leavedate: String,
   image: String,
-  travelCosts: Array,
-  lodgingCosts: Array,
-  miscCosts: Array
+  travelCosts: [Schema.Types.Mixed],
+  lodgingCosts: [Schema.Types.Mixed],
+  miscCosts: [Schema.Types.Mixed]
 });
 
 module.exports = mongoose.model('Trip', TripSchema);

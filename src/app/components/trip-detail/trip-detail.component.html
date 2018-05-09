@@ -1,50 +1,53 @@
 <div class="wrap">
 
-  <button (click)="show = !show">Edit</button>
 
+  <div *ngIf="!formEnabled">
+    <div *ngIf="trip">
+      <h2>Trip to: {{trip.destination}}
+      </h2>
 
-  <h2>Trip to: {{trip?.destination}}
-    <span>
-      <input *ngIf="show" type="text" value="{{trip?.destination}}">
-    </span>
-  </h2>
-
-  <p>From: {{trip?.startdate}} - {{trip?.leavedate}}</p>
-  <h3>Travel Details</h3>
-  <div class="card">
-    <h4>Methods of Travel</h4>
-    <p>Plane
-      <span>${{trip?.travelCosts[0].plane}}</span>
-    </p>
-    <p>Bus
-      <span>${{trip?.travelCosts[0].bus}}</span>
-    </p>
-    <p>Car
-      <span>${{trip?.travelCosts[0].car}}</span>
-    </p>
-  </div>
-  <div class="card">
-    <h4>Lodging</h4>
-    <p>Hotel
-      <span>${{trip?.lodgingCosts[0].hotel}}</span>
-    </p>
-    <p>AirBnb
-      <span>${{trip?.lodgingCosts[0].airBnB}}</span>
-    </p>
-    <p>Other
-      <span>${{trip?.lodgingCosts[0].other}}</span>
-    </p>
-  </div>
-  <div class="card">
-    <h4>Miscallaneous</h4>
-    <p>Fun
-        <span>${{trip?.miscCosts[0].fun}}</span>
-      </p>
-      <p>Other
-          <span>${{trip?.miscCosts[0].other}}</span>
+      <p>From: {{trip.startdate}} - {{trip.leavedate}}</p>
+      <h3>Travel Details</h3>
+      <div class="card">
+        <h4>Travel Costs</h4>
+        <p>Plane
+          <span>${{trip.travelCosts[0].plane}}</span>
         </p>
-  </div>
-  <!-- <div class="card">
+        <p>Bus
+          <span>${{trip.travelCosts[0].bus}}</span>
+        </p>
+        <p>Car
+          <span>${{trip.travelCosts[0].car}}</span>
+        </p>
+        <p>Train
+          <span>${{trip.travelCosts[0].train}}</span>
+        </p>
+        <p>Boat
+          <span>${{trip.travelCosts[0].boat}}</span>
+        </p>
+        <p>Other
+          <span>${{trip.travelCosts[0].other}}</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4>Lodging</h4>
+        <p>Hotel/Motel
+          <span>${{trip.lodgingCosts[0].hotelMotel}}</span>
+        </p>
+        <p>AirBnb
+          <span>${{trip.lodgingCosts[0].airBnB}}</span>
+        </p>
+        <p>Other
+          <span>${{trip.lodgingCosts[0].other}}</span>
+        </p>
+      </div>
+      <div class="card">
+        <h4>Miscallaneous</h4>
+        <p>Misc
+          <span>${{trip.miscCosts[0].misc}}</span>
+        </p>
+      </div>
+      <!-- <div class="card">
     <h4>Links</h4>
     <p>
       <a href="https://www.google.com/flights/#flt=/m/02_286..2018-05-23*./m/02_286.2018-05-27;c:USD;e:1;sd:1;t:h" target="_blank">Google Flights</a>
@@ -53,16 +56,75 @@
       <a href="https://www.expedia.com/" target="_blank">Expedia</a>
     </p>
   </div> -->
-  <div class="card">
-    <h4>Total Trip Cost:
-        <span>${{trip?.miscCosts[0].other + trip?.miscCosts[0].fun }}</span>
-    </h4>
+      <div class="card">
+        <h4>Total Trip Cost:
+          <span>${{totalCost }}</span>
+        </h4>
+      </div>
+    </div>
   </div>
 
-  <button (click)="back()">Back</button>
+  <div *ngIf="formEnabled">
+    <div *ngIf="trip">
+      <div class="form-wrapper">
+        <form (submit)="editTrip()">
+          <fieldset>
+            <legend>Edit Trip</legend>
+            <div>
+              <label for="destination">Trip Destination</label>
+              <input [(ngModel)]="trip.destination" type="text" name="destination" required placeholder="Trip Destination">
+            </div>
+            <div>
+              <p>Travel Dates</p>
+              <label for="startdate"></label>
+              <input [(ngModel)]="trip.startdate" type="text" name="startdate" required placeholder="Start Date">
+              <label for="leavedate"></label>
+              <input [(ngModel)]="trip.leavedate" type="text" name="leavedate" required placeholder="Leave Date">
+            </div>
+            <div>
+              <p>Travel Costs</p>
+              <label for="planecost">Plane</label>
+              <input [(ngModel)]="trip.travelCosts[0].plane" type="number" name="planecost" required placeholder="Plane Cost">
+              <label for="carcost">Car</label>
+              <input [(ngModel)]="trip.travelCosts[0].car" type="number" name="carcost" required placeholder="Car Cost">
+              <label for="buscost">Bus</label>
+              <input [(ngModel)]="trip.travelCosts[0].bus" type="number" name="buscost" required placeholder="Bus Cost">
+              <label for="traincost">Train</label>
+              <input [(ngModel)]="trip.travelCosts[0].train" type="number" name="traincost" required placeholder="Train Cost">
+              <label for="boatcost">Boat</label>
+              <input [(ngModel)]="trip.travelCosts[0].boat" type="number" name="boatcost" required placeholder="Boat Cost">
+              <label for="othertravelcost">Other</label>
+              <input [(ngModel)]="trip.travelCosts[0].other" type="number" name="othertravelcost" required placeholder="Other Cost">
+            </div>
+            <div>
+              <p>Lodging Costs</p>
+              <label for="hotelmotelcost">Hotel/Motel</label>
+              <input [(ngModel)]="trip.lodgingCosts[0].hotelMotel" type="number" name="hotelmotelcost" required placeholder="Hotel/Motel Cost">
+              <label for="airbnbcost">AirBnB</label>
+              <input [(ngModel)]="trip.lodgingCosts[0].airBnB" type="number" name="airbnbcost" required placeholder="AirBnB Cost">
+              <label for="otherlodgingcost">Other</label>
+              <input [(ngModel)]="trip.lodgingCosts[0].other" type="number" name="otherlodgingcost" required placeholder="Other Cost">
+            </div>
+            <div>
+              <p>Miscallaneous Costs</p>
+              <label for="misccost">Misc Cost</label>
+              <input [(ngModel)]="trip.miscCosts[0].misc" type="number" name="misccost" required placeholder="Misc Cost">
+            </div>
+            <div>
+              <button type="submit">Save Trip</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
 
-  <button>Save</button>
-  <button>Cancel</button>
+
+
+  <button (click)="back()">Back</button>
+  <button (click)="toggleForm()">Edit</button>
+
+  <button (click)="cancel()">Cancel</button>
 </div>
 
 <div class="wrap">
