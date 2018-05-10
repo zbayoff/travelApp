@@ -47,18 +47,24 @@
           <span>${{trip.miscCosts[0].misc}}</span>
         </p>
       </div>
-      <!-- <div class="card">
-    <h4>Links</h4>
-    <p>
-      <a href="https://www.google.com/flights/#flt=/m/02_286..2018-05-23*./m/02_286.2018-05-27;c:USD;e:1;sd:1;t:h" target="_blank">Google Flights</a>
-    </p>
-    <p>
-      <a href="https://www.expedia.com/" target="_blank">Expedia</a>
-    </p>
-  </div> -->
+      <div class="card">
+        <h4>Links</h4>
+        <p>
+          <a href="{{trip.url1}}" target="_blank">{{trip.url1}}</a>
+        </p>
+        <p>
+          <a href="{{trip.url2}}" target="_blank">{{trip.url2}}</a>
+        </p>
+      </div>
+      <div class="card">
+          <h4>Image</h4>
+          <p>{{trip.image}}</p>
+        </div>
       <div class="card">
         <h4>Total Trip Cost:
-          <span>${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</span>
+          <span>${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train +
+            trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB
+            + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</span>
         </h4>
       </div>
     </div>
@@ -111,10 +117,23 @@
               <input [(ngModel)]="trip.miscCosts[0].misc" type="number" name="misccost" required placeholder="Misc Cost">
             </div>
             <div>
-                <p>Total Cost</p>
-                <label for="totalcost">Total Cost</label>
-                <input [(ngModel)]="trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc" type="number" name="totalcost" disabled placeholder="Total Cost">
+              <p>Links</p>
+              <label for="url1">Link 1</label>
+              <input [(ngModel)]="trip.url1" type="text" name="url1" required placeholder="Link 1">
+              <label for="url2">Link 2</label>
+              <input [(ngModel)]="trip.url2" type="text" name="url2" required placeholder="Link 2">
+            </div>
+            <div>
+                <p>Image</p>
+                <label for="image">Image</label>
+                <input [(ngModel)]="trip.image" type="text" name="image" required placeholder="Image">
               </div>
+            <div>
+              <p>Total Cost</p>
+              <label for="totalcost">Total Cost</label>
+              <input [(ngModel)]="trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc"
+                type="number" name="totalcost" disabled placeholder="Total Cost">
+            </div>
             <div>
               <button *ngIf="formEnabled" type="submit">Save Trip</button>
               <button *ngIf="formEnabled" (click)="cancel()">Cancel</button>
@@ -130,5 +149,5 @@
   <button (click)="back()">Back</button>
   <button *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
 
-  
+
 </div>

@@ -31,33 +31,28 @@ export class TripDetailComponent implements OnInit {
 
   }
 
-
   toggleForm() {
     this.formEnabled = !this.formEnabled;
     this.orginData = JSON.parse(JSON.stringify(this.trip));
-    console.log(this.orginData);
+    // console.log(this.orginData);
   }
 
   cancel() {
     this.formEnabled = !this.formEnabled;
     this.trip = this.orginData;
-    console.log(this.trip);
+    // console.log(this.trip);
   }
 
   editTrip() {
     this.formEnabled = !this.formEnabled;
-    // this.trip = JSON.parse(JSON.stringify(this.trip));
   }
-
 
   async ngOnInit() {
 
     const id = this.route.snapshot.params.id;
     const response = await this.tripService.getTrip(id);
-    // console.log(response);
+
     this.trip = response.json();
-    // this.orginData = response.json();
-    // this.orginData = JSON.parse(JSON.stringify(this.trip));
 
   }
 
@@ -65,6 +60,5 @@ export class TripDetailComponent implements OnInit {
     const response = await this.tripService.putTrip(this.trip);
     this.toggleForm();
   }
-
 
 }

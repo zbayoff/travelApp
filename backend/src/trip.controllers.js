@@ -52,68 +52,74 @@ exports.import = function (req, res) {
   Trip.create({
       'destination': 'Madrid, Spain',
       'totalCost': 0,
-      'startdate': 'May 15',
-      'leavedate': 'May 20',
+      'startdate': 'June 7',
+      'leavedate': 'June 14',
       'image': 'madrid.png',
+      'url1': 'https://www.google.com/flights?lite=0#flt=/m/02_286./m/056_y.2018-06-07.JFKLHR0BA176~LHRMAD1BA512*/m/056_y./m/02_286.2018-06-14.MADJFK0AA95;c:USD;e:1;a:AA*AA;sd:1;t:f;sp:.USD.55751*.USD.55751',
+      'url2': 'https://www.hotels.com/search.do?resolved-location=CITY%3A457987%3AUNKNOWN%3AUNKNOWN&destination-id=457987&q-destination=Madrid,%20Spain&q-check-in=2018-05-13&q-check-out=2018-05-14&q-rooms=1&q-room-0-adults=2&q-room-0-children=0',
       'travelCosts': {
-        'plane': 500,
-        'car': 200,
+        'plane': 558,
+        'car': 300,
         'bus': 0,
         'train': 100,
         'boat': 0,
         'other': 0
       },
       'lodgingCosts': {
-        'hotelMotel': 300,
-        'airBnB': 200,
-        'other': 0,
-      },
-      'miscCosts': {
-        'misc': 200,
-      }
-    }, {
-      'destination': 'Geneva, Switzerland',
-      'totalCost': 0,
-      'startdate': 'May 15',
-      'leavedate': 'May 20',
-      'image': 'madrid.png',
-      'travelCosts': {
-        'plane': 1000,
-        'car': 200,
-        'bus': 20,
-        'train': 0,
-        'boat': 0,
-        'other': 0
-      },
-      'lodgingCosts': {
-        'hotelMotel': 300,
-        'airBnB': 300,
+        'hotelMotel': 400,
+        'airBnB': 0,
         'other': 0,
       },
       'miscCosts': {
         'misc': 400,
+      }
+    }, {
+      'destination': 'Geneva, Switzerland',
+      'totalCost': 0,
+      'startdate': 'June 12',
+      'leavedate': 'June 21',
+      'image': 'geneva.png',
+      'url1': 'https://www.google.com/flights?lite=0#flt=/m/02_286./m/03902.2018-06-12.JFKLHR0AA100~LHRGVA1BA726*/m/03902./m/02_286.2018-06-21.GVAMAD0IB3483~MADJFK0IB6253;c:USD;e:1;a:AA*AA;sd:1;t:f;sp:.USD.89221*.USD.89221',
+      'url2': 'https://www.hotels.com/search.do?resolved-location=CITY%3A173674%3AUNKNOWN%3AUNKNOWN&destination-id=173674&q-destination=Geneva,%20Switzerland&q-check-in=2018-05-13&q-check-out=2018-05-14&q-rooms=1&q-room-0-adults=2&q-room-0-children=0',
+      'travelCosts': {
+        'plane': 893,
+        'car': 400,
+        'bus': 0,
+        'train': 0,
+        'boat': 100,
+        'other': 0
+      },
+      'lodgingCosts': {
+        'hotelMotel': 0,
+        'airBnB': 400,
+        'other': 0,
+      },
+      'miscCosts': {
+        'misc': 350,
       }
     }, {
       'destination': 'Rome, Italy',
       'totalCost': 0,
       'startdate': 'May 15',
-      'leavedate': 'May 20',
-      'image': 'madrid.png',
+      'leavedate': 'May 27',
+      'image': 'rome.png',
+      'url1': 'https://www.google.com/flights/#flt=/m/02_286./m/06c62.2018-05-15*/m/06c62./m/02_286.2018-05-27;c:USD;e:1;sd:1;t:f',
+      'url2': 'https://www.hotels.com/search.do?resolved-location=CITY%3A1729991%3AUNKNOWN%3AUNKNOWN&destination-id=1729991&q-destination=Monti,%20Rome,%20Italy&q-check-in=2018-05-13&q-check-out=2018-05-14&q-rooms=1&q-room-0-adults=2&q-room-0-children=0&f-hotel-id=280065',
       'travelCosts': {
-        'plane': 700,
-        'car': 0,
-        'bus': 40,
+        'plane': 814,
+        'car': 200,
+        'bus': 0,
         'train': 0,
-        'boat': 300,
+        'boat': 60,
         'other': 0
       },
       'lodgingCosts': {
-        'hotelMotel': 200,
+        'hotelMotel': 500,
         'airBnB': 0,
         'other': 30,
       },
       'miscCosts': {
-        'misc': 400,
+        'misc': 200,
       }
     },
     function (err) {

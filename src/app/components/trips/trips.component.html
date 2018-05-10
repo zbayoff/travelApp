@@ -9,19 +9,22 @@
       </h2>
       <span class="deleteTrip" (click)="deleteTrip(trip._id)">X</span>
       <p>Travel Dates: {{trip.startdate}} - {{trip.leavedate}}</p>
-      <p>Total Travel Costs: ${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</p>
+      <p>Total Travel Costs: ${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train
+        + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB
+        + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</p>
     </div>
   </li>
 </ul>
 
 <div *ngIf="add">
   <div class="form-wrapper">
-    <form (ngSubmit)="addTrip(f)" #f="ngForm">
+    <form (ngSubmit)="addTrip(f)" #f="ngForm" ngNativeValidate>
       <fieldset>
         <legend>Add Trip</legend>
         <div>
           <label for="destination">Destination</label>
-          <input ngModel minlength="3" type="text" name="destination" placeholder="Destination">
+          <input ngModel #destination="ngModel" type="text" name="destination" placeholder="Destination" required>
+          <div *ngIf="destination.errors?.required && destination.touched" class="alert">A trip destination is required.</div>
         </div>
         <div>
           <label for="startdate">Start Date</label>
@@ -61,7 +64,19 @@
           <input ngModel type="number" name="misccost" required placeholder="Misc Cost">
         </div>
         <div>
-          <button type="submit">Add Trip</button>
+          <p>Links</p>
+          <label for="url1">Link 1</label>
+          <input ngModel type="text" name="url1" required placeholder="Link 1">
+          <label for="url2">Link 2</label>
+          <input ngModel type="text" name="url2" required placeholder="Link 2">
+        </div>
+        <div>
+          <p>Image</p>
+          <label for="image">Image</label>
+          <input ngModel type="text" name="image" placeholder="Image">
+        </div>
+        <div>
+          <input type="submit" value="Add Trip">
         </div>
       </fieldset>
 

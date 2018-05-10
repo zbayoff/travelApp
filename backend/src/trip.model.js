@@ -7,6 +7,8 @@ const TripSchema = new Schema({
   startdate: String,
   leavedate: String,
   image: String,
+  url1: String,
+  url2: String,
   travelCosts: [Schema.Types.Mixed],
   lodgingCosts: [Schema.Types.Mixed],
   miscCosts: [Schema.Types.Mixed]

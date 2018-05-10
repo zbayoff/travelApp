@@ -29,13 +29,15 @@ export class TripsComponent implements OnInit {
 
 
   async addTrip(form: NgForm) {
-    console.log(form.value);
+    // console.log(form.value);
 
     const formData = {
       'destination': form.value.destination,
       'startdate': form.value.startdate,
       'leavedate': form.value.leavedate,
-      'image': 'madrid.png',
+      'image': form.value.image,
+      'url1': form.value.url1,
+      'url2': form.value.url2,
       'travelCosts': {
         'plane': form.value.planecost,
         'car': form.value.carcost,
@@ -59,28 +61,10 @@ export class TripsComponent implements OnInit {
     this.trips = responseGet.json();
   }
 
-
-
   async ngOnInit() {
     const response = await this.tripService.getTrips();
     this.trips = response.json();
-    console.log(this.trips);
 
-    // for (const trip of this.trips) {
-    //   trip.totalCost = Object.values(trip.travelCosts[0]).reduce((accumulator: number, currentValue: number) => {
-    //       return accumulator + currentValue;
-    //     }) + Object.values(trip.lodgingCosts[0]).reduce((accumulator: number, currentValue: number) => {
-    //       return accumulator + currentValue;
-    //     }) + Object.values(trip.miscCosts[0]).reduce((accumulator: number, currentValue: number) => {
-    //       return accumulator + currentValue;
-    //     });
-
-    // }
-
-
-    // this.totalCost = Object.values(this.trips.travelCosts[0]).reduce((accumulator: number, currentValue: number) => {
-    //   return accumulator + currentValue;
-    // });
   }
 
   async deleteTrip(tripID) {
@@ -88,7 +72,5 @@ export class TripsComponent implements OnInit {
     const responseGet = await this.tripService.getTrips();
     this.trips = responseGet.json();
   }
-
-
 
 }

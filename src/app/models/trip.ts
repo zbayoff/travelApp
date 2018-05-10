@@ -5,6 +5,8 @@ export class Trip {
     startdate: string;
     leavedate: string;
     image: string;
+    url1: string;
+    url2: string;
     travelCosts: any;
     lodgingCosts: any;
     miscCosts: any;
