@@ -17,6 +17,71 @@ export class TripDetailComponent implements OnInit {
   orginData: any;
   formEnabled: boolean;
 
+  planeCostCheck: boolean;
+
+  carCostCheck: boolean;
+
+  busCostCheck: boolean;
+  buscost: any;
+  trainCostCheck: boolean;
+
+  boatCostCheck: boolean;
+  boatcost: any;
+  otherTravelCostCheck: boolean;
+  otherTravelcost: any;
+  hotelmotelCostCheck: boolean;
+  hotelmotelcost: any;
+  airbnbCostCheck: boolean;
+  airbnbcost: any;
+  otherLodgingCostCheck: boolean;
+  otherLodgingcost: any;
+  miscCostCheck: boolean;
+  misccost: any;
+
+  myVar: any;
+
+  setZero() {
+
+    // console.log(myVar);
+    this.trip.travelCosts[0].plane = 0;
+    // this.trip.travelCosts[0].bus = 0;
+    // this.trip.travelCosts[0].car = 0;
+
+  }
+
+  focusOut() {
+    if (this.trip.travelCosts[0].plane === null) {
+      this.trip.travelCosts[0].plane = 0;
+    }
+    if (this.trip.travelCosts[0].car === null) {
+      this.trip.travelCosts[0].car = 0;
+    }
+    if (this.trip.travelCosts[0].bus === null) {
+      this.trip.travelCosts[0].bus = 0;
+    }
+    if (this.trip.travelCosts[0].train === null) {
+      this.trip.travelCosts[0].train = 0;
+    }
+    if (this.trip.travelCosts[0].boat === null) {
+      this.trip.travelCosts[0].boat = 0;
+    }
+    if (this.trip.travelCosts[0].other === null) {
+      this.trip.travelCosts[0].other = 0;
+    }
+    if (this.trip.lodgingCosts[0].hotelMotel === null) {
+      this.trip.lodgingCosts[0].hotelMotel = 0;
+    }
+    if (this.trip.lodgingCosts[0].airBnB === null) {
+      this.trip.lodgingCosts[0].airBnB = 0;
+    }
+    if (this.trip.lodgingCosts[0].other === null) {
+      this.trip.lodgingCosts[0].other = 0;
+    }
+    if (this.trip.miscCosts[0].misc === null) {
+      this.trip.miscCosts[0].misc = 0;
+    }
+  }
+
   back() {
     window.history.back();
   }
@@ -28,6 +93,28 @@ export class TripDetailComponent implements OnInit {
   ) {
 
     this.formEnabled = false;
+
+
+    this.planeCostCheck = true;
+
+    this.carCostCheck = true;
+
+    this.busCostCheck = true;
+
+    this.trainCostCheck = true;
+
+    this.boatCostCheck = true;
+
+    this.otherTravelCostCheck = true;
+
+    this.hotelmotelCostCheck = true;
+
+    this.airbnbCostCheck = true;
+
+    this.otherLodgingCostCheck = true;
+
+    this.miscCostCheck = true;
+
 
   }
 

@@ -9,7 +9,7 @@
       </h2>
       <span class="deleteTrip" (click)="deleteTrip(trip._id)">X</span>
       <p>Travel Dates: {{trip.startdate}} - {{trip.leavedate}}</p>
-      <p>Total Travel Costs: ${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train
+      <p>Total Trip Cost: ${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train
         + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB
         + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</p>
     </div>
@@ -37,38 +37,48 @@
         <div>
           <p>Travel Costs</p>
           <label for="planecost">Plane</label>
-          <input ngModel type="number" name="planecost" required placeholder="Plane Cost">
+          <input [(ngModel)]="planeCostCheck" (change)="setZero()" name="planeCostCheck" type="checkbox">
+          <input [readonly]="!planeCostCheck" [(ngModel)]="planecost" (focusout)="focusOut()" type="number" name="planecost" placeholder="Plane Cost">
           <label for="carcost">Car</label>
-          <input ngModel type="number" name="carcost" required placeholder="Car Cost">
+          <input [(ngModel)]="carCostCheck" (change)="setZero()" name="carCostCheck" type="checkbox">
+          <input [readonly]="!carCostCheck" [(ngModel)]="carcost" (focusout)="focusOut()" type="number" name="carcost" placeholder="Car Cost">
           <label for="buscost">Bus</label>
-          <input ngModel type="number" name="buscost" required placeholder="Bus Cost">
+          <input [(ngModel)]="busCostCheck" (change)="setZero()" name="busCostCheck" type="checkbox">
+          <input [readonly]="!busCostCheck" [(ngModel)]="buscost" (focusout)="focusOut()" type="number" name="buscost" placeholder="Bus Cost">
           <label for="traincost">Train</label>
-          <input ngModel type="number" name="traincost" required placeholder="Train Cost">
+          <input [(ngModel)]="trainCostCheck" (change)="setZero()" name="trainCostCheck" type="checkbox">
+          <input [readonly]="!trainCostCheck" [(ngModel)]="traincost" (focusout)="focusOut()" type="number" name="traincost" placeholder="Train Cost">
           <label for="boatcost">Boat</label>
-          <input ngModel type="number" name="boatcost" required placeholder="Boat Cost">
-          <label for="othertravelcost">Other</label>
-          <input ngModel type="number" name="othertravelcost" required placeholder="Other Cost">
+          <input [(ngModel)]="boatCostCheck" (change)="setZero()" name="boatCostCheck" type="checkbox">
+          <input [readonly]="!boatCostCheck" [(ngModel)]="boatcost" (focusout)="focusOut()" type="number" name="boatcost" placeholder="Boat Cost">
+          <label for="otherTravelcost">Other</label>
+          <input [(ngModel)]="otherTravelCostCheck" (change)="setZero()" name="otherTravelCostCheck" type="checkbox">
+          <input [readonly]="!otherTravelCostCheck" [(ngModel)]="otherTravelcost" (focusout)="focusOut()" type="number" name="otherTravelcost" placeholder="Other Cost">
         </div>
         <div>
           <p>Lodging Costs</p>
-          <label for="hotelmotelcost">Hotel/Motel</label>
-          <input ngModel type="number" name="hotelmotelcost" required placeholder="Hotel/Motel Cost">
-          <label for="airbnbcost">AirBnB</label>
-          <input ngModel type="number" name="airbnbcost" required placeholder="AirBnB Cost">
-          <label for="otherlodgingcost">Other</label>
-          <input ngModel type="number" name="otherlodgingcost" required placeholder="Other Cost">
+          <label for="hotelmotelCostCheck">Hotel/Motel</label>
+          <input [(ngModel)]="hotelmotelCostCheck" (change)="setZero()" name="hotelmotelCostCheck" type="checkbox">
+          <input [readonly]="!hotelmotelCostCheck" [(ngModel)]="hotelmotelcost" (focusout)="focusOut()" type="number" name="hotelmotelcost" placeholder="Hotel/Motel Cost">
+          <label for="airbnbCostCheck">AirBnB</label>
+          <input [(ngModel)]="airbnbCostCheck" (change)="setZero()" name="airbnbCostCheck" type="checkbox">
+          <input [readonly]="!airbnbCostCheck" [(ngModel)]="airbnbcost" (focusout)="focusOut()" type="number" name="airbnbcost" placeholder="AirBnB Cost">
+          <label for="otherLodgingCostCheck">Other Cost</label>
+          <input [(ngModel)]="otherLodgingCostCheck" (change)="setZero()" name="otherLodgingCostCheck" type="checkbox">
+          <input [readonly]="!otherLodgingCostCheck" [(ngModel)]="otherLodgingcost" (focusout)="focusOut()" type="number" name="otherLodgingcost" placeholder="Other Cost">
         </div>
         <div>
           <p>Miscallaneous Costs</p>
-          <label for="misccost">Misc Cost</label>
-          <input ngModel type="number" name="misccost" required placeholder="Misc Cost">
+          <label for="miscCostCheck">Misc Cost</label>
+          <input [(ngModel)]="miscCostCheck" (change)="setZero()" name="miscCostCheck" type="checkbox">
+          <input [readonly]="!miscCostCheck" [(ngModel)]="misccost" (focusout)="focusOut()" type="number" name="misccost" placeholder="Misc Cost">
         </div>
         <div>
           <p>Links</p>
           <label for="url1">Link 1</label>
-          <input ngModel type="text" name="url1" required placeholder="Link 1">
+          <input ngModel type="text" name="url1"  placeholder="Link 1">
           <label for="url2">Link 2</label>
-          <input ngModel type="text" name="url2" required placeholder="Link 2">
+          <input ngModel type="text" name="url2"  placeholder="Link 2">
         </div>
         <div>
           <p>Image</p>
