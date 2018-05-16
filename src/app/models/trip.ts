@@ -1,13 +1,18 @@
 export class Trip {
-    id: string;
+    id: number;
     destination: string;
-    totalCost: number;
     startdate: string;
     leavedate: string;
     image: string;
-    url1: string;
-    url2: string;
-    travelCosts: any;
-    lodgingCosts: any;
-    miscCosts: any;
+    urls: Url[];
+    costs: Cost[];
+}
+
+export class Cost {
+    label: string;
+    cost: number;
+}
+
+export class Url {
+    url: string;
 }

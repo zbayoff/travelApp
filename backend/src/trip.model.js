@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const TripSchema = new Schema({
   destination: String,
   totalCost: Number,
-  startdate: String,
-  leavedate: String,
+  startdate: Date,
+  leavedate: Date,
   image: String,
   url1: String,
   url2: String,

@@ -1,95 +1,91 @@
-<h1>Your Trips</h1>
+<div class="wrap">
+  <h1>Your Trips</h1>
 
-<ul class="trips-list">
-  <li *ngFor="let trip of trips">
-    <img src="../../../assets/images/{{trip.image}}">
-    <div>
-      <h2>
-        <a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a>
-      </h2>
-      <span class="deleteTrip" (click)="deleteTrip(trip._id)">X</span>
-      <p>Travel Dates: {{trip.startdate}} - {{trip.leavedate}}</p>
-      <p>Total Trip Cost: ${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train
-        + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB
-        + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</p>
+  <ul class="trips-list">
+    <li *ngFor="let trip of trips">
+      <img src="../../../assets/images/{{trip.image}}">
+      <div>
+        <h2>
+          <a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a>
+        </h2>
+        <span class="deleteTrip" (click)="deleteTrip(trip._id)">X</span>
+        <p>Travel Dates: {{trip.startdate}} - {{trip.leavedate}}</p>
+        <p>Total Trip Cost: ${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train
+          + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB
+          + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</p>
+      </div>
+    </li>
+  </ul>
+  
+  <div *ngIf="add">
+    <div class="form-wrapper">
+      <form (ngSubmit)="addTrip(f)" #f="ngForm" ngNativeValidate>
+        <fieldset>
+          <legend>Add Trip</legend>
+          <div>
+            <label for="destination">Destination</label>
+            <input ngModel #destination="ngModel" type="text" name="destination" placeholder="Destination" required>
+            <div *ngIf="destination.errors?.required && destination.touched" class="alert">A trip destination is required.</div>
+          </div>
+          <div>
+            <label for="startdate">Start Date</label>
+            <input ngModel minlength="3" type="text" name="startdate" placeholder="Start Date">
+          </div>
+          <div>
+            <label for="leavedate">Leave Date</label>
+            <input ngModel minlength="3" type="text" name="leavedate" placeholder="Leave Date">
+          </div>
+          <div>
+            <h2>Travel Costs</h2>
+            <tripCosts>
+              <tripCostItem></tripCostItem>
+              <tripCostItem></tripCostItem>
+              <tripCostItem></tripCostItem>
+            </tripCosts>
+            <tripCostsEdit>
+              <tripCostItemEdit></tripCostItemEdit>
+              <tripCostItemEdit></tripCostItemEdit>
+              <tripCostItemEdit></tripCostItemEdit>
+              <tripCostAdd>
+              </tripCostAdd>
+            </tripCostsEdit>
+            <h2>Lodging Costs</h2>
+            <tripCosts>
+              <tripCostItem></tripCostItem>
+              <tripCostItem></tripCostItem>
+              <tripCostItem></tripCostItem>
+            </tripCosts>
+            <tripCostsEdit>
+              <tripCostItemEdit></tripCostItemEdit>
+              <tripCostItemEdit></tripCostItemEdit>
+              <tripCostItemEdit></tripCostItemEdit>
+              <tripCostAdd>
+              </tripCostAdd>
+            </tripCostsEdit>
+
+            <!-- <label for="planecost">Plane</label> -->
+            <!-- <input [readonly]="!planeCostCheck" [(ngModel)]="planecost" (focusout)="focusOut()" type="number" name="planecost" placeholder="Plane Cost"> -->
+          </div>
+          <div>
+          <div>
+            <p>Links</p>
+            <label for="url1">Link 1</label>
+            <input ngModel type="text" name="url1"  placeholder="Link 1">
+            <label for="url2">Link 2</label>
+            <input ngModel type="text" name="url2"  placeholder="Link 2">
+          </div>
+          <div>
+            <p>Image</p>
+            <label for="image">Image</label>
+            <input ngModel type="text" name="image" placeholder="Image">
+          </div>
+          <div>
+            <input type="submit" value="Add Trip">
+          </div>
+        </fieldset>
+  
+      </form>
     </div>
-  </li>
-</ul>
-
-<div *ngIf="add">
-  <div class="form-wrapper">
-    <form (ngSubmit)="addTrip(f)" #f="ngForm" ngNativeValidate>
-      <fieldset>
-        <legend>Add Trip</legend>
-        <div>
-          <label for="destination">Destination</label>
-          <input ngModel #destination="ngModel" type="text" name="destination" placeholder="Destination" required>
-          <div *ngIf="destination.errors?.required && destination.touched" class="alert">A trip destination is required.</div>
-        </div>
-        <div>
-          <label for="startdate">Start Date</label>
-          <input ngModel minlength="3" type="text" name="startdate" placeholder="Start Date">
-        </div>
-        <div>
-          <label for="leavedate">Leave Date</label>
-          <input ngModel minlength="3" type="text" name="leavedate" placeholder="Leave Date">
-        </div>
-        <div>
-          <p>Travel Costs</p>
-          <label for="planecost">Plane</label>
-          <input [(ngModel)]="planeCostCheck" (change)="setZero()" name="planeCostCheck" type="checkbox">
-          <input [readonly]="!planeCostCheck" [(ngModel)]="planecost" (focusout)="focusOut()" type="number" name="planecost" placeholder="Plane Cost">
-          <label for="carcost">Car</label>
-          <input [(ngModel)]="carCostCheck" (change)="setZero()" name="carCostCheck" type="checkbox">
-          <input [readonly]="!carCostCheck" [(ngModel)]="carcost" (focusout)="focusOut()" type="number" name="carcost" placeholder="Car Cost">
-          <label for="buscost">Bus</label>
-          <input [(ngModel)]="busCostCheck" (change)="setZero()" name="busCostCheck" type="checkbox">
-          <input [readonly]="!busCostCheck" [(ngModel)]="buscost" (focusout)="focusOut()" type="number" name="buscost" placeholder="Bus Cost">
-          <label for="traincost">Train</label>
-          <input [(ngModel)]="trainCostCheck" (change)="setZero()" name="trainCostCheck" type="checkbox">
-          <input [readonly]="!trainCostCheck" [(ngModel)]="traincost" (focusout)="focusOut()" type="number" name="traincost" placeholder="Train Cost">
-          <label for="boatcost">Boat</label>
-          <input [(ngModel)]="boatCostCheck" (change)="setZero()" name="boatCostCheck" type="checkbox">
-          <input [readonly]="!boatCostCheck" [(ngModel)]="boatcost" (focusout)="focusOut()" type="number" name="boatcost" placeholder="Boat Cost">
-          <label for="otherTravelcost">Other</label>
-          <input [(ngModel)]="otherTravelCostCheck" (change)="setZero()" name="otherTravelCostCheck" type="checkbox">
-          <input [readonly]="!otherTravelCostCheck" [(ngModel)]="otherTravelcost" (focusout)="focusOut()" type="number" name="otherTravelcost" placeholder="Other Cost">
-        </div>
-        <div>
-          <p>Lodging Costs</p>
-          <label for="hotelmotelCostCheck">Hotel/Motel</label>
-          <input [(ngModel)]="hotelmotelCostCheck" (change)="setZero()" name="hotelmotelCostCheck" type="checkbox">
-          <input [readonly]="!hotelmotelCostCheck" [(ngModel)]="hotelmotelcost" (focusout)="focusOut()" type="number" name="hotelmotelcost" placeholder="Hotel/Motel Cost">
-          <label for="airbnbCostCheck">AirBnB</label>
-          <input [(ngModel)]="airbnbCostCheck" (change)="setZero()" name="airbnbCostCheck" type="checkbox">
-          <input [readonly]="!airbnbCostCheck" [(ngModel)]="airbnbcost" (focusout)="focusOut()" type="number" name="airbnbcost" placeholder="AirBnB Cost">
-          <label for="otherLodgingCostCheck">Other Cost</label>
-          <input [(ngModel)]="otherLodgingCostCheck" (change)="setZero()" name="otherLodgingCostCheck" type="checkbox">
-          <input [readonly]="!otherLodgingCostCheck" [(ngModel)]="otherLodgingcost" (focusout)="focusOut()" type="number" name="otherLodgingcost" placeholder="Other Cost">
-        </div>
-        <div>
-          <p>Miscallaneous Costs</p>
-          <label for="miscCostCheck">Misc Cost</label>
-          <input [(ngModel)]="miscCostCheck" (change)="setZero()" name="miscCostCheck" type="checkbox">
-          <input [readonly]="!miscCostCheck" [(ngModel)]="misccost" (focusout)="focusOut()" type="number" name="misccost" placeholder="Misc Cost">
-        </div>
-        <div>
-          <p>Links</p>
-          <label for="url1">Link 1</label>
-          <input ngModel type="text" name="url1"  placeholder="Link 1">
-          <label for="url2">Link 2</label>
-          <input ngModel type="text" name="url2"  placeholder="Link 2">
-        </div>
-        <div>
-          <p>Image</p>
-          <label for="image">Image</label>
-          <input ngModel type="text" name="image" placeholder="Image">
-        </div>
-        <div>
-          <input type="submit" value="Add Trip">
-        </div>
-      </fieldset>
-
-    </form>
   </div>
+  
 </div>
