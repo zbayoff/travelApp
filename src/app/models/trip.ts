@@ -4,7 +4,6 @@ export class Trip {
     startdate: string;
     leavedate: string;
     image: string;
-    urls: Url[];
     costs: Cost[];
 }
 
@@ -13,6 +12,3 @@ export class Cost {
     cost: number;
 }
 
-export class Url {
-    url: string;
-}

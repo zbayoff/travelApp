@@ -3,15 +3,10 @@ const Schema = mongoose.Schema;
 
 const TripSchema = new Schema({
   destination: String,
-  totalCost: Number,
   startdate: Date,
   leavedate: Date,
   image: String,
-  url1: String,
-  url2: String,
-  travelCosts: [Schema.Types.Mixed],
-  lodgingCosts: [Schema.Types.Mixed],
-  miscCosts: [Schema.Types.Mixed]
+  costs: Array
 });
 
 module.exports = mongoose.model('Trip', TripSchema);

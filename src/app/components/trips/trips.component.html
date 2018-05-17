@@ -6,86 +6,13 @@
       <img src="../../../assets/images/{{trip.image}}">
       <div>
         <h2>
-          <a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a>
+          <a>{{trip.destination}}</a>
         </h2>
         <span class="deleteTrip" (click)="deleteTrip(trip._id)">X</span>
-        <p>Travel Dates: {{trip.startdate}} - {{trip.leavedate}}</p>
-        <p>Total Trip Cost: ${{trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train
-          + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB
-          + trip.lodgingCosts[0].other + trip.miscCosts[0].misc }}</p>
+        <p>Travel Dates: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
+        <p>Total Trip Cost: </p>
       </div>
     </li>
   </ul>
-  
-  <div *ngIf="add">
-    <div class="form-wrapper">
-      <form (ngSubmit)="addTrip(f)" #f="ngForm" ngNativeValidate>
-        <fieldset>
-          <legend>Add Trip</legend>
-          <div>
-            <label for="destination">Destination</label>
-            <input ngModel #destination="ngModel" type="text" name="destination" placeholder="Destination" required>
-            <div *ngIf="destination.errors?.required && destination.touched" class="alert">A trip destination is required.</div>
-          </div>
-          <div>
-            <label for="startdate">Start Date</label>
-            <input ngModel minlength="3" type="text" name="startdate" placeholder="Start Date">
-          </div>
-          <div>
-            <label for="leavedate">Leave Date</label>
-            <input ngModel minlength="3" type="text" name="leavedate" placeholder="Leave Date">
-          </div>
-          <div>
-            <h2>Travel Costs</h2>
-            <tripCosts>
-              <tripCostItem></tripCostItem>
-              <tripCostItem></tripCostItem>
-              <tripCostItem></tripCostItem>
-            </tripCosts>
-            <tripCostsEdit>
-              <tripCostItemEdit></tripCostItemEdit>
-              <tripCostItemEdit></tripCostItemEdit>
-              <tripCostItemEdit></tripCostItemEdit>
-              <tripCostAdd>
-              </tripCostAdd>
-            </tripCostsEdit>
-            <h2>Lodging Costs</h2>
-            <tripCosts>
-              <tripCostItem></tripCostItem>
-              <tripCostItem></tripCostItem>
-              <tripCostItem></tripCostItem>
-            </tripCosts>
-            <tripCostsEdit>
-              <tripCostItemEdit></tripCostItemEdit>
-              <tripCostItemEdit></tripCostItemEdit>
-              <tripCostItemEdit></tripCostItemEdit>
-              <tripCostAdd>
-              </tripCostAdd>
-            </tripCostsEdit>
-
-            <!-- <label for="planecost">Plane</label> -->
-            <!-- <input [readonly]="!planeCostCheck" [(ngModel)]="planecost" (focusout)="focusOut()" type="number" name="planecost" placeholder="Plane Cost"> -->
-          </div>
-          <div>
-          <div>
-            <p>Links</p>
-            <label for="url1">Link 1</label>
-            <input ngModel type="text" name="url1"  placeholder="Link 1">
-            <label for="url2">Link 2</label>
-            <input ngModel type="text" name="url2"  placeholder="Link 2">
-          </div>
-          <div>
-            <p>Image</p>
-            <label for="image">Image</label>
-            <input ngModel type="text" name="image" placeholder="Image">
-          </div>
-          <div>
-            <input type="submit" value="Add Trip">
-          </div>
-        </fieldset>
-  
-      </form>
-    </div>
-  </div>
-  
+  <app-trip-add-form></app-trip-add-form>
 </div>

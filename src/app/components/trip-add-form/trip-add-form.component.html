@@ -1,0 +1,39 @@
+<div class="form-wrapper">
+  <form [formGroup]="tripAddForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+      <legend>Add Trip</legend>
+      <div class="form-group">
+        <label>Destination
+          <input class="form-control" type="text" formControlName="destination" placeholder="Destination" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Start Date
+          <input class="form-control" type="text" formControlName="startdate" placeholder="Start Date" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Leave Date
+          <input class="form-control" type="text" formControlName="leavedate" placeholder="Leave Date" required>
+        </label>
+      </div>
+      <div formArrayName="costs">
+        <h2>Costs</h2>
+        <div *ngFor="let cost of costs.controls">
+          <label>Cost Label
+            <input type="text" placeholder="$" formControlName="cost">
+          </label>
+
+        </div>
+
+
+
+      </div>
+
+
+      <div>
+        <input type="submit" value="Add Trip">
+      </div>
+    </fieldset>
+  </form>
+</div>
