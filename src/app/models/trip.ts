@@ -8,7 +8,7 @@ export class Trip {
 }
 
 export class Cost {
-    label: string;
-    cost: number;
+    costLabel = '';
+    costAmt = '';
 }
 

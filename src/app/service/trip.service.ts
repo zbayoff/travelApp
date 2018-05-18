@@ -4,7 +4,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
 
-import { Observable, of } from 'rxjs';
+import { Observable, of} from 'rxjs';
+
 
 // import { toPromise } from 'rxjs/operator';
 
@@ -15,8 +16,7 @@ import { Observable, of } from 'rxjs';
 
 // import 'rxjs/add/operator/toPromise';
 
-import { map, filter, switchMap } from 'rxjs/operators';
-
+import { map, filter, switchMap, catchError } from 'rxjs/operators';
 
 import { Trip } from '../models/trip';
 // import { TRIPS } from '../models/mock-trips';
@@ -31,7 +31,7 @@ export class TripService {
   // }
 
   getTrips() {
-    return this.http.get('http://localhost:3006/api/trip').toPromise();
+    return this.http.get('http://localhost:3006/api/trip');
   }
 
   // getTrip(id: number): Observable<Trip> {

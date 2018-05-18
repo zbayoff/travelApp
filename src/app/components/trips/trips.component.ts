@@ -27,12 +27,20 @@ export class TripsComponent implements OnInit {
   //   this.trips = responseGet.json();
   // }
 
-  async ngOnInit() {
-    const response = await this.tripService.getTrips();
-    this.trips = response.json();
-    console.log(this.trips);
+  getTrips(): void {
+    this.tripService.getTrips().subscribe(trips => this.trips = trips);
+  }
+
+  ngOnInit() {
 
   }
+
+  // async ngOnInit() {
+  //   const response = await this.tripService.getTrips();
+  //   this.trips = response.json();
+  //   // console.log(this.trips);
+
+  // }
 
   // async deleteTrip(tripID) {
   //   const response = await this.tripService.deleteTrip(tripID);

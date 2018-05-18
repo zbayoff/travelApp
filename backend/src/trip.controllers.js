@@ -56,16 +56,16 @@ exports.import = function (req, res) {
       'image': 'madrid.png',
       'costs': [
         {
-          'label':"plane",
-          'cost':600
+          'costLabel':"plane",
+          'costAmt':600
         },
         {
-          'label':"car",
-          'cost':40
+          'costLabel':"car",
+          'costAmt':40
         },
         {
-          'label':"boat",
-          'cost':54
+          'costLabel':"boat",
+          'costAmt':54
         }
       ]
     }, {
@@ -75,16 +75,16 @@ exports.import = function (req, res) {
       'image': 'geneva.png',
       'costs': [
         {
-          'label':"plane",
-          'cost':600
+          'costLabel':"plane",
+          'costAmt':600
         },
         {
-          'label':"car",
-          'cost':40
+          'costLabel':"car",
+          'costAmt':40
         },
         {
-          'label':"boat",
-          'cost':54
+          'costLabel':"boat",
+          'costAmt':54
         }
       ]
     }, {
@@ -94,16 +94,16 @@ exports.import = function (req, res) {
       'image': 'rome.png',
       'costs': [
         {
-          'label':"plane",
-          'cost':600
+          'costLabel':"plane",
+          'costAmt':600
         },
         {
-          'label':"car",
-          'cost':40
+          'costLabel':"car",
+          'costAmt':40
         },
         {
-          'label':"boat",
-          'cost':54
+          'costLabel':"boat",
+          'costAmt':54
         }
       ]
     },

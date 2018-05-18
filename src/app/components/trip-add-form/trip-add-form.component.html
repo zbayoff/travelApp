@@ -17,17 +17,30 @@
           <input class="form-control" type="text" formControlName="leavedate" placeholder="Leave Date" required>
         </label>
       </div>
-      <div formArrayName="costs">
+      <div>
         <h2>Costs</h2>
-        <div *ngFor="let cost of costs.controls">
-          <label>Cost Label
-            <input type="text" placeholder="$" formControlName="cost">
-          </label>
-
+        <div formArrayName="costs">
+          <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
+            <label> Cost {{idx + 1}}
+              <input type="text" formControlName="costLabel" placeholder="Cost Label">
+            </label>
+            <label>
+              <input type="number" formControlName="costAmt" placeholder="$">
+            </label>
+          </div>
         </div>
 
 
-
+<!-- 
+        <div formGroupName="addCost">
+          <label>
+            <input type="text" placeholder="Cost Label" formControlName="costLabel">
+          </label>
+          <label>
+            <input type="number" placeholder="$" formControlName="costAmt">
+          </label> -->
+          <button type="button" (click)="addCost()">Add'l Cost</button>
+        <!-- </div> -->
       </div>
 
 
@@ -36,4 +49,8 @@
       </div>
     </fieldset>
   </form>
+
+  <p>Form value: {{tripAddForm.value | json}}</p>
+  <p>Form value: {{tripAddForm.status | json}}</p>
+
 </div>
