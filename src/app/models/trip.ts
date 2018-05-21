@@ -1,14 +1,15 @@
 export class Trip {
-    id: number;
+    _id: number;
     destination: string;
     startdate: string;
     leavedate: string;
     image: string;
     costs: Cost[];
+    totalCost: number;
 }
 
 export class Cost {
     costLabel = '';
-    costAmt = '';
+    costAmt = 0;
 }
 

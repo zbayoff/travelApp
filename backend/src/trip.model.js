@@ -6,7 +6,8 @@ const TripSchema = new Schema({
   startdate: Date,
   leavedate: Date,
   image: String,
-  costs: Array
+  costs: Array,
+  totalCost: Number
 });
 
 module.exports = mongoose.model('Trip', TripSchema);

@@ -9,12 +9,12 @@
       </div>
       <div class="form-group">
         <label>Start Date
-          <input class="form-control" type="text" formControlName="startdate" placeholder="Start Date" required>
+          <input class="form-control" type="date" formControlName="startdate" placeholder="Start Date" required>
         </label>
       </div>
       <div class="form-group">
         <label>Leave Date
-          <input class="form-control" type="text" formControlName="leavedate" placeholder="Leave Date" required>
+          <input class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date" required>
         </label>
       </div>
       <div>
@@ -27,6 +27,7 @@
             <label>
               <input type="number" formControlName="costAmt" placeholder="$">
             </label>
+            <span *ngIf="idx > 0" (click)="removeCost(idx)">X</span>
           </div>
         </div>
 

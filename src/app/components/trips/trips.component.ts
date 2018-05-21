@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Trip } from '../../models/trip';
@@ -14,9 +14,11 @@ export class TripsComponent implements OnInit {
   trip: Trip;
   trips: Trip[];
   add: boolean;
+  // totalCost: number;
 
   constructor(private tripService: TripService) {
     this.add = true;
+
   }
 
   // async addTrip(form: NgForm) {
@@ -27,12 +29,28 @@ export class TripsComponent implements OnInit {
   //   this.trips = responseGet.json();
   // }
 
-  getTrips(): void {
-    this.tripService.getTrips().subscribe(trips => this.trips = trips);
+  addCosts() {
+    for (const trip of this.trips) {
+      let totalCost = 0;
+      for (const cost of trip.costs) {
+        totalCost += cost.costAmt;
+      }
+      trip.totalCost = totalCost;
+    }
+  }
+
+  getTrips() {
+    this.tripService.getTrips().subscribe(
+      data => {
+        this.trips = data.json();
+        this.addCosts();
+      },
+      err => console.log(err)
+    );
   }
 
   ngOnInit() {
-
+    this.getTrips();
   }
 
   // async ngOnInit() {
@@ -42,10 +60,17 @@ export class TripsComponent implements OnInit {
 
   // }
 
-  // async deleteTrip(tripID) {
-  //   const response = await this.tripService.deleteTrip(tripID);
-  //   const responseGet = await this.tripService.getTrips();
-  //   this.trips = responseGet.json();
-  // }
+  deleteTrip(trip: Trip) {
+    this.tripService.deleteTrip(trip._id).subscribe(
+      res => {
+        this.trips.splice(this.trips.indexOf(trip), 1);
+      },
+      err => console.log(err)
+    );
+
+    // const response =  this.tripService.deleteTrip(tripID);
+    // const responseGet =  this.tripService.getTrips();
+    // this.trips = responseGet.json();
+  }
 
 }

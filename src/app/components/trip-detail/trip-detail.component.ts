@@ -13,7 +13,6 @@ import { TripService } from '../../service/trip.service';
 export class TripDetailComponent implements OnInit {
 
   trip: Trip;
-  totalCost: Number;
   orginData: any;
   formEnabled: boolean;
 
@@ -35,6 +34,21 @@ export class TripDetailComponent implements OnInit {
     // console.log(this.orginData);
   }
 
+  addCosts() {
+    let totalCost = 0;
+    for (const cost of this.trip.costs) {
+      totalCost += cost.costAmt;
+    }
+    console.log(totalCost);
+    this.trip.totalCost = totalCost;
+
+  }
+
+
+
+
+
+
   cancel() {
     this.formEnabled = !this.formEnabled;
     this.trip = this.orginData;
@@ -45,13 +59,19 @@ export class TripDetailComponent implements OnInit {
     this.formEnabled = !this.formEnabled;
   }
 
-  async ngOnInit() {
-
+  getTrip() {
     const id = this.route.snapshot.params.id;
-    const response = await this.tripService.getTrip(id);
+    this.tripService.getTrip(id).subscribe(
+      data => {
+        this.trip = data.json();
+        this.addCosts();
+      },
+      err => console.log(err)
+    );
+  }
 
-    this.trip = response.json();
-
+  ngOnInit() {
+    this.getTrip();
   }
 
   async saveTrip() {

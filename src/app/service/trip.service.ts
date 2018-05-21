@@ -39,11 +39,11 @@ export class TripService {
   // }
 
   getTrip(id) {
-    return this.http.get('http://localhost:3006/api/trip/' + id).toPromise();
+    return this.http.get('http://localhost:3006/api/trip/' + id);
   }
 
   addTrip(trip) {
-    return this.http.post('http://localhost:3006/api/trip/', trip).toPromise();
+    return this.http.post('http://localhost:3006/api/trip/', trip);
   }
 
   putTrip(trip) {
@@ -51,7 +51,7 @@ export class TripService {
   }
 
   deleteTrip(tripID) {
-    return this.http.delete('http://localhost:3006/api/trip/' + tripID).toPromise();
+    return this.http.delete('http://localhost:3006/api/trip/' + tripID);
   }
 
   constructor(private http: Http) { }

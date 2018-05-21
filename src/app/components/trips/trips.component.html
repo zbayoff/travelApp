@@ -6,11 +6,11 @@
       <img src="../../../assets/images/{{trip.image}}">
       <div>
         <h2>
-          <a>{{trip.destination}}</a>
+          <a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a>
         </h2>
-        <span class="deleteTrip" (click)="deleteTrip(trip._id)">X</span>
+        <span class="deleteTrip" (click)="deleteTrip(trip)">X</span>
         <p>Travel Dates: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
-        <p>Total Trip Cost: </p>
+        <p >Total Trip Cost: {{trip.totalCost}}</p>
         <ul>
           <li *ngFor="let cost of trip.costs">
             <p>{{cost.costLabel}}: {{cost.costAmt}}</p>
@@ -19,5 +19,7 @@
       </div>
     </li>
   </ul>
-  <app-trip-add-form></app-trip-add-form>
+  <div *ngIf="trips">
+    <app-trip-add-form [trips]="trips"></app-trip-add-form>
+  </div>
 </div>

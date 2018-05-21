@@ -1,4 +1,4 @@
-<!-- <div class="wrap">
+<div class="wrap">
 
 
   <div *ngIf="!formEnabled">
@@ -6,55 +6,15 @@
       <h2>Trip to: {{trip.destination}}
       </h2>
 
-      <p>From: {{trip.startdate}} - {{trip.leavedate}}</p>
+      <p>From: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
       <h3>Travel Details</h3>
       <div class="card">
         <h4>Travel Costs</h4>
-        <p>Plane
-          <span>${{trip.travelCosts[0].plane}}</span>
-        </p>
-        <p>Bus
-          <span>${{trip.travelCosts[0].bus}}</span>
-        </p>
-        <p>Car
-          <span>${{trip.travelCosts[0].car}}</span>
-        </p>
-        <p>Train
-          <span>${{trip.travelCosts[0].train}}</span>
-        </p>
-        <p>Boat
-          <span>${{trip.travelCosts[0].boat}}</span>
-        </p>
-        <p>Other
-          <span>${{trip.travelCosts[0].other}}</span>
-        </p>
-      </div>
-      <div class="card">
-        <h4>Lodging</h4>
-        <p>Hotel/Motel
-          <span>${{trip.lodgingCosts[0].hotelMotel}}</span>
-        </p>
-        <p>AirBnb
-          <span>${{trip.lodgingCosts[0].airBnB}}</span>
-        </p>
-        <p>Other
-          <span>${{trip.lodgingCosts[0].other}}</span>
-        </p>
-      </div>
-      <div class="card">
-        <h4>Miscallaneous</h4>
-        <p>Misc
-          <span>${{trip.miscCosts[0].misc}}</span>
-        </p>
-      </div>
-      <div class="card">
-        <h4>Links</h4>
-        <p>
-          <a href="{{trip.url1}}" target="_blank">{{trip.url1}}</a>
-        </p>
-        <p>
-          <a href="{{trip.url2}}" target="_blank">{{trip.url2}}</a>
-        </p>
+        <ul>
+          <li *ngFor="let cost of trip.costs">
+            <p>{{cost.costLabel}}: {{cost.costAmt}}</p>
+          </li>
+        </ul>
       </div>
       <div class="card">
         <h4>Image</h4>
@@ -62,13 +22,13 @@
       </div>
       <div class="card">
         <h4>Total Trip Cost:
-          <span></span>
+          <span>{{trip.totalCost}}</span>
         </h4>
       </div>
     </div>
   </div>
 
-  <div *ngIf="formEnabled">
+  <!-- <div *ngIf="formEnabled">
     <div *ngIf="trip">
       <div class="form-wrapper">
         <form (ngSubmit)="saveTrip()" ngNativeValidate>
@@ -87,86 +47,26 @@
             </div>
             <div>
               <p>Travel Costs</p>
-              <label for="planecost">Plane</label>
-              <input [(ngModel)]="planeCostCheck" (change)="setZero()" name="planeCostCheck" type="checkbox">
-              <input [readonly]="!planeCostCheck" [(ngModel)]="trip.travelCosts[0].plane" (focusout)="focusOut()" type="number" name="planecost"
-                placeholder="Plane Cost">
-              <label for="carcost">Car</label>
-              <input [(ngModel)]="carCostCheck" (change)="setZero()" name="carCostCheck" type="checkbox">
-              <input [readonly]="!carCostCheck" [(ngModel)]="trip.travelCosts[0].car" (focusout)="focusOut()" type="number" name="carcost"
-                placeholder="Car Cost">
-              <label for="buscost">Bus</label>
-              <input [(ngModel)]="busCostCheck" (change)="setZero()" name="busCostCheck" type="checkbox">
-              <input [readonly]="!busCostCheck" [(ngModel)]="trip.travelCosts[0].bus" (focusout)="focusOut()" type="number" name="buscost"
-                placeholder="Bus Cost">
-              <label for="traincost">Train</label>
-              <input [(ngModel)]="trainCostCheck" (change)="setZero()" name="trainCostCheck" type="checkbox">
-              <input [readonly]="!trainCostCheck" [(ngModel)]="trip.travelCosts[0].train" (focusout)="focusOut()" type="number" name="traincost"
-                placeholder="Train Cost">
-              <label for="boatcost">Boat</label>
-              <input [(ngModel)]="boatCostCheck" (change)="setZero()" name="boatCostCheck" type="checkbox">
-              <input [readonly]="!boatCostCheck" [(ngModel)]="trip.travelCosts[0].boat" (focusout)="focusOut()" type="number" name="boatcost"
-                placeholder="Boat Cost">
-              <label for="otherTravelcost">Other</label>
-              <input [(ngModel)]="otherTravelCostCheck" (change)="setZero()" name="otherTravelCostCheck" type="checkbox">
-              <input [readonly]="!otherTravelCostCheck" [(ngModel)]="trip.travelCosts[0].other" (focusout)="focusOut()" type="number" name="otherTravelcost"
-                placeholder="Other Cost">
             </div>
-            <div>
-              <p>Lodging Costs</p>
-              <label for="hotelmotelCostCheck">Hotel/Motel</label>
-              <input [(ngModel)]="hotelmotelCostCheck" (change)="setZero()" name="hotelmotelCostCheck" type="checkbox">
-              <input [readonly]="!hotelmotelCostCheck" [(ngModel)]="trip.lodgingCosts[0].hotelMotel" (focusout)="focusOut()" type="number"
-                name="hotelmotelcost" placeholder="Hotel/Motel Cost">
-              <label for="airbnbCostCheck">AirBnB</label>
-              <input [(ngModel)]="airbnbCostCheck" (change)="setZero()" name="airbnbCostCheck" type="checkbox">
-              <input [readonly]="!airbnbCostCheck" [(ngModel)]="trip.lodgingCosts[0].airBnB" (focusout)="focusOut()" type="number" name="airbnbcost"
-                placeholder="AirBnB Cost">
-              <label for="otherLodgingCostCheck">Other Cost</label>
-              <input [(ngModel)]="otherLodgingCostCheck" (change)="setZero()" name="otherLodgingCostCheck" type="checkbox">
-              <input [readonly]="!otherLodgingCostCheck" [(ngModel)]="trip.lodgingCosts[0].other" (focusout)="focusOut()" type="number"
-                name="otherLodgingcost" placeholder="Other Cost">
-            </div>
-            <div>
-              <p>Miscallaneous Costs</p>
-              <label for="miscCostCheck">Misc Cost</label>
-              <input [(ngModel)]="miscCostCheck" (change)="setZero()" name="miscCostCheck" type="checkbox">
-              <input [readonly]="!miscCostCheck" [(ngModel)]="trip.miscCosts[0].misc" (focusout)="focusOut()" type="number" name="misccost"
-                placeholder="Misc Cost">
-            </div>
-            <div>
-              <p>Links</p>
-              <label for="url1">Link 1</label>
-              <input [(ngModel)]="trip.url1" type="text" name="url1" required placeholder="Link 1">
-              <label for="url2">Link 2</label>
-              <input [(ngModel)]="trip.url2" type="text" name="url2" required placeholder="Link 2">
-            </div>
-            <div>
-              <p>Image</p>
-              <label for="image">Image</label>
-              <input [(ngModel)]="trip.image" type="text" name="image" required placeholder="Image">
-            </div>
-            <div>
-              <p>Total Cost</p>
-              <label for="totalcost">Total Cost</label>
-              <input [(ngModel)]="trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc"
-                type="number" name="totalcost" disabled placeholder="Total Cost">
-            </div>
-            <div>
-              <button *ngIf="formEnabled" type="submit">Save Trip</button>
-              <button *ngIf="formEnabled" (click)="cancel()">Cancel</button>
-            </div>
-          </fieldset>
-
-        </form>
+            <p>Total Cost</p>
+            <label for="totalcost">Total Cost</label>
+            <input [(ngModel)]="trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc"
+              type="number" name="totalcost" disabled placeholder="Total Cost">
       </div>
+      <div>
+        <button *ngIf="formEnabled" type="submit">Save Trip</button>
+        <button *ngIf="formEnabled" (click)="cancel()">Cancel</button>
+      </div>
+      </fieldset>
+
+      </form>
     </div>
-  </div>
+  </div> -->
 
 
 
-  <button (click)="back()">Back</button>
-  <button *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
+<button (click)="back()">Back</button>
+<button *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
 
 
-</div> -->
+</div>
