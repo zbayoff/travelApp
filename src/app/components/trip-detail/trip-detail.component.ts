@@ -15,6 +15,7 @@ export class TripDetailComponent implements OnInit {
   trip: Trip;
   orginData: any;
   formEnabled: boolean;
+  editable: boolean;
 
   back() {
     window.history.back();
@@ -30,6 +31,7 @@ export class TripDetailComponent implements OnInit {
 
   toggleForm() {
     this.formEnabled = !this.formEnabled;
+    this.editable = !this.editable;
     this.orginData = JSON.parse(JSON.stringify(this.trip));
     // console.log(this.orginData);
   }
@@ -44,14 +46,10 @@ export class TripDetailComponent implements OnInit {
 
   }
 
-
-
-
-
-
   cancel() {
     this.formEnabled = !this.formEnabled;
-    this.trip = this.orginData;
+    this.editable = !this.editable;
+    // this.trip = this.orginData;
     // console.log(this.trip);
   }
 
@@ -72,11 +70,6 @@ export class TripDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getTrip();
-  }
-
-  async saveTrip() {
-    const response = await this.tripService.putTrip(this.trip);
-    this.toggleForm();
   }
 
 }

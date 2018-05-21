@@ -1,0 +1,44 @@
+<div class="form-wrapper">
+    <form [formGroup]="tripEditForm" (ngSubmit)="saveTrip()">
+      <fieldset>
+        <legend>Edit Trip</legend>
+        <div class="form-group">
+          <label>Destination
+            <input class="form-control" type="text" formControlName="destination" placeholder="Destination" required>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Start Date
+            <input class="form-control" type="date" formControlName="startdate" placeholder="Start Date" required>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Leave Date
+            <input class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date" required>
+          </label>
+        </div>
+        <div>
+          <h2>Costs</h2>
+          <div formArrayName="costs">
+            <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
+              <label> Cost {{idx + 1}}
+                <input type="text" formControlName="costLabel" placeholder="Cost Label">
+              </label>
+              <label>
+                <input type="number" formControlName="costAmt" placeholder="$">
+              </label>
+              <span *ngIf="idx > 0" (click)="removeCost(idx)">X</span>
+            </div>
+          </div>
+          <button type="button" (click)="addCost()">Add'l Cost</button>
+        </div>
+        <div>
+          <input type="submit" value="Save Trip">
+        </div>
+      </fieldset>
+    </form>
+  
+    <p>Form value: {{tripEditForm.value | json}}</p>
+    <p>Form value: {{tripEditForm.status | json}}</p>
+  
+  </div>

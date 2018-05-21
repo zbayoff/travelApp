@@ -30,21 +30,8 @@
             <span *ngIf="idx > 0" (click)="removeCost(idx)">X</span>
           </div>
         </div>
-
-
-<!-- 
-        <div formGroupName="addCost">
-          <label>
-            <input type="text" placeholder="Cost Label" formControlName="costLabel">
-          </label>
-          <label>
-            <input type="number" placeholder="$" formControlName="costAmt">
-          </label> -->
-          <button type="button" (click)="addCost()">Add'l Cost</button>
-        <!-- </div> -->
+        <button type="button" (click)="addCost()">Add'l Cost</button>
       </div>
-
-
       <div>
         <input type="submit" value="Add Trip">
       </div>

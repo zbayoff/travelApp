@@ -1,11 +1,12 @@
 <div class="wrap">
 
+  <div *ngIf="formEnabled">
+    <app-trip-edit-form [trip]="trip"></app-trip-edit-form>
+  </div>
 
   <div *ngIf="!formEnabled">
     <div *ngIf="trip">
-      <h2>Trip to: {{trip.destination}}
-      </h2>
-
+      <h2>{{trip.destination}}</h2>
       <p>From: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
       <h3>Travel Details</h3>
       <div class="card">
@@ -28,45 +29,11 @@
     </div>
   </div>
 
-  <!-- <div *ngIf="formEnabled">
-    <div *ngIf="trip">
-      <div class="form-wrapper">
-        <form (ngSubmit)="saveTrip()" ngNativeValidate>
-          <fieldset>
-            <legend>Edit Trip</legend>
-            <div>
-              <label for="destination">Trip Destination</label>
-              <input [(ngModel)]="trip.destination" type="text" name="destination" required placeholder="Trip Destination">
-            </div>
-            <div>
-              <p>Travel Dates</p>
-              <label for="startdate"></label>
-              <input [(ngModel)]="trip.startdate" type="text" name="startdate" required placeholder="Start Date">
-              <label for="leavedate"></label>
-              <input [(ngModel)]="trip.leavedate" type="text" name="leavedate" required placeholder="Leave Date">
-            </div>
-            <div>
-              <p>Travel Costs</p>
-            </div>
-            <p>Total Cost</p>
-            <label for="totalcost">Total Cost</label>
-            <input [(ngModel)]="trip.travelCosts[0].plane + trip.travelCosts[0].bus + trip.travelCosts[0].car + trip.travelCosts[0].train + trip.travelCosts[0].boat + trip.travelCosts[0].other + trip.lodgingCosts[0].hotelMotel + trip.lodgingCosts[0].airBnB + trip.lodgingCosts[0].other + trip.miscCosts[0].misc"
-              type="number" name="totalcost" disabled placeholder="Total Cost">
-      </div>
-      <div>
-        <button *ngIf="formEnabled" type="submit">Save Trip</button>
-        <button *ngIf="formEnabled" (click)="cancel()">Cancel</button>
-      </div>
-      </fieldset>
+  <div *ngIf="formEnabled">
+    
+  </div>
 
-      </form>
-    </div>
-  </div> -->
-
-
-
-<button (click)="back()">Back</button>
-<button *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
-
-
+  <button type="button" (click)="back()">Back</button>
+  <button type="button" *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
+  <button type="button" *ngIf="formEnabled" (click)="cancel()">Cancel</button>
 </div>
