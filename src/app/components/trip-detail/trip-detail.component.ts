@@ -41,7 +41,7 @@ export class TripDetailComponent implements OnInit {
     for (const cost of this.trip.costs) {
       totalCost += cost.costAmt;
     }
-    console.log(totalCost);
+    // console.log(totalCost);
     this.trip.totalCost = totalCost;
 
   }

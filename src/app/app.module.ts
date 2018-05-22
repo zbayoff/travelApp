@@ -7,10 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TripsComponent } from './components/trips/trips.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
+import { TripAddFormComponent } from './components/trip-add-form/trip-add-form.component';
+import { TripEditFormComponent } from './components/trip-edit-form/trip-edit-form.component';
 
 import { AppRoutingModule } from './/app-routing.module';
 import { TripService } from './service/trip.service';
-import { TripAddFormComponent } from './components/trip-add-form/trip-add-form.component';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { TripAddFormComponent } from './components/trip-add-form/trip-add-form.c
     TripsComponent,
     TripDetailComponent,
     TripAddFormComponent,
+    TripEditFormComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Trip, Cost } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-trip-edit-form',
@@ -14,6 +15,8 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   @Input() trip: Trip;
   @Input() costs: Cost;
   tripEditForm: FormGroup;
+
+  // @Output() tripSavedData: EventEmitter = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -54,18 +57,6 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     this.costsFormArray.removeAt(costID);
   }
 
-  onSubmit() {
-    console.log('form submitted');
-    // this.tripService.addTrip(this.tripEditForm.value).subscribe(
-    //   res => {
-    //     this.trips.push(res.json());
-    //     this.addCosts();
-    //     this.rebuildForm();
-    //   },
-    //   err => console.log(err)
-    // );
-  }
-
   convertDates (date) {
     return date.substring(0, 10);
   }
@@ -93,6 +84,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
    saveTrip() {
 
     this.trip = this.prepareSaveTrip();
+    // this.tripSavedData.emit(this.trip);
 
     this.tripService.putTrip(this.trip).subscribe(
       data => {
