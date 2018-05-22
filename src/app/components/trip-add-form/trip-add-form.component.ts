@@ -28,6 +28,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
       destination: ['', Validators.required],
       startdate: '',
       leavedate: '',
+      image: '',
       costs: this.fb.array([]),
     });
   }
@@ -44,7 +45,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     for (const trip of this.trips) {
       let totalCost = 0;
       for (const cost of trip.costs) {
-        console.log(cost.costAmt);
+        // console.log(cost.costAmt);
         totalCost += cost.costAmt;
       }
       trip.totalCost = totalCost;
@@ -56,7 +57,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    console.log('form submitted');
+    // console.log('form submitted');
     this.tripService.addTrip(this.tripAddForm.value).subscribe(
       res => {
         this.trips.push(res.json());

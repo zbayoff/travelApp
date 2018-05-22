@@ -1,7 +1,7 @@
 <div class="wrap">
 
   <div *ngIf="formEnabled">
-    <app-trip-edit-form [trip]="trip" (tripSavedData)="getTrip($event)"></app-trip-edit-form>
+    <app-trip-edit-form [trip]="trip" (tripSaveSubmit)="getTrip($event)"></app-trip-edit-form>
   </div>
 
   <div *ngIf="!formEnabled">

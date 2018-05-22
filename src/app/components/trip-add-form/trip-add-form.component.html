@@ -21,6 +21,7 @@
         <h2>Costs</h2>
         <div formArrayName="costs">
           <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
+            <div class="form-group">
             <label> Cost {{idx + 1}}
               <input type="text" formControlName="costLabel" placeholder="Cost Label">
             </label>
@@ -29,8 +30,14 @@
             </label>
             <span *ngIf="idx > 0" (click)="removeCost(idx)">X</span>
           </div>
+          </div>
         </div>
         <button type="button" (click)="addCost()">Add'l Cost</button>
+      </div>
+      <div class="form-group">
+        <label>Image
+          <input type="text" formControlName="image" placeholder="image">
+        </label>
       </div>
       <div>
         <input type="submit" value="Add Trip">

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Trip, Cost } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
-import { EventEmitter } from 'protractor';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-trip-edit-form',
@@ -16,7 +16,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   @Input() costs: Cost;
   tripEditForm: FormGroup;
 
-  // @Output() tripSavedData: EventEmitter = new EventEmitter();
+  @Output() tripSaveSubmit = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +30,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
       destination: ['', Validators.required],
       startdate: '',
       leavedate: '',
+      image: '',
       costs: this.fb.array([]),
     });
   }
@@ -63,10 +64,13 @@ export class TripEditFormComponent implements OnInit, OnChanges {
 
   rebuildForm() {
 
+    console.log(this.trip);
+
     this.tripEditForm.reset({
       destination: this.trip.destination,
       startdate: this.convertDates(this.trip.startdate),
-      leavedate: this.convertDates(this.trip.leavedate)
+      leavedate: this.convertDates(this.trip.leavedate),
+      image: this.trip.image
     });
 
     this.setCosts(this.trip.costs);
@@ -89,6 +93,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     this.tripService.putTrip(this.trip).subscribe(
       data => {
         console.log('success');
+        this.tripSaveSubmit.emit(this.trip);
       },
       err => console.log(err)
     );
@@ -122,7 +127,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     // this.createForm();
     // this.addCost();
     // this.rebuildForm();
-    console.log('init');
+    // console.log('init');
   }
 
   ngOnChanges() {

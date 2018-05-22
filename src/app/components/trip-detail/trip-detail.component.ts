@@ -58,6 +58,7 @@ export class TripDetailComponent implements OnInit {
   }
 
   getTrip() {
+    this.formEnabled = false;
     const id = this.route.snapshot.params.id;
     this.tripService.getTrip(id).subscribe(
       data => {

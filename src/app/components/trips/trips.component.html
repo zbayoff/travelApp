@@ -11,11 +11,6 @@
         <span class="deleteTrip" (click)="deleteTrip(trip)">X</span>
         <p>Travel Dates: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
         <p >Total Trip Cost: {{trip.totalCost}}</p>
-        <ul>
-          <li *ngFor="let cost of trip.costs">
-            <p>{{cost.costLabel}}: {{cost.costAmt}}</p>
-          </li>
-        </ul>
       </div>
     </li>
   </ul>
