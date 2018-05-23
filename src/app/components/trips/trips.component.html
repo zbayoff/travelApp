@@ -1,22 +1,23 @@
 <div class="wrap">
   <h1>Trips</h1>
   <label>Search 
-    <input type="text" placeholder="Trip Destination">
+    <input type="text" [(ngModel)]="searchText" placeholder="Trip Destination">
   </label>
   <label>Sort By: 
-    <select>
-      <option value="">Leave Date</option>
-      <option value="">Total Cost</option>
+    <select [(ngModel)]="orderField">
+      <option value="startdate">Start Date</option>
+      <option value="leavedate">Leave Date</option>
+      <option value="totalCost">Total Cost</option>
     </select>
   </label>
   <label> 
-    <select>
-      <option value="">Asc</option>
-      <option value="">Desc</option>
+    <select [(ngModel)]="orderDir">
+      <option value="1">Asc</option>
+      <option value="-1">Desc</option>
     </select>
   </label>
   <ul class="trips-list">
-    <li *ngFor="let trip of trips">
+    <li *ngFor="let trip of trips | filter: searchText | orderBy: orderField : orderDir">
       <img src="../../../assets/images/{{trip.image}}">
       <div>
         <h2>

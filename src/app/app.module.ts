@@ -12,6 +12,8 @@ import { TripEditFormComponent } from './components/trip-edit-form/trip-edit-for
 
 import { AppRoutingModule } from './/app-routing.module';
 import { TripService } from './service/trip.service';
+import { FilterPipe } from './pipes/filter.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { TripService } from './service/trip.service';
     TripsComponent,
     TripDetailComponent,
     TripAddFormComponent,
-    TripEditFormComponent
+    TripEditFormComponent,
+    FilterPipe,
+    OrderByPipe,
   ],
   imports: [
     BrowserModule,
