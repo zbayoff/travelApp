@@ -1,6 +1,20 @@
 <div class="wrap">
-  <h1>Your Trips</h1>
-
+  <h1>Trips</h1>
+  <label>Search 
+    <input type="text" placeholder="Trip Destination">
+  </label>
+  <label>Sort By: 
+    <select>
+      <option value="">Leave Date</option>
+      <option value="">Total Cost</option>
+    </select>
+  </label>
+  <label> 
+    <select>
+      <option value="">Asc</option>
+      <option value="">Desc</option>
+    </select>
+  </label>
   <ul class="trips-list">
     <li *ngFor="let trip of trips">
       <img src="../../../assets/images/{{trip.image}}">
