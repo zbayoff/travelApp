@@ -1,21 +1,27 @@
 <div class="wrap">
   <h1>Trips</h1>
-  <label>Search 
-    <input type="text" [(ngModel)]="searchText" placeholder="Trip Destination">
-  </label>
-  <label>Sort By: 
-    <select [(ngModel)]="orderField">
-      <option value="startdate">Start Date</option>
-      <option value="leavedate">Leave Date</option>
-      <option value="totalCost">Total Cost</option>
-    </select>
-  </label>
-  <label> 
-    <select [(ngModel)]="orderDir">
-      <option value="1">Asc</option>
-      <option value="-1">Desc</option>
-    </select>
-  </label>
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput type="text" [(ngModel)]="searchText" placeholder="Trip Destination">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Sort By:
+      <mat-select [(ngModel)]="orderField">
+        <mat-option value="startdate">Start Date</mat-option>
+        <mat-option value="leavedate">Leave Date</mat-option>
+        <mat-option value="totalCost">Total Cost</mat-option>
+      </mat-select>
+    </mat-label>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>
+      <mat-select [(ngModel)]="orderDir">
+        <mat-option value="1">Asc</mat-option>
+        <mat-option value="-1">Desc</mat-option>
+      </mat-select>
+    </mat-label>
+  </mat-form-field>
   <ul class="trips-list">
     <li *ngFor="let trip of trips | filter: searchText | orderBy: orderField : orderDir">
       <img src="../../../assets/images/{{trip.image}}">
@@ -25,7 +31,7 @@
         </h2>
         <span class="deleteTrip" (click)="deleteTrip(trip)">X</span>
         <p>Travel Dates: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
-        <p >Total Trip Cost: {{trip.totalCost}}</p>
+        <p>Total Trip Cost: {{trip.totalCost}}</p>
       </div>
     </li>
   </ul>

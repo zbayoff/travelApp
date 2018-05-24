@@ -15,13 +15,13 @@ export class TripsComponent implements OnInit {
   trips: Trip[];
   add: boolean;
   orderField: string;
-  orderDir: number;
+  orderDir: any;
   // totalCost: number;
 
   constructor(private tripService: TripService) {
     this.add = true;
     this.orderField = 'totalCost';
-    this.orderDir = 1;
+    this.orderDir = '1';
   }
 
   // async addTrip(form: NgForm) {

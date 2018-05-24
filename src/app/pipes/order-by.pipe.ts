@@ -8,10 +8,10 @@ export class OrderByPipe implements PipeTransform {
 
   transform(array: any, orderField: any, orderDir: any): Trip[] {
 
+    // convert order direction into a number
     orderDir = +orderDir;
 
-    console.log(orderDir);
-
+    // sort the trips array depending on orderField and asc or desc order
     array.sort((a: any, b: any) => {
       const ae = a[orderField];
       const be = b[orderField];
@@ -36,24 +36,6 @@ export class OrderByPipe implements PipeTransform {
     });
     return array;
   }
-
-
-
-
-  // console.log(orderField);
-  // console.log(orderDir);
-
-
-
-
-  // return trip.sort((a: any, b: any) => {
-  //   path.forEach((property) => {
-  //     a = a[property];
-  //     b = b[property];
-  //   });
-
-  // });
-
 
 }
 

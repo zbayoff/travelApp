@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { MaterialModule } from '../../material.module';
+
 import { Trip, Cost } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
 

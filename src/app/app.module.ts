@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+
 import { TripsComponent } from './components/trips/trips.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
 import { TripAddFormComponent } from './components/trip-add-form/trip-add-form.component';
@@ -14,6 +15,9 @@ import { AppRoutingModule } from './/app-routing.module';
 import { TripService } from './service/trip.service';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -31,7 +35,9 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     AppRoutingModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

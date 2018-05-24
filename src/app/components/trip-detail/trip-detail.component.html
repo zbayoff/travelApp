@@ -1,4 +1,5 @@
 <div class="wrap">
+    <nav><a routerLink="/">Home</a></nav>
 
   <div *ngIf="formEnabled">
     <app-trip-edit-form [trip]="trip" (tripSaveSubmit)="getTrip($event)"></app-trip-edit-form>
