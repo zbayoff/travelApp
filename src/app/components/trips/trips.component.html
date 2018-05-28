@@ -1,40 +1,54 @@
 <div class="wrap">
-  <h1>Trips</h1>
-  <mat-form-field>
-    <mat-label>Search</mat-label>
-    <input matInput type="text" [(ngModel)]="searchText" placeholder="Trip Destination">
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Sort By:
+  <mat-card class="card trip-search">
+    <!-- <mat-card-header class="card-header">Search Trips</mat-card-header> -->
+    <mat-form-field class="trip-search-field">
+      <mat-label>Search Destinations</mat-label>
+      <input matInput type="text" [(ngModel)]="searchText" placeholder="Trip Destination">
+    </mat-form-field>
+    <mat-form-field class="trip-sort-field">
+      <mat-label>Sort By:</mat-label>
       <mat-select [(ngModel)]="orderField">
         <mat-option value="startdate">Start Date</mat-option>
         <mat-option value="leavedate">Leave Date</mat-option>
         <mat-option value="totalCost">Total Cost</mat-option>
       </mat-select>
-    </mat-label>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>
+    </mat-form-field>
+    <mat-form-field class="trip-sort-order">
+      <mat-label>Order:</mat-label>
       <mat-select [(ngModel)]="orderDir">
         <mat-option value="1">Asc</mat-option>
         <mat-option value="-1">Desc</mat-option>
       </mat-select>
-    </mat-label>
-  </mat-form-field>
-  <ul class="trips-list">
-    <li *ngFor="let trip of trips | filter: searchText | orderBy: orderField : orderDir">
-      <img src="../../../assets/images/{{trip.image}}">
-      <div>
-        <h2>
-          <a routerLink="/trip/{{trip._id}}">{{trip.destination}}</a>
-        </h2>
-        <span class="deleteTrip" (click)="deleteTrip(trip)">X</span>
-        <p>Travel Dates: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
-        <p>Total Trip Cost: {{trip.totalCost}}</p>
-      </div>
-    </li>
-  </ul>
+    </mat-form-field>
+  </mat-card>
+
+  <mat-card class="card">
+    <h1>Trips</h1>
+    <ul class="trips-list">
+      <p class="no-trip-msg" *ngIf="trips?.length == 0">No trips have been added. Add one below!</p>
+      <li *ngFor="let trip of trips | filter: searchText | orderBy: orderField : orderDir">
+        <img class="trip-image" src="../../../assets/images/{{trip.image}}">
+        <div class="trip-details">
+          <h2 class="trip-destination">
+            <a mat-button routerLink="/trip/{{trip._id}}">{{trip.destination}}</a>
+            <button mat-button class="deleteTrip" (click)="deleteTrip(trip)">
+              <i class="material-icons">
+                delete
+              </i>
+            </button>
+          </h2>
+          <p class="trip-totalCost">
+            <strong>${{trip.totalCost}}</strong>
+            <span class="trip-cost-msg">(Total Trip Cost)</span>
+          </p>
+          <p>Travel Dates: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
+        </div>
+        <mat-divider></mat-divider>
+      </li>
+
+    </ul>
+  </mat-card>
+
   <div *ngIf="trips">
     <app-trip-add-form [trips]="trips"></app-trip-add-form>
   </div>

@@ -1,50 +1,122 @@
-form {
+.card {
     margin-bottom: 1rem;
 }
 
+.card-header {
+    width: 100%;
+    display: block;
+}
 
-ul {
-    list-style: none;
-    // background-color: lightblue;
+.trip-search {
     display: flex;
-    flex-direction: column;
-    li {
-        display: flex;
-        margin-bottom: 1rem;
-        // background-color: indianred;
-
-        img {
-            width: 30%;
-            height: 100%;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    @media screen and (min-width: 768px) {
+        flex-wrap: nowrap;
+    }
+    .trip-search-field {
+        flex: 1 1 100%;
+        @media screen and (min-width: 768px) {
+            flex: 0;
+            min-width: 50%;
         }
-
-        h2, p {
-            padding-left: 1rem;
+    }
+    .trip-sort-field {
+        max-width: 200px;
+        margin: 0 1rem 0 0;
+        flex: 1;
+        @media screen and (min-width: 768px) {
+            margin: 0 1rem;
         }
-
-        h2 {
-            margin-top: 0;
+    }
+    .trip-sort-order {
+        max-width: 100px;
+        margin: 0;
+        flex: 1;
+        @media screen and (min-width: 768px) {
+            margin: 0;
         }
     }
 }
 
-.deleteTrip{
-    cursor: pointer;
+form {
+    margin-bottom: 1rem;
 }
 
+.trips-list {
+    list-style: none; // background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    .no-trip-msg {
+        margin: 0.2rem;
+    }
+    li {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        @media screen and (min-width: 768px) {
+            flex-direction: row;
+        }
+        .trip-image {
+            text-align: center;
+            margin: 0 auto;
+            width: 95%;
+            height: 100%;
+            order: 2;
+            @media screen and (min-width: 768px) {
+                width: 50%;
+                order: 0;
+                margin: 0;
+            }
+        }
+        .trip-details {
+            order: 1;
+            margin-left: 0.2rem;
+            .trip-destination {
+                display: flex;
+                align-items: center;
+                align-content: center;
+                padding-left: 0rem;
+                margin: 1rem 0;
+                a {
+                    text-decoration: underline;
+                    font-size: 1.5rem;
+                    color: black;
+                    
+                    @media screen and (min-width: 768px) {
+                        padding-left: 1rem;
+                    }
+                }
+                button {
+                    
+                    color: red;
+                    min-width: 10px;
+                    padding: 0.2rem;
+                    border-radius: 50px;
+                    i {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+            p {
+                padding-left: 1rem;
+                @media screen and (min-width: 768px) {
+                    padding-left: 1rem;
+                }
+            }
+            .trip-totalCost {
+                margin: 0.3rem 0;
+                font-size: 1.2rem;
+                .trip-cost-msg {
+                    padding-left: 0.5rem;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+}
 
-// input {
-//     display: block;
-//     margin-bottom: 0.5rem;
-// }
-
-// label {
-//     display: inline-block;
-//     margin-bottom: 0.5rem;
-    
-// }
-
-// input[type="checkbox"] {
-//     display: inline-block;
-//     margin: 0 0 0 1rem;
-// }
+.deleteTrip {
+    cursor: pointer;
+}

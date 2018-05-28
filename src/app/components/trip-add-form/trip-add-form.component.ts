@@ -1,15 +1,38 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { MaterialModule } from '../../material.module';
 
 import { Trip, Cost } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
 
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
+
+
 @Component({
   selector: 'app-trip-add-form',
   templateUrl: './trip-add-form.component.html',
-  styleUrls: ['./trip-add-form.component.scss']
+  styleUrls: ['./trip-add-form.component.scss'],
+  animations: [
+    trigger('slideShowHide', [
+      state('hide', style({
+        'display': 'none',
+        'height': '0',
+        'opacity': 0,
+        'overflow-y': 'hidden'
+      })),
+      state('show', style({
+        'display': 'block',
+        'height': '*',
+        'overflow-y': 'hidden',
+        'opacity': 1
+      })),
+      transition('show => hide', animate('300ms ease-in')),
+      transition('hide => show', animate('300ms ease-out')),
+    ])
+  ]
 })
 export class TripAddFormComponent implements OnInit, OnChanges {
 
@@ -17,12 +40,20 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   @Input() trips: Trip[];
   @Input() costs: Cost;
   tripAddForm: FormGroup;
+  formState: string;
 
   constructor(
     private fb: FormBuilder,
     private tripService: TripService
   ) {
+    this.formState = 'hide';
+  }
 
+  toggleAddTripForm() {
+    this.formState = this.formState === 'hide' ? 'show' : 'hide';
+    setTimeout(() => {
+      window.scroll({ top: 2500, left: 0, behavior: 'smooth' });
+    }, 300);
   }
 
   createForm() {

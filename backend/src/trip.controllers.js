@@ -58,15 +58,15 @@ exports.import = function (req, res) {
       'costs': [
         {
           'costLabel':"plane",
-          'costAmt':600
+          'costAmt':500
         },
         {
           'costLabel':"car",
-          'costAmt':40
+          'costAmt':100
         },
         {
           'costLabel':"boat",
-          'costAmt':54
+          'costAmt':50
         }
       ]
     }, {
@@ -78,15 +78,15 @@ exports.import = function (req, res) {
       'costs': [
         {
           'costLabel':"plane",
-          'costAmt':600
+          'costAmt':1000
         },
         {
           'costLabel':"car",
-          'costAmt':40
+          'costAmt':200
         },
         {
           'costLabel':"boat",
-          'costAmt':54
+          'costAmt':30
         }
       ]
     }, {
@@ -98,15 +98,15 @@ exports.import = function (req, res) {
       'costs': [
         {
           'costLabel':"plane",
-          'costAmt':600
+          'costAmt':1200
         },
         {
           'costLabel':"car",
-          'costAmt':40
+          'costAmt':300
         },
         {
           'costLabel':"boat",
-          'costAmt':54
+          'costAmt':20
         }
       ]
     },

@@ -378,6 +378,10 @@ template {
 
   */
 
+  * {
+    font-family: Roboto,"Helvetica Neue",sans-serif
+  }
+
 body {
     // background: #B4D2E7;
     position: relative;
@@ -385,7 +389,7 @@ body {
 
 .wrap {
 
-  margin: 1rem auto;
+  margin: 0 auto 1rem auto;
   padding: 1rem;
 //   background: white;
   max-width: 800px;
@@ -403,4 +407,8 @@ li {
 
 mat-form-field.mat-form-field {
     display: block;
+}
+
+mat-input, mat-label{
+   font-size: 1.2rem;
 }

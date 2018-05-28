@@ -22,6 +22,7 @@ export class TripsComponent implements OnInit {
     this.add = true;
     this.orderField = 'totalCost';
     this.orderDir = '1';
+
   }
 
   // async addTrip(form: NgForm) {
@@ -45,8 +46,10 @@ export class TripsComponent implements OnInit {
   getTrips() {
     this.tripService.getTrips().subscribe(
       data => {
+        console.log(data);
         this.trips = data.json();
         this.addCosts();
+        console.log(this.trips);
       },
       err => console.log(err)
     );

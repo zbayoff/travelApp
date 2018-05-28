@@ -16,8 +16,8 @@ import { TripService } from './service/trip.service';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MaterialModule } from './material.module';
+
 
 
 @NgModule({

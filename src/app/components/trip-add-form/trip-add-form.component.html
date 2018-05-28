@@ -1,51 +1,57 @@
-<div class="form-wrapper">
-  <form [formGroup]="tripAddForm" (ngSubmit)="onSubmit()">
-    <fieldset>
-      <legend>Add Trip</legend>
-      <mat-form-field>
-        <label>Destination
-          <input matInput  class="form-control" type="text" formControlName="destination" placeholder="Destination" required>
-        </label>
-      </mat-form-field>
-      <mat-form-field>
-        <label>Start Date
-          <input matInput  class="form-control" type="date" formControlName="startdate" placeholder="Start Date" required>
-        </label>
-      </mat-form-field>
-      <mat-form-field>
-        <label>Leave Date
-          <input matInput  class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date" required>
-        </label>
-      </mat-form-field>
-      <div>
-        <h2>Costs</h2>
-        <div formArrayName="costs">
-          <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
-            <div class="mat-form-field">
-            <label> Cost {{idx + 1}}
-              <input type="text" formControlName="costLabel" placeholder="Cost Label">
-            </label>
-            <label>
-              <input type="number" formControlName="costAmt" placeholder="$">
-            </label>
-            <span *ngIf="idx > 0" (click)="removeCost(idx)">X</span>
-          </div>
+<mat-card class="form-wrapper card">
+  <mat-card-header color="background" class="addTrip-header" (click)="toggleAddTripForm()">
+    <h2 class="">
+      <i class="material-icons">
+        add_circle_outline
+      </i>Add Trip</h2>
+  </mat-card-header>
+  <form class="addTripForm" [formGroup]="tripAddForm" (ngSubmit)="onSubmit()" [@slideShowHide]='formState'>
+    <mat-form-field>
+      <mat-label>Destination</mat-label>
+      <input matInput class="form-control" type="text" formControlName="destination" placeholder="Destination" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Start Date</mat-label>
+      <input matInput class="form-control" type="date" formControlName="startdate" placeholder="Start Date" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Leave Date</mat-label>
+      <input matInput class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Image </mat-label>
+      <input matInput class="form-control" type="text" formControlName="image" placeholder="image">
+    </mat-form-field>
+    <div>
+      <h2>Costs</h2>
+      <div formArrayName="costs">
+        <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
+          <div class="trip-addCosts">
+            <mat-form-field class="trip-cost-label">
+              <mat-label>Cost {{idx + 1}}</mat-label>
+              <input matInput type="text" formControlName="costLabel" placeholder="Cost Label">
+            </mat-form-field>
+            <mat-form-field class="trip-cost-field">
+              <span matPrefix>$ </span>
+              <input matInput type="number" formControlName="costAmt" value="0">
+            </mat-form-field>
+            <i *ngIf="idx > 0" class="material-icons" (click)="removeCost(idx)">
+              clear
+            </i>
           </div>
         </div>
-        <button mat-raised-button color="primary" type="button" (click)="addCost()">Add'l Cost</button>
       </div>
-      <div class="form-group">
-        <label>Image
-          <input type="text" formControlName="image" placeholder="image">
-        </label>
+      <div class="addCost-btn">
+        <button mat-raised-button type="button" (click)="addCost()">Add'l Cost</button>
       </div>
-      <div>
-        <button mat-raised-button color="primary" type="submit">Add Trip</button>
-      </div>
-    </fieldset>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="tripAdd-submit-btn">
+      <button mat-raised-button color="accent" type="submit">Add Trip</button>
+    </div>
   </form>
 
-  <p>Form value: {{tripAddForm.value | json}}</p>
-  <p>Form value: {{tripAddForm.status | json}}</p>
+  <!-- <p>Form value: {{tripAddForm.value | json}}</p> -->
+  <!-- <p>Form value: {{tripAddForm.status | json}}</p> -->
 
-</div>
+</mat-card>

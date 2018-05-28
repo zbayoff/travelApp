@@ -1,4 +1,56 @@
-<div class="form-wrapper">
+<mat-card class="form-wrapper card">
+    <mat-card-header class="editTrip-header">
+      <h2 class="">Edit Trip</h2>
+    </mat-card-header>
+    <form class="editTripForm" [formGroup]="tripEditForm" (ngSubmit)="saveTrip()">
+      <mat-form-field>
+        <mat-label>Destination</mat-label>
+        <input matInput class="form-control" type="text" formControlName="destination" placeholder="Destination" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Start Date</mat-label>
+        <input matInput class="form-control" type="date" formControlName="startdate" placeholder="Start Date" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Leave Date</mat-label>
+        <input matInput class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Image </mat-label>
+        <input matInput class="form-control" type="text" formControlName="image" placeholder="image">
+      </mat-form-field>
+      <div>
+        <h2>Costs</h2>
+        <div formArrayName="costs">
+          <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
+            <div class="trip-editCosts">
+              <mat-form-field class="trip-cost-label">
+                <mat-label>Cost {{idx + 1}}</mat-label>
+                <input matInput type="text" formControlName="costLabel" placeholder="Cost Label">
+              </mat-form-field>
+              <mat-form-field class="trip-cost-field">
+                <span matPrefix>$ </span>
+                <input matInput type="number" formControlName="costAmt" value="0">
+              </mat-form-field>
+              <i *ngIf="idx > 0" class="material-icons" (click)="removeCost(idx)">
+                clear
+              </i>
+            </div>
+          </div>
+        </div>
+        <div class="editCost-btn">
+          <button mat-raised-button type="button" (click)="addCost()">Add'l Cost</button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="tripEdit-submit-btn">
+        <button mat-raised-button color="accent" type="submit">Save Trip</button>
+      </div>
+    </form>
+  </mat-card>
+  
+
+<!-- <div class="form-wrapper">
     <form [formGroup]="tripEditForm" (ngSubmit)="saveTrip()">
       <fieldset>
         <legend>Edit Trip</legend>
@@ -46,4 +98,4 @@
     <p>Form value: {{tripEditForm.value | json}}</p>
     <p>Form value: {{tripEditForm.status | json}}</p>
   
-  </div>
+  </div> -->
