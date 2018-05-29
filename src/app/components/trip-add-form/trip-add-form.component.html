@@ -6,30 +6,32 @@
       </i>Add Trip</h2>
   </mat-card-header>
   <form class="addTripForm" [formGroup]="tripAddForm" (ngSubmit)="onSubmit()" [@slideShowHide]='formState'>
-    <div class="trip-details">
-      <mat-form-field class="trip-destination">
+    <div class="trip-details-field">
+      <mat-form-field class="trip-destination-field">
         <mat-label>Destination</mat-label>
         <input matInput class="form-control" type="text" formControlName="destination" placeholder="Destination">
       </mat-form-field>
-      <mat-form-field class="trip-start-date">
+      <mat-form-field class="trip-start-date-field">
         <mat-label>Start Date</mat-label>
         <input matInput class="form-control" type="date" formControlName="startdate" placeholder="Start Date">
       </mat-form-field>
-      <mat-form-field class="trip-leave-date">
+      <mat-form-field class="trip-leave-date-field">
         <mat-label>Leave Date</mat-label>
         <input matInput class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date">
       </mat-form-field>
     </div>
-    <mat-form-field class="trip-image">
-      <mat-label>Image</mat-label>
-      <input matInput class="form-control" type="text" formControlName="image" placeholder="image">
-    </mat-form-field>
+    <!-- <mat-form-field class="trip-image-field"> -->
+      <app-photo-gallery></app-photo-gallery>
+      <!-- <mat-label>Image</mat-label>
+      <input matInput class="form-control" type="text" formControlName="image" placeholder="image"> -->
+    <!-- </mat-form-field> -->
+
     <div>
       <h2>Costs</h2>
       <p>Add some costs you're likely to incur on your trip. Plane tickets, hotels, car rentals, for example.</p>
       <div formArrayName="costs">
         <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
-          <div class="trip-addCosts">
+          <div class="trip-addCosts-field">
             <mat-form-field class="trip-cost-label">
               <mat-label>Cost {{idx + 1}}</mat-label>
               <input matInput type="text" formControlName="costLabel" placeholder="Cost Label ex. 'Plane Ticket'">

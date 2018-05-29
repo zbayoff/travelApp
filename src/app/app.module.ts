@@ -17,6 +17,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { PhotoGalleryComponent } from './components/photo-gallery/photo-gallery.component';
 
 
 
@@ -29,6 +30,7 @@ import { MaterialModule } from './material.module';
     TripEditFormComponent,
     FilterPipe,
     OrderByPipe,
+    PhotoGalleryComponent,
   ],
   imports: [
     BrowserModule,

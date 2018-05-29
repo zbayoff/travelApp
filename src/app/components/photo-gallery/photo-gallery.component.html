@@ -1,0 +1,31 @@
+<button type="button" mat-raised-button color="accent" (click)="openModal()">Add Image</button><span>&nbsp; &nbsp; No Image Selected</span>
+
+<!-- <mat-card *ngIf="modalOpen" class="card modal">
+  <div class="modal-content">
+    <h1>Image Gallery</h1>
+    <h2>Select and</h2>
+    <p>
+      Home page text
+    </p>
+    <button type="button" mat-raised-button color="primary" (click)="closeModal()">Close</button>
+  </div>
+  <div class="modal-background"></div>
+</mat-card> -->
+
+<mat-card  *ngIf="modalOpen" class="modal">
+    <div class="modal-column">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" (click)="closeModal()">&times;</span>
+                <h2>Image Gallery</h2>
+            </div>
+            <div class="modal-body">
+                <p>Pick an Image</p>
+            </div>
+        </div>
+    </div>
+</mat-card>
+
+
+
+

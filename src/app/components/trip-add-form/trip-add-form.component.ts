@@ -29,8 +29,8 @@ smoothscroll.polyfill();
         'opacity': 1,
         'overflow': 'hidden'
       })),
-      transition('show => hide', animate('500ms ease-in')),
-      transition('hide => show', animate('500ms ease-out')),
+      transition('show => hide', animate('600ms ease-in')),
+      transition('hide => show', animate('600ms ease-out')),
     ])
   ]
 })
@@ -49,11 +49,44 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     this.formState = 'hide';
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  offset(el) {
+    const rect = el.getBoundingClientRect(),
+      scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+      scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
+  }
+
   toggleAddTripForm() {
+    // const viewportOffset = document.querySelector('.addTrip-header').getBoundingClientRect();
+    const documentOffset = this.offset(document.querySelector('.addTrip-header'));
+    const top = documentOffset.top;
+    const topScrollPos = window.scrollY;
+    console.log(topScrollPos);
     this.formState = this.formState === 'hide' ? 'show' : 'hide';
-    setTimeout(() => {
-      window.scroll({ top: 2500, left: 0, behavior: 'smooth' });
-    }, 300);
+    if (this.formState === 'show') {
+      setTimeout(() => {
+        window.scroll({ top: top, left: 0, behavior: 'smooth' });
+      }, 700);
+    } else {
+      setTimeout(() => {
+        window.scroll({ top: 5000, left: 0, behavior: 'smooth' });
+      }, 300);
+    }
+
   }
 
   createForm() {
