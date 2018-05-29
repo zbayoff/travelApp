@@ -64,7 +64,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
 
   rebuildForm() {
 
-    console.log(this.trip);
+    // console.log(this.trip);
 
     this.tripEditForm.reset({
       destination: this.trip.destination,
@@ -92,7 +92,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
 
     this.tripService.putTrip(this.trip).subscribe(
       data => {
-        console.log('success');
+        // console.log('success');
         this.tripSaveSubmit.emit(this.trip);
       },
       err => console.log(err)
@@ -131,7 +131,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('changes');
+    // console.log('changes');
     this.createForm();
     this.addCost();
     this.rebuildForm();

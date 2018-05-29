@@ -27,6 +27,47 @@
     }
 }
 
+.trip-details {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    @media screen and (min-width: 768px) {
+        flex-wrap: nowrap;
+    }
+    .trip-destination {
+        flex: 1 1 100%;
+        input {
+            height: 24px;
+        }
+        @media screen and (min-width: 768px) {
+            flex: 1;
+            width: 50%;
+        }
+    }
+    
+    .trip-start-date {
+        max-width: 50%;
+        margin: 0 1rem 0 0;
+        @media screen and (min-width: 768px) {
+            max-width: 150px;
+            flex: 0;
+            margin: 0 1rem;
+        }
+    }
+    
+    .trip-leave-date {
+        max-width: 50%;
+        @media screen and (min-width: 768px) {
+            max-width: 150px;
+            flex: 0;
+            margin: 0;
+        }
+    }
+}
+
+
+
 .trip-addCosts {
     display: flex;
     flex-wrap: wrap;
@@ -49,6 +90,7 @@
         // }
     }
     i {
+        cursor: pointer;
         font-size: 2rem;
         margin-left: 0.5rem;
     }

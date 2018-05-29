@@ -21,16 +21,16 @@ smoothscroll.polyfill();
         'display': 'none',
         'height': '0',
         'opacity': 0,
-        'overflow-y': 'hidden'
+        'overflow': 'hidden'
       })),
       state('show', style({
         'display': 'block',
         'height': '*',
-        'overflow-y': 'hidden',
-        'opacity': 1
+        'opacity': 1,
+        'overflow': 'hidden'
       })),
-      transition('show => hide', animate('300ms ease-in')),
-      transition('hide => show', animate('300ms ease-out')),
+      transition('show => hide', animate('500ms ease-in')),
+      transition('hide => show', animate('500ms ease-out')),
     ])
   ]
 })
@@ -59,8 +59,8 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   createForm() {
     this.tripAddForm = this.fb.group({
       destination: ['', Validators.required],
-      startdate: '',
-      leavedate: '',
+      startdate: ['', Validators.required],
+      leavedate: ['', Validators.required],
       image: '',
       costs: this.fb.array([]),
     });

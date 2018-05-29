@@ -10,5 +10,12 @@ header {
         font-size: 1.2rem;
         margin: 0.5rem 0 1rem 0;
     }
+}
 
+.app-header {
+    align-content: center;
+    align-items: center;
+    .app-subtitle {
+        font-size: 1rem;
+    }
 }

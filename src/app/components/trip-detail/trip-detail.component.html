@@ -1,5 +1,5 @@
 <div class="wrap">
-    <!-- <nav><a routerLink="/">Home</a></nav> -->
+  <!-- <nav><a routerLink="/">Home</a></nav> -->
 
   <div *ngIf="formEnabled">
     <app-trip-edit-form [trip]="trip" (tripSaveSubmit)="getTrip($event)"></app-trip-edit-form>
@@ -7,34 +7,32 @@
 
   <div *ngIf="!formEnabled">
     <div *ngIf="trip">
-      <h2>{{trip.destination}}</h2>
-      <p>From: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
-      <h3>Travel Details</h3>
-      <div class="card">
-        <h4>Travel Costs</h4>
-        <ul>
-          <li *ngFor="let cost of trip.costs">
-            <p>{{cost.costLabel}}: {{cost.costAmt}}</p>
-          </li>
-        </ul>
-      </div>
-      <div class="card">
-        <h4>Image</h4>
-        <p>{{trip.image}}</p>
-      </div>
-      <div class="card">
-        <h4>Total Trip Cost:
-          <span>{{trip.totalCost}}</span>
-        </h4>
-      </div>
+      <mat-card class="card">
+        <img class="trip-image" src="../../../assets/images/{{trip.image}}">
+        <div class="trip-details">
+          <h2 class="trip-destination">{{trip.destination}}</h2>
+          <p class="trip-totalCost">
+            <strong>${{trip.totalCost}}</strong>
+            <span class="trip-cost-msg"> (Total Trip Cost)</span>
+          </p>
+          <p>From: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
+          <div class="card">
+            <h4>Image</h4>
+            <p>{{trip.image}}</p>
+          </div>
+          <h4>Travel Costs</h4>
+          <ul>
+            <li *ngFor="let cost of trip.costs" class="trip-costs">
+              <p>{{cost.costLabel}}:
+                <span class="trip-cost-amt">${{cost.costAmt}}</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </mat-card>
     </div>
   </div>
-
-  <div *ngIf="formEnabled">
-    
-  </div>
-
-  <button type="button" (click)="back()">Back</button>
-  <button type="button" *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
-  <button type="button" *ngIf="formEnabled" (click)="cancel()">Cancel</button>
+  <button type="button" mat-raised-button color="accent" (click)="back()">Back</button>
+  <button type="button" mat-raised-button color="accent" *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
+  <button type="button" mat-raised-button color="accent" *ngIf="formEnabled" (click)="cancel()">Cancel</button>
 </div>
