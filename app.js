@@ -5,10 +5,11 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 8080;
 
 const mongoose = require('mongoose');
-const mongoUri = 'mongodb://localhost/trips';
+const config = require('./config/database');
+// const mongoUri = 'mongodb://localhost/trips';
 
 // const mongoUri = 'mongodb://devereld:dd2345@ds015730.mlab.com:15730/recipes-dd';
-mongoose.connect(mongoUri, { useMongoClient: true } );
+mongoose.connect(config.database, { useMongoClient: true } );
 
 // make sure this line always appears before any routes
 app.use(bodyParser.json());
