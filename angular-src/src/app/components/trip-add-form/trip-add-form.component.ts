@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { MaterialModule } from '../../material.module';
@@ -41,6 +41,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   @Input() costs: Cost;
   tripAddForm: FormGroup;
   formState: string;
+  @ViewChild(FormGroupDirective) addForm;
 
   constructor(
     private fb: FormBuilder,
@@ -79,8 +80,9 @@ export class TripAddFormComponent implements OnInit, OnChanges {
       startdate: ['', Validators.required],
       leavedate: ['', Validators.required],
       image: '',
-      costs: this.fb.array([]),
+      costs: this.fb.array([])
     });
+    // console.log(this.tripAddForm);
   }
 
   get costsFormArray(): FormArray {
@@ -88,7 +90,10 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   addCost() {
-    this.costsFormArray.push(this.fb.group(new Cost()));
+    this.costsFormArray.push(this.fb.group({
+      costLabel: ['', Validators.required],
+      costAmt: [0, Validators.required]
+    }));
   }
 
   addCosts() {
@@ -106,6 +111,8 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
+
+    // console.log(this.tripAddForm.value);
     this.tripService.addTrip(this.tripAddForm.value).subscribe(
       res => {
         this.trips.push(res.json());
@@ -114,23 +121,28 @@ export class TripAddFormComponent implements OnInit, OnChanges {
       },
       err => console.log(err)
     );
+
   }
 
   rebuildForm() {
-    this.tripAddForm.reset();
-    for (let i = 1; i < this.costsFormArray.length; i += 1) {
+
+    this.addForm.resetForm();
+
+    for (let i = 0; i < this.costsFormArray.length; i += 1) {
       this.costsFormArray.removeAt(i);
     }
+    console.log(this.tripAddForm);
   }
 
   ngOnInit() {
     this.createForm();
-    this.addCost();
-    this.rebuildForm();
   }
 
   ngOnChanges() {
 
+
   }
+
+
 
 }

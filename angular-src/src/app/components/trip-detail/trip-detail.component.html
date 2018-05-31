@@ -1,6 +1,8 @@
 <div class="wrap">
   <!-- <nav><a routerLink="/">Home</a></nav> -->
 
+  <button type="button" mat-raised-button color="accent" (click)="back()">&larr; Back to Trips</button>
+
   <div *ngIf="formEnabled">
     <app-trip-edit-form [trip]="trip" (tripSaveSubmit)="getTrip($event)"></app-trip-edit-form>
   </div>
@@ -31,7 +33,7 @@
       </mat-card>
     </div>
   </div>
-  <button type="button" mat-raised-button color="accent" (click)="back()">Back</button>
+
   <button type="button" mat-raised-button color="accent" *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
   <button type="button" mat-raised-button color="accent" *ngIf="formEnabled" (click)="cancel()">Cancel</button>
 </div>

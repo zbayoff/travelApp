@@ -14,7 +14,7 @@ const config = require('./config/database');
 // const mongoUri = 'mongodb://devereld:dd2345@ds015730.mlab.com:15730/recipes-dd';
 mongoose.connect(config.database, { useMongoClient: true } );
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // make sure this line always appears before any routes
 app.use(bodyParser.json());
@@ -31,13 +31,13 @@ const tripModels = require('./src/trip.model');
 const routes = require('./src/trip.routes');
 const appRoutes = routes(app);
 
-// app.get('/', function (req, res) {
-//     res.send('api is up');
-// });
-
-app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
+app.get('/', function (req, res) {
+    res.send('api is up');
 });
+
+// app.get('*', function (req, res) {
+//     res.sendFile(path.join(__dirname, 'public/index.html'));
+// });
 
 app.listen(port);
 console.log(`Server running at http://localhost:${port}/`);

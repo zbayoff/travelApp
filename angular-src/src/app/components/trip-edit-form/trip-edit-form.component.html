@@ -23,18 +23,19 @@
     </mat-form-field>
     <div>
       <h2>Costs</h2>
+      <p>Add some costs you're likely to incur on your trip. Plane tickets, hotels, car rentals, for example.</p>
       <div formArrayName="costs">
         <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
           <div class="trip-editCosts">
             <mat-form-field class="trip-cost-label">
               <mat-label>Cost {{idx + 1}}</mat-label>
-              <input matInput type="text" formControlName="costLabel" placeholder="Cost Label">
+              <input matInput type="text" formControlName="costLabel" placeholder="Cost Label ex. 'Plane Ticket'">
             </mat-form-field>
             <mat-form-field class="trip-cost-field">
               <span matPrefix>$ </span>
               <input matInput type="number" formControlName="costAmt">
             </mat-form-field>
-            <i *ngIf="idx > 0" class="material-icons" (click)="removeCost(idx)">
+            <i class="material-icons" (click)="removeCost(idx)">
               clear
             </i>
           </div>
@@ -46,7 +47,7 @@
     </div>
     <mat-divider></mat-divider>
     <div class="tripEdit-submit-btn">
-      <button mat-raised-button color="accent" type="submit">Save Trip</button>
+      <button mat-raised-button color="accent" type="submit" [disabled]="!tripEditForm.valid">Save Trip</button>
     </div>
   </form>
 </mat-card>

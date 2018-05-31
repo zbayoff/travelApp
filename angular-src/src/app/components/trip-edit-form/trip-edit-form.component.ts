@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, OnChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Input, Output, OnChanges, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 
 import { Trip, Cost } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
@@ -17,6 +17,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   tripEditForm: FormGroup;
 
   @Output() tripSaveSubmit = new EventEmitter<any>();
+  @ViewChild(FormGroupDirective) editForm;
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +41,10 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   }
 
   addCost() {
-    this.costsFormArray.push(this.fb.group(new Cost()));
+    this.costsFormArray.push(this.fb.group({
+      costLabel: ['', Validators.required],
+      costAmt: [0, Validators.required]
+    }));
   }
 
   removeCost(costID) {
@@ -61,11 +65,15 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     });
 
     this.setCosts(this.trip.costs);
+
   }
 
   setCosts(costs: Cost[]) {
     const costFormGroup = costs.map((cost) => {
-      return this.fb.group(cost);
+      return this.fb.group({
+        costAmt: [cost.costAmt, Validators.required],
+        costLabel: [cost.costLabel, Validators.required]
+      });
     });
     const costsFormArray = this.fb.array(costFormGroup);
     this.tripEditForm.setControl('costs', costsFormArray);
@@ -107,7 +115,6 @@ export class TripEditFormComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.createForm();
-    this.addCost();
     this.rebuildForm();
   }
 
