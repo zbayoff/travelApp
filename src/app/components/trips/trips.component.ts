@@ -16,22 +16,13 @@ export class TripsComponent implements OnInit {
   add: boolean;
   orderField: string;
   orderDir: any;
-  // totalCost: number;
+  searchText: string;
 
   constructor(private tripService: TripService) {
     this.add = true;
     this.orderField = 'totalCost';
     this.orderDir = '1';
-
   }
-
-  // async addTrip(form: NgForm) {
-  //   // console.log(form.value);
-
-  //   const response = await this.tripService.addTrip(formData);
-  //   const responseGet = await this.tripService.getTrips();
-  //   this.trips = responseGet.json();
-  // }
 
   addCosts() {
     for (const trip of this.trips) {
@@ -46,10 +37,8 @@ export class TripsComponent implements OnInit {
   getTrips() {
     this.tripService.getTrips().subscribe(
       data => {
-        console.log(data);
         this.trips = data.json();
         this.addCosts();
-        console.log(this.trips);
       },
       err => console.log(err)
     );
@@ -59,13 +48,6 @@ export class TripsComponent implements OnInit {
     this.getTrips();
   }
 
-  // async ngOnInit() {
-  //   const response = await this.tripService.getTrips();
-  //   this.trips = response.json();
-  //   // console.log(this.trips);
-
-  // }
-
   deleteTrip(trip: Trip) {
     this.tripService.deleteTrip(trip._id).subscribe(
       res => {
@@ -74,9 +56,5 @@ export class TripsComponent implements OnInit {
       err => console.log(err)
     );
 
-    // const response =  this.tripService.deleteTrip(tripID);
-    // const responseGet =  this.tripService.getTrips();
-    // this.trips = responseGet.json();
   }
-
 }

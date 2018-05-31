@@ -33,7 +33,6 @@ export class TripDetailComponent implements OnInit {
     this.formEnabled = !this.formEnabled;
     this.editable = !this.editable;
     this.orginData = JSON.parse(JSON.stringify(this.trip));
-    // console.log(this.orginData);
   }
 
   addCosts() {
@@ -41,16 +40,12 @@ export class TripDetailComponent implements OnInit {
     for (const cost of this.trip.costs) {
       totalCost += cost.costAmt;
     }
-    // console.log(totalCost);
     this.trip.totalCost = totalCost;
-
   }
 
   cancel() {
     this.formEnabled = !this.formEnabled;
     this.editable = !this.editable;
-    // this.trip = this.orginData;
-    // console.log(this.trip);
   }
 
   editTrip() {
@@ -72,5 +67,4 @@ export class TripDetailComponent implements OnInit {
   ngOnInit() {
     this.getTrip();
   }
-
 }

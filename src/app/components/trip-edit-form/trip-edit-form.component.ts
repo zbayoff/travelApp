@@ -43,28 +43,15 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     this.costsFormArray.push(this.fb.group(new Cost()));
   }
 
-  // addCosts() {
-  //   for (const trip of this.trips) {
-  //     let totalCost = 0;
-  //     for (const cost of trip.costs) {
-  //       console.log(cost.costAmt);
-  //       totalCost += cost.costAmt;
-  //     }
-  //     trip.totalCost = totalCost;
-  //   }
-  // }
-
   removeCost(costID) {
     this.costsFormArray.removeAt(costID);
   }
 
-  convertDates (date) {
+  convertDates(date) {
     return date.substring(0, 10);
   }
 
   rebuildForm() {
-
-    // console.log(this.trip);
 
     this.tripEditForm.reset({
       destination: this.trip.destination,
@@ -81,28 +68,23 @@ export class TripEditFormComponent implements OnInit, OnChanges {
       return this.fb.group(cost);
     });
     const costsFormArray = this.fb.array(costFormGroup);
-    // console.log(this.costsFormArray);
     this.tripEditForm.setControl('costs', costsFormArray);
   }
 
-   saveTrip() {
+  saveTrip() {
 
     this.trip = this.prepareSaveTrip();
-    // this.tripSavedData.emit(this.trip);
 
     this.tripService.putTrip(this.trip).subscribe(
       data => {
-        // console.log('success');
         this.tripSaveSubmit.emit(this.trip);
       },
       err => console.log(err)
     );
-
     this.rebuildForm();
   }
 
   prepareSaveTrip() {
-
     const formModel = this.tripEditForm.value;
     const costsDeepCopy: Cost[] = formModel.costs.map((cost: Cost) => {
       return Object.assign({}, cost);
@@ -117,21 +99,13 @@ export class TripEditFormComponent implements OnInit, OnChanges {
       totalCost: formModel.totalCost,
       costs: costsDeepCopy
     };
-
     return saveTrip;
-
-
   }
 
   ngOnInit() {
-    // this.createForm();
-    // this.addCost();
-    // this.rebuildForm();
-    // console.log('init');
   }
 
   ngOnChanges() {
-    // console.log('changes');
     this.createForm();
     this.addCost();
     this.rebuildForm();

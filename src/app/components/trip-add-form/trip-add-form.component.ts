@@ -49,20 +49,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     this.formState = 'hide';
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   offset(el) {
     const rect = el.getBoundingClientRect(),
       scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
@@ -75,7 +61,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     const documentOffset = this.offset(document.querySelector('.addTrip-header'));
     const top = documentOffset.top;
     const topScrollPos = window.scrollY;
-    console.log(topScrollPos);
     this.formState = this.formState === 'hide' ? 'show' : 'hide';
     if (this.formState === 'show') {
       setTimeout(() => {
@@ -86,7 +71,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
         window.scroll({ top: 5000, left: 0, behavior: 'smooth' });
       }, 300);
     }
-
   }
 
   createForm() {
@@ -111,7 +95,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     for (const trip of this.trips) {
       let totalCost = 0;
       for (const cost of trip.costs) {
-        // console.log(cost.costAmt);
         totalCost += cost.costAmt;
       }
       trip.totalCost = totalCost;
@@ -123,7 +106,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    // console.log('form submitted');
     this.tripService.addTrip(this.tripAddForm.value).subscribe(
       res => {
         this.trips.push(res.json());

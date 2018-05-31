@@ -23,8 +23,7 @@
           <h4>Travel Costs</h4>
           <ul>
             <li *ngFor="let cost of trip.costs" class="trip-costs">
-              <p>{{cost.costLabel}}:
-                <span class="trip-cost-amt">${{cost.costAmt}}</span>
+              <p>{{cost.costLabel}}: ${{cost.costAmt}}
               </p>
             </li>
           </ul>
