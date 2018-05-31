@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+
+
 const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 8080;
@@ -11,6 +13,8 @@ const config = require('./config/database');
 
 // const mongoUri = 'mongodb://devereld:dd2345@ds015730.mlab.com:15730/recipes-dd';
 mongoose.connect(config.database, { useMongoClient: true } );
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // make sure this line always appears before any routes
 app.use(bodyParser.json());
