@@ -1,7 +1,7 @@
 <div class="wrap">
   <!-- <nav><a routerLink="/">Home</a></nav> -->
 
-  <button type="button" mat-raised-button color="accent" (click)="back()">&larr; Back to Trips</button>
+  <button type="button" mat-raised-button color="accent" routerLink="/">&larr; Back to Trips</button>
 
   <div *ngIf="formEnabled">
     <app-trip-edit-form [trip]="trip" (tripSaveSubmit)="getTrip($event)"></app-trip-edit-form>
@@ -13,16 +13,19 @@
         <img class="trip-image" src="../../../assets/images/{{trip.image}}">
         <div class="trip-details">
           <h2 class="trip-destination">{{trip.destination}}</h2>
-          <p class="trip-totalCost">
-            <strong>${{trip.totalCost}}</strong>
-            <span class="trip-cost-msg"> (Total Trip Cost)</span>
-          </p>
-          <p>From: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
-          <div class="card">
-            <h4>Image</h4>
-            <p>{{trip.image}}</p>
+          <div *ngIf="trip.costs.length > 0">
+            <p class="trip-totalCost">
+              <strong>${{trip.totalCost}}</strong>
+              <span class="trip-cost-msg">&nbsp; (Total Trip Cost)</span>
+            </p>
           </div>
-          <h4>Travel Costs</h4>
+          <p>From: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
+          <h4>Image</h4>
+          <p>{{trip.image}}</p>
+          <h4>Costs</h4>
+          <div *ngIf="trip.costs.length === 0">
+              <p>No Costs Added.</p>
+            </div>
           <ul>
             <li *ngFor="let cost of trip.costs" class="trip-costs">
               <p>{{cost.costLabel}}: ${{cost.costAmt}}
@@ -31,9 +34,13 @@
           </ul>
         </div>
       </mat-card>
+      <button type="button" mat-raised-button color="accent" *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
+    </div>
+    <div *ngIf="!trip">
+      <p>This trip does not exist.</p>
     </div>
   </div>
 
-  <button type="button" mat-raised-button color="accent" *ngIf="!formEnabled" (click)="toggleForm()">Edit</button>
+
   <button type="button" mat-raised-button color="accent" *ngIf="formEnabled" (click)="cancel()">Cancel</button>
 </div>

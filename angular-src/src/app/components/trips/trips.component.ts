@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { Trip } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
@@ -7,7 +8,25 @@ import { TripService } from '../../service/trip.service';
 @Component({
   selector: 'app-trips',
   templateUrl: './trips.component.html',
-  styleUrls: ['./trips.component.scss']
+  styleUrls: ['./trips.component.scss'],
+  animations: [
+    trigger('slideOff', [
+      state('hide', style({
+        'display': 'none',
+        'height': '0',
+        'opacity': 0,
+        'overflow': 'hidden'
+      })),
+      state('show', style({
+        'display': 'block',
+        'height': '*',
+        'opacity': 1,
+        'overflow': 'hidden'
+      })),
+      transition('show => hide', animate('600ms ease-in')),
+      transition('hide => show', animate('600ms ease-out')),
+    ])
+  ]
 })
 export class TripsComponent implements OnInit {
 
@@ -54,7 +73,7 @@ export class TripsComponent implements OnInit {
       data => {
         this.trips = data.json();
         this.addCosts();
-        // console.log(this.trips);
+        console.log(this.trips);
       },
       err => console.log(err)
     );

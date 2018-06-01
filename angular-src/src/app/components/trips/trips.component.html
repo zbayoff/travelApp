@@ -38,19 +38,22 @@
         <img class="trip-image" src="../../../assets/images/{{trip.image}}">
         <div class="trip-details">
           <h2 class="trip-destination">
-            <a mat-button routerLink="/trip/{{trip._id}}">{{trip.destination}}</a>
-            <button mat-button class="deleteTrip" (click)="deleteTrip(trip)">
+            <a mat-button routerLink="/trip/{{trip._id}}" matTooltip="Go to Trip Details." matTooltipPosition="right" >{{trip.destination}}</a>
+            <button mat-button class="deleteTrip" (click)="deleteTrip(trip)" matTooltip="Delete this trip." matTooltipPosition="left">
               <i class="material-icons">
                 delete
               </i>
             </button>
           </h2>
-          <p *ngFor="let cost of trip.costs">{{trip.cost}}</p>
-          <p *ngIf="trip.cost === null" class="trip-totalCost">No Costs Added</p>
-          <p *ngIf="hasCosts" class="trip-totalCost">
-            <strong>${{trip.totalCost}}</strong>
-            <span class="trip-cost-msg">(Total Trip Cost)</span>
-          </p>
+          <div *ngIf="trip.costs.length > 0">
+            <p class="trip-totalCost">
+              <strong>${{trip.totalCost}}</strong>
+              <span class="trip-cost-msg">(Total Trip Cost)</span>
+            </p>
+          </div>
+          <div *ngIf="trip.costs.length === 0">
+            <p>No Costs Added.</p>
+          </div>
           <p>Travel Dates: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
         </div>
         <mat-divider></mat-divider>

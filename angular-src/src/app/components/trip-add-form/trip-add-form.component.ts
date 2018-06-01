@@ -118,6 +118,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
         this.trips.push(res.json());
         this.addCosts();
         this.rebuildForm();
+        this.formState = 'hide';
       },
       err => console.log(err)
     );
