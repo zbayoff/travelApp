@@ -17,6 +17,7 @@ export class TripsComponent implements OnInit {
   orderField: string;
   orderDir: any;
   searchText: string;
+  hasCosts: boolean;
 
   constructor(private tripService: TripService) {
     this.add = true;
@@ -25,11 +26,25 @@ export class TripsComponent implements OnInit {
   }
 
   addCosts() {
+    let i = 0;
+
     for (const trip of this.trips) {
       let totalCost = 0;
+      this.hasCosts = true;
       for (const cost of trip.costs) {
+        i += 1;
+        // console.log(i);
+        this.hasCosts = true;
+        // console.log(cost);
         totalCost += cost.costAmt;
+        if (cost.costAmt === null) {
+          this.hasCosts = false;
+          // console.log('has costs:' + this.hasCosts);
+        } else {
+          // console.log('has costs:' + this.hasCosts);
+        }
       }
+      //
       trip.totalCost = totalCost;
     }
   }
@@ -39,7 +54,7 @@ export class TripsComponent implements OnInit {
       data => {
         this.trips = data.json();
         this.addCosts();
-        console.log(this.trips);
+        // console.log(this.trips);
       },
       err => console.log(err)
     );

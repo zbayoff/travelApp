@@ -112,7 +112,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
 
   onSubmit() {
 
-    // console.log(this.tripAddForm.value);
+    console.log(this.tripAddForm.value);
     this.tripService.addTrip(this.tripAddForm.value).subscribe(
       res => {
         this.trips.push(res.json());

@@ -45,7 +45,9 @@
               </i>
             </button>
           </h2>
-          <p class="trip-totalCost">
+          <p *ngFor="let cost of trip.costs">{{trip.cost}}</p>
+          <p *ngIf="trip.cost === null" class="trip-totalCost">No Costs Added</p>
+          <p *ngIf="hasCosts" class="trip-totalCost">
             <strong>${{trip.totalCost}}</strong>
             <span class="trip-cost-msg">(Total Trip Cost)</span>
           </p>
