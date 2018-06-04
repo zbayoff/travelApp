@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, OnChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, ViewChild, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 
 import { Trip, Cost } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
-import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-trip-edit-form',

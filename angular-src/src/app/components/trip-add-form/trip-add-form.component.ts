@@ -8,7 +8,7 @@ import { Trip, Cost } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
 
 import smoothscroll from 'smoothscroll-polyfill';
-smoothscroll.polyfill();
+
 
 
 @Component({
@@ -41,6 +41,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   @Input() costs: Cost;
   tripAddForm: FormGroup;
   formState: string;
+  photo: any;
   @ViewChild(FormGroupDirective) addForm;
 
   constructor(
@@ -48,6 +49,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     private tripService: TripService
   ) {
     this.formState = 'hide';
+    smoothscroll.polyfill();
   }
 
   offset(el) {
@@ -110,6 +112,10 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     this.costsFormArray.removeAt(costID);
   }
 
+  displayImg(photo) {
+    this.photo = photo;
+  }
+
   onSubmit() {
 
     console.log(this.tripAddForm.value);
@@ -119,6 +125,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
         this.addCosts();
         this.rebuildForm();
         this.formState = 'hide';
+        // this.tripSaveSubmit.emit(this.trip);
       },
       err => console.log(err)
     );

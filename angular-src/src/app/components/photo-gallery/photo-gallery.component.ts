@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { PhotosService } from '../../service/photos.service';
 
@@ -9,9 +9,12 @@ import { PhotosService } from '../../service/photos.service';
 })
 export class PhotoGalleryComponent implements OnInit {
 
-  selectedImage: string;
+  // chosenPhoto: any;
   modalOpen: boolean;
   photos: any;
+
+  @Input() chosenPhoto: any;
+  @Output() imgChange = new EventEmitter<any>();
 
   constructor(private photosService: PhotosService) {
     this.modalOpen = false;
@@ -27,23 +30,26 @@ export class PhotoGalleryComponent implements OnInit {
           this.photos = data.results;
 
           // set first image as the selected image
-          this.selectImage(this.photos[0].urls.regular);
-
+          this.selectImage(this.photos[0]);
           console.log(this.photos);
         },
         err => console.log(err)
       );
   }
 
-  selectImage(imgUrl) {
-    this.selectedImage = imgUrl;
+  selectImage(photo) {
+    this.chosenPhoto = photo;
   }
 
+  presaveImage() {
+    this.imgChange.emit(this.chosenPhoto);
+    this.closeModal();
+  }
 
-
-
-
-
+  onScroll(event) {
+    // console.log(event);
+    // event.preventDefault();
+  }
 
   openModal() {
     this.modalOpen = true;
