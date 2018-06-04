@@ -1,4 +1,5 @@
-<button type="button" mat-raised-button color="accent" (click)="openModal()">Add Image</button><span>&nbsp; &nbsp; No Image Selected</span>
+<button type="button" mat-raised-button color="accent" (click)="openModal()">Add Image</button>
+<span>&nbsp; &nbsp; No Image Selected</span>
 
 <!-- <mat-card *ngIf="modalOpen" class="card modal">
   <div class="modal-content">
@@ -12,20 +13,52 @@
   <div class="modal-background"></div>
 </mat-card> -->
 
-<mat-card  *ngIf="modalOpen" class="modal">
-    <div class="modal-column">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" (click)="closeModal()">&times;</span>
-                <h2>Image Gallery</h2>
-            </div>
-            <div class="modal-body">
-                <p>Pick an Image</p>
-            </div>
+<mat-card *ngIf="modalOpen" class="modal">
+  <div class="modal-column">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2>Image Gallery</h2>
+      </div>
+      <div class="modal-body">
+        <p>Search an Image from the <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a> Gallery. Choose one that will encourage you to go to your destination.</p>
+        <mat-form-field class="search-field">
+          <mat-label>Search for an Image</mat-label>
+          <input matInput type="text" [(ngModel)]="searchTerm" placeholder="Search for an Image.">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button" (click)="searchPhotos(searchTerm)">Search</button>
+
+        <div *ngIf="photos" class="search-img-results-container">
+          <!-- <div class="search-img-results-container"> -->
+          <ul>
+            <!-- <li>
+              <img src="../../../assets/images/geneva.png">
+              <img src="../../../assets/images/geneva.png">
+              <img src="../../../assets/images/geneva.png">
+              <img src="../../../assets/images/geneva.png">
+              <img src="../../../assets/images/geneva.png">
+              <img src="../../../assets/images/geneva.png">
+              <img src="../../../assets/images/geneva.png">
+            </li> -->
+            <li *ngFor="let photo of photos">
+              <img src="{{photo.urls.small}}" (click)="selectImage(photo.urls.regular)">
+              <p class="unsplash-attr-small"><a href="{{photo.user.links.html}}utm_source=zb-travel-app&utm_medium=referral">{{photo.user.name}}</a></p>
+            </li>
+          </ul>
         </div>
+        <div *ngIf="photos" class="chosen-img-container">
+          <h3>Chosen Image</h3>
+          <div class="chosen-img">
+              <img src="{{selectedImage}}">
+              <p class="unsplash-attr">Photo By: <a></a> at <a></a></p>
+          </div>
+        </div>
+        <div *ngIf="photos">
+          <button mat-raised-button color="primary" type="button">Save Image</button>
+          <button mat-raised-button color="primary" type="button" (click)="closeModal()">Cancel</button>
+        </div>
+
+      </div>
     </div>
+  </div>
 </mat-card>
-
-
-
-

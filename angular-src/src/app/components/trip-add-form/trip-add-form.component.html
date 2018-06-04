@@ -21,9 +21,9 @@
       </mat-form-field>
     </div>
     <!-- <mat-form-field class="trip-image-field"> -->
-      <!-- <app-photo-gallery></app-photo-gallery> -->
-      <!-- <mat-label>Image</mat-label>
-      <input matInput class="form-control" type="text" formControlName="image" placeholder="image"> -->
+    <app-photo-gallery></app-photo-gallery>
+    <!-- <mat-label>Image</mat-label> -->
+    <!-- <input matInput class="form-control" type="text" formControlName="image" placeholder="image"> -->
     <!-- </mat-form-field> -->
 
     <div>
@@ -52,7 +52,7 @@
     </div>
     <mat-divider></mat-divider>
     <div class="tripAdd-submit-btn">
-        <!-- <button mat-raised-button color="accent" type="submit">Add Trip</button> -->
+      <!-- <button mat-raised-button color="accent" type="submit">Add Trip</button> -->
       <button mat-raised-button color="accent" type="submit" [disabled]="!tripAddForm.valid">Add Trip</button>
     </div>
   </form>
