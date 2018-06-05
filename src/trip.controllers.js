@@ -53,60 +53,69 @@ exports.import = function (req, res) {
       'destination': 'Madrid, Spain',
       'startdate': 'June 7, 2018',
       'leavedate': 'June 14, 2018',
-      'image': 'madrid.png',
+      'image': {
+        'url': 'madrid.png',
+        'user': 'zach',
+        'userUrl': 'zach.com'
+      },
       'totalCost': 0,
-      'costs': [
-        {
-          'costLabel':"plane",
-          'costAmt':500
+      'costs': [{
+          'costLabel': "plane",
+          'costAmt': 500
         },
         {
-          'costLabel':"car",
-          'costAmt':100
+          'costLabel': "car",
+          'costAmt': 100
         },
         {
-          'costLabel':"boat",
-          'costAmt':50
+          'costLabel': "boat",
+          'costAmt': 50
         }
       ]
     }, {
       'destination': 'Geneva, Switzerland',
       'startdate': 'June 12, 2018',
       'leavedate': 'June 21, 2018',
-      'image': 'geneva.png',
+      'image': {
+        'url': 'geneva.png',
+        'user': 'zach',
+        'userUrl': 'zach.com'
+      },
       'totalCost': 0,
-      'costs': [
-        {
-          'costLabel':"plane",
-          'costAmt':1000
+      'costs': [{
+          'costLabel': "plane",
+          'costAmt': 1000
         },
         {
-          'costLabel':"car",
-          'costAmt':200
+          'costLabel': "car",
+          'costAmt': 200
         },
         {
-          'costLabel':"boat",
-          'costAmt':30
+          'costLabel': "boat",
+          'costAmt': 30
         }
       ]
     }, {
       'destination': 'Rome, Italy',
       'startdate': 'May 15, 2018',
       'leavedate': 'May 27, 2018',
-      'image': 'rome.png',
+      'image': {
+        'url': 'rome.png',
+        'user': 'zach',
+        'userUrl': 'zach.com'
+      },
       'totalCost': 0,
-      'costs': [
-        {
-          'costLabel':"plane",
-          'costAmt':1200
+      'costs': [{
+          'costLabel': "plane",
+          'costAmt': 1200
         },
         {
-          'costLabel':"car",
-          'costAmt':300
+          'costLabel': "car",
+          'costAmt': 300
         },
         {
-          'costLabel':"boat",
-          'costAmt':20
+          'costLabel': "boat",
+          'costAmt': 20
         }
       ]
     },

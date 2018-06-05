@@ -5,7 +5,7 @@ const TripSchema = new Schema({
   destination: String,
   startdate: Date,
   leavedate: Date,
-  image: String,
+  image: Object,
   costs: Array,
   totalCost: Number
 });

@@ -35,7 +35,9 @@
     <ul class="trips-list">
       <p class="no-trip-msg" *ngIf="trips?.length == 0">No trips have been added. Add one below!</p>
       <li *ngFor="let trip of trips | filter: searchText | orderBy: orderField : orderDir">
-        <img class="trip-image" src="../../../assets/images/{{trip.image}}">
+        <img class="trip-image" src="{{trip.image.url}}">
+        <p>{{trip.image.user}}</p>
+        <p>{{trip.image.userUrl}}</p>
         <div class="trip-details">
           <h2 class="trip-destination">
             <a mat-button routerLink="/trip/{{trip._id}}" matTooltip="Go to Trip Details." matTooltipPosition="right" >{{trip.destination}}</a>

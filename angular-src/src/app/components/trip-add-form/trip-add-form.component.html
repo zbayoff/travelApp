@@ -20,11 +20,16 @@
         <input matInput class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date">
       </mat-form-field>
     </div>
-    
+
     <app-photo-gallery (imgChange)="displayImg($event)"></app-photo-gallery>
 
     <img *ngIf="photo" src="{{photo.urls.thumb}}" alt="">
-    
+    <!-- <div *ngIf="photo" formGroupName="image">
+      <input type="text" formControlName="url" value="{{photo.urls.regular}}">
+      <input type="text" formControlName="user" value="{{photo.user.name}}">
+      <input type="text" formControlName="userUrl" value="{{photo.user.links.html}}">
+    </div> -->
+
     <div>
       <h2>Costs</h2>
       <p>Add some costs you're likely to incur on your trip. Plane tickets, hotels, car rentals, for example.</p>

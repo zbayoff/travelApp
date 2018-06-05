@@ -4,12 +4,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 import { MaterialModule } from '../../material.module';
 
-import { Trip, Cost } from '../../models/trip';
+import { Trip, Cost, Image } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
 
 import smoothscroll from 'smoothscroll-polyfill';
-
-
 
 @Component({
   selector: 'app-trip-add-form',
@@ -39,6 +37,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   @Input() trip: Trip;
   @Input() trips: Trip[];
   @Input() costs: Cost;
+  @Input() image: Image;
   tripAddForm: FormGroup;
   formState: string;
   photo: any;
@@ -77,14 +76,19 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   createForm() {
+    console.log('create form');
     this.tripAddForm = this.fb.group({
       destination: ['', Validators.required],
       startdate: ['', Validators.required],
       leavedate: ['', Validators.required],
-      image: '',
+      image: this.fb.group({
+        url: [''],
+        user: [''],
+        userUrl: ['']
+      }),
       costs: this.fb.array([])
     });
-    // console.log(this.tripAddForm);
+    console.log(this.tripAddForm.controls);
   }
 
   get costsFormArray(): FormArray {
@@ -113,7 +117,16 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   displayImg(photo) {
+    console.log('displayImg');
     this.photo = photo;
+    this.tripAddForm.patchValue({
+      image: {
+        url: photo.urls.regular,
+        user: photo.user.name,
+        userUrl: photo.user.links.html
+      }
+    });
+    // this.image.url = photo.urls.regular;
   }
 
   onSubmit() {
@@ -129,7 +142,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
       },
       err => console.log(err)
     );
-
   }
 
   rebuildForm() {
@@ -139,7 +151,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     for (let i = 0; i < this.costsFormArray.length; i += 1) {
       this.costsFormArray.removeAt(i);
     }
-    console.log(this.tripAddForm);
+    // console.log(this.tripAddForm);
   }
 
   ngOnInit() {
@@ -147,7 +159,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-
 
   }
 
