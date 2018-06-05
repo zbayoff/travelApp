@@ -13,18 +13,24 @@ export class PhotoGalleryComponent implements OnInit {
   modalOpen: boolean;
   photos: any;
 
-  @Input() chosenPhoto: any;
+  @Input() searchTerm: '';
+  @Input() chosenPhoto: {};
   @Output() imgChange = new EventEmitter<any>();
 
   constructor(private photosService: PhotosService) {
     this.modalOpen = false;
   }
 
+  isEmptyObject(obj) {
+    // console.log(obj);
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+  }
+
   searchPhotos(searchTerm) {
     this.photosService.searchPhotos(searchTerm)
       .subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
 
           // if returns a results array
           this.photos = data.results;
@@ -46,6 +52,18 @@ export class PhotoGalleryComponent implements OnInit {
     this.closeModal();
   }
 
+  removePresavedImg() {
+    // console.log(this.chosenPhoto);
+    this.chosenPhoto = {};
+    this.imgChange.emit(this.chosenPhoto);
+    this.rebuildGallery();
+  }
+
+  rebuildGallery () {
+    this.photos = null;
+    this.searchTerm = '';
+  }
+
   onScroll(event) {
     // console.log(event);
     // event.preventDefault();
@@ -60,10 +78,10 @@ export class PhotoGalleryComponent implements OnInit {
     this.modalOpen = false;
   }
 
-
-
-
   ngOnInit() {
+    this.chosenPhoto = {};
+    // console.log('chosen img is: ');
+    // console.log(this.chosenPhoto);
   }
 
 }

@@ -1,71 +1,80 @@
 .form-wrapper {
-    padding-bottom: 0;
+  padding-bottom: 0;
 }
 
 .editTripForm {
-    padding-bottom: 2rem;
-    padding-top: 1rem;
+  padding-bottom: 2rem;
+  padding-top: 1rem;
 }
 
 .editTrip-header {
-    background-color: #3f51b5;
-    color: white;
-    margin: -24px -16px 0 -16px;
-    @media screen and (min-width: 599px) {
-        margin: -24px -24px 0 -24px;
+  background-color: #3f51b5;
+  color: white;
+  margin: -24px -16px 0 -16px;
+  @media screen and (min-width: 599px) {
+    margin: -24px -24px 0 -24px;
+  }
+  h2 {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    font-weight: 500;
+    i {
+      font-size: 2rem;
+      margin-right: 0.5rem;
     }
-    h2 {
-        display: flex;
-        align-content: center;
-        align-items: center;
-        font-weight: 500;
-        i {
-            font-size: 2rem;
-            margin-right: 0.5rem;
-        }
-    }
+  }
+}
+
+.presaved-img {
+  margin: 1rem auto;
+  text-align: center;
+  img {
+    display: block;
+    max-width: 200px;
+  }
 }
 
 .trip-editCosts {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    @media screen and (min-width: 768px) {
-        flex-wrap: nowrap;
-    }
-    .trip-cost-label {
-        flex: 0;
-        min-width: 50%;
-    }
-    .trip-cost-field {
-        // flex: 1 1 100%;
-        margin-left: 1rem;
-        max-width: 80px; // @media screen and (min-width: 768px) {
-        //     flex: 0;
-        //     min-width: 50%;
-        //     margin-left: 0rem;
-        // }
-    }
-    i {
-        cursor: pointer;
-        font-size: 2rem;
-        margin-left: 0.5rem;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+  .trip-cost-label {
+    flex: 0;
+    min-width: 50%;
+  }
+  .trip-cost-field {
+    // flex: 1 1 100%;
+    margin-left: 1rem;
+    max-width: 80px; // @media screen and (min-width: 768px) {
+    //     flex: 0;
+    //     min-width: 50%;
+    //     margin-left: 0rem;
+    // }
+  }
+  i {
+    cursor: pointer;
+    font-size: 2rem;
+    margin-left: 0.5rem;
+  }
 }
 
 .editCost-btn {
-    padding-bottom: 1rem;
-    button {
-        background-color: #3f51b5;
-        color: white;
-    }
+  padding-bottom: 1rem;
+  button {
+    background-color: #3f51b5;
+    color: white;
+  }
 }
 
 .tripEdit-submit-btn {
-    padding-top: 1rem;
-    button {
-        padding: 0.5rem 1rem 0.5rem 1rem;
-        font-size: 1.5rem;
-    }
+  padding-top: 1rem;
+  button {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 1.5rem;
+  }
 }

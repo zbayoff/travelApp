@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, OnChanges, ViewChild, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 
-import { Trip, Cost } from '../../models/trip';
+import { Trip, Cost, Image } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
 
 @Component({
@@ -13,7 +13,9 @@ export class TripEditFormComponent implements OnInit, OnChanges {
 
   @Input() trip: Trip;
   @Input() costs: Cost;
+  @Input() image: Image;
   tripEditForm: FormGroup;
+  photo: any;
 
   @Output() tripSaveSubmit = new EventEmitter<any>();
   @ViewChild(FormGroupDirective) editForm;
@@ -30,7 +32,11 @@ export class TripEditFormComponent implements OnInit, OnChanges {
       destination: ['', Validators.required],
       startdate: '',
       leavedate: '',
-      image: '',
+      image: this.fb.group({
+        url: [''],
+        user: [''],
+        userUrl: ['']
+      }),
       costs: this.fb.array([]),
     });
   }
@@ -54,14 +60,51 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     return date.substring(0, 10);
   }
 
+  displayImg(photo) {
+    console.log('display img photo: ');
+    console.log(photo);
+
+    if (Object.keys(photo).length === 0 && photo.constructor === Object) {
+      this.photo = null;
+      this.tripEditForm.patchValue({
+        image: {
+          url: '',
+          user: '',
+          userUrl: ''
+        }
+      });
+
+    } else {
+      this.photo = photo;
+      // console.log('about to patch value');
+      this.tripEditForm.patchValue({
+        image: {
+          url: photo.urls.regular,
+          user: photo.user.name,
+          userUrl: photo.user.links.html
+        }
+      });
+    }
+  }
+
   rebuildForm() {
+
+    console.log(this.trip.image.url);
 
     this.tripEditForm.reset({
       destination: this.trip.destination,
       startdate: this.convertDates(this.trip.startdate),
       leavedate: this.convertDates(this.trip.leavedate),
-      image: this.trip.image
+      image: {
+        url: this.trip.image.url,
+        user: this.trip.image.user,
+        userUrl: this.trip.image.userUrl
+      }
     });
+
+    // this.displayImg(this.trip.image);
+
+
 
     this.setCosts(this.trip.costs);
 

@@ -1,13 +1,7 @@
-<button type="button" mat-raised-button color="accent" (click)="openModal()">Add Image</button>
+<button type="button" mat-raised-button color="accent" (click)="openModal()">{{isEmptyObject(chosenPhoto) ? 'Add Image' : 'Change Image'}}</button>
 
-<!-- <div *ngIf="chosenPhoto">
-    <span>&nbsp; &nbsp;<img src="{{chosenPhoto.urls.thumb}}"></span>
-</div> -->
-
-<div *ngIf="!chosenPhoto">
-    <span>&nbsp; &nbsp; No Image Selected</span>
-</div>
-
+<button *ngIf="!isEmptyObject(chosenPhoto)" type="button" mat-raised-button (click)="removePresavedImg()">Remove Image</button>
+<span *ngIf="isEmptyObject(chosenPhoto)">&nbsp; &nbsp; No Image Selected</span>
 
 <mat-card *ngIf="modalOpen" class="modal">
   <div class="modal-column">
@@ -17,7 +11,8 @@
         <h2>Image Gallery</h2>
       </div>
       <div class="modal-body">
-        <p>Search an Image from the <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a> Gallery. Choose one that will encourage you to go to your destination.</p>
+        <p>Search an Image from the
+          <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a> Gallery. Choose one that will encourage you to go to your destination.</p>
         <mat-form-field class="search-field">
           <mat-label>Search for an Image</mat-label>
           <input matInput type="text" [(ngModel)]="searchTerm" placeholder="Search for an Image.">
@@ -38,15 +33,20 @@
             </li> -->
             <li *ngFor="let photo of photos">
               <img src="{{photo.urls.small}}" (click)="selectImage(photo)">
-              <p class="unsplash-attr-small"><a href="{{photo.user.links.html}}?utm_source=zb-travel-app&utm_medium=referral" target="_blank">By: {{photo.user.name}}</a></p>
+              <p class="unsplash-attr-small">
+                <a href="{{photo.user.links.html}}?utm_source=zb-travel-app&utm_medium=referral" target="_blank">By: {{photo.user.name}}</a>
+              </p>
             </li>
           </ul>
         </div>
         <div *ngIf="photos" class="chosen-img-container">
           <h3>Chosen Image</h3>
           <div class="chosen-img">
-              <img src="{{chosenPhoto.urls.regular}}">
-              <p class="unsplash-attr">Photo By: <a href="{{chosenPhoto.user.links.html}}?utm_source=zb-travel-app&utm_medium=referral" target="_blank">{{chosenPhoto.user.name}}</a> </p>
+            <img src="{{chosenPhoto.urls.regular}}">
+            <p class="unsplash-attr">Photo By:
+              <a href="{{chosenPhoto.user.links.html}}?utm_source=zb-travel-app&utm_medium=referral" target="_blank">{{chosenPhoto.user.name}} on
+                  <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a></a>
+            </p>
           </div>
         </div>
         <div *ngIf="photos">

@@ -29,6 +29,7 @@ export class TripDetailComponent implements OnInit {
 
   }
 
+
   toggleForm() {
     this.formEnabled = !this.formEnabled;
     this.editable = !this.editable;
@@ -59,6 +60,7 @@ export class TripDetailComponent implements OnInit {
       data => {
         this.trip = data.json();
         this.addCosts();
+        // console.log(this.trip);
       },
       err => console.log(err)
     );

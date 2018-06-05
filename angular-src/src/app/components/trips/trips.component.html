@@ -35,12 +35,25 @@
     <ul class="trips-list">
       <p class="no-trip-msg" *ngIf="trips?.length == 0">No trips have been added. Add one below!</p>
       <li *ngFor="let trip of trips | filter: searchText | orderBy: orderField : orderDir">
-        <img class="trip-image" src="{{trip.image.url}}">
+        <div *ngIf="trip.image.url !== ''" class="trip-image">
+          <img src="{{trip.image.url}}">
+          <p class="unsplash-attr">Photo By:
+            <a href="{{trip.image.userUrl}}?utm_source=zb-travel-app&utm_medium=referral" target="_blank">{{trip.image.user}}</a> on
+            <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a>
+          </p>
+        </div>
+        <div *ngIf="trip.image.url === ''" class="trip-image">
+          <p>No Image Added.
+          </p>
+        </div>
+
+        <!-- <img class="trip-image" src="{{trip.image.url}}">
         <p>{{trip.image.user}}</p>
-        <p>{{trip.image.userUrl}}</p>
+        <p>{{trip.image.userUrl}}</p> -->
+
         <div class="trip-details">
           <h2 class="trip-destination">
-            <a mat-button routerLink="/trip/{{trip._id}}" matTooltip="Go to Trip Details." matTooltipPosition="right" >{{trip.destination}}</a>
+            <a mat-button routerLink="/trip/{{trip._id}}" matTooltip="Go to Trip Details." matTooltipPosition="right">{{trip.destination}}</a>
             <button mat-button class="deleteTrip" (click)="deleteTrip(trip)" matTooltip="Delete this trip." matTooltipPosition="left">
               <i class="material-icons">
                 delete
@@ -65,7 +78,7 @@
   </mat-card>
 
   <div *ngIf="trips">
-      <app-trip-add-form [trips]="trips"></app-trip-add-form>
+    <app-trip-add-form [trips]="trips"></app-trip-add-form>
     <!-- <app-trip-add-form></app-trip-add-form> -->
   </div>
 </div>

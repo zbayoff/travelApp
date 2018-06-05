@@ -10,7 +10,17 @@
   <div *ngIf="!formEnabled">
     <div *ngIf="trip">
       <mat-card class="card">
-        <img class="trip-image" src="../../../assets/images/{{trip.image}}">
+        <div *ngIf="trip.image.url !== ''" class="trip-image">
+          <img src="{{trip.image.url}}">
+          <p class="unsplash-attr">Photo By:
+            <a href="{{trip.image.userUrl}}?utm_source=zb-travel-app&utm_medium=referral" target="_blank">{{trip.image.user}}</a> on
+            <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a>
+          </p>
+        </div>
+        <div *ngIf="trip.image.url === ''" class="trip-image">
+          <p>No Image Added.
+          </p>
+        </div>
         <div class="trip-details">
           <h2 class="trip-destination">{{trip.destination}}</h2>
           <div *ngIf="trip.costs.length > 0">
@@ -20,12 +30,10 @@
             </p>
           </div>
           <p>From: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
-          <h4>Image</h4>
-          <p>{{trip.image}}</p>
           <h4>Costs</h4>
           <div *ngIf="trip.costs.length === 0">
-              <p>No Costs Added.</p>
-            </div>
+            <p>No Costs Added.</p>
+          </div>
           <ul>
             <li *ngFor="let cost of trip.costs" class="trip-costs">
               <p>{{cost.costLabel}}: ${{cost.costAmt}}

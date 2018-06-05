@@ -76,7 +76,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   createForm() {
-    console.log('create form');
+    // console.log('create form');
     this.tripAddForm = this.fb.group({
       destination: ['', Validators.required],
       startdate: ['', Validators.required],
@@ -88,7 +88,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
       }),
       costs: this.fb.array([])
     });
-    console.log(this.tripAddForm.controls);
   }
 
   get costsFormArray(): FormArray {
@@ -117,21 +116,35 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   displayImg(photo) {
-    console.log('displayImg');
-    this.photo = photo;
-    this.tripAddForm.patchValue({
-      image: {
-        url: photo.urls.regular,
-        user: photo.user.name,
-        userUrl: photo.user.links.html
-      }
-    });
-    // this.image.url = photo.urls.regular;
+    // console.log('display img photo: ');
+    // console.log(photo);
+
+    if (Object.keys(photo).length === 0 && photo.constructor === Object) {
+      this.photo = null;
+      this.tripAddForm.patchValue({
+        image: {
+          url: '',
+          user: '',
+          userUrl: ''
+        }
+      });
+
+    } else {
+      this.photo = photo;
+      // console.log('about to patch value');
+      this.tripAddForm.patchValue({
+        image: {
+          url: photo.urls.regular,
+          user: photo.user.name,
+          userUrl: photo.user.links.html
+        }
+      });
+    }
   }
 
   onSubmit() {
 
-    console.log(this.tripAddForm.value);
+    // console.log(this.tripAddForm.value);
     this.tripService.addTrip(this.tripAddForm.value).subscribe(
       res => {
         this.trips.push(res.json());

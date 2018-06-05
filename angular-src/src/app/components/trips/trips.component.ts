@@ -73,7 +73,7 @@ export class TripsComponent implements OnInit {
       data => {
         this.trips = data.json();
         this.addCosts();
-        console.log(this.trips);
+        // console.log(this.trips);
       },
       err => console.log(err)
     );

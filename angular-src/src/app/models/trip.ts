@@ -3,7 +3,7 @@ export class Trip {
     destination: string;
     startdate: string;
     leavedate: string;
-    image: Image[];
+    image: Image;
     costs: Cost[];
     totalCost: number;
 }
