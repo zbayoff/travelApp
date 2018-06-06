@@ -10,15 +10,18 @@ import { PhotosService } from '../../service/photos.service';
 export class PhotoGalleryComponent implements OnInit {
 
   // chosenPhoto: any;
-  modalOpen: boolean;
+  // modalOpen: boolean;
   photos: any;
 
   @Input() searchTerm: '';
   @Input() chosenPhoto: {};
+  @Input() modalOpen: boolean;
+
+  @Output() modalOpenChange = new EventEmitter<any>();
   @Output() imgChange = new EventEmitter<any>();
 
   constructor(private photosService: PhotosService) {
-    this.modalOpen = false;
+    // this.modalOpen = false;
   }
 
   isEmptyObject(obj) {
@@ -52,12 +55,12 @@ export class PhotoGalleryComponent implements OnInit {
     this.closeModal();
   }
 
-  removePresavedImg() {
-    // console.log(this.chosenPhoto);
-    this.chosenPhoto = {};
-    this.imgChange.emit(this.chosenPhoto);
-    this.rebuildGallery();
-  }
+  // removePresavedImg() {
+  //   // console.log(this.chosenPhoto);
+  //   this.chosenPhoto = {};
+  //   this.imgChange.emit(this.chosenPhoto);
+  //   this.rebuildGallery();
+  // }
 
   rebuildGallery () {
     this.photos = null;
@@ -69,13 +72,15 @@ export class PhotoGalleryComponent implements OnInit {
     // event.preventDefault();
   }
 
-  openModal() {
-    this.modalOpen = true;
-    document.body.classList.add('modal-open');
-  }
+  // openModal() {
+  //   this.modalOpen = true;
+  //   document.body.classList.add('modal-open');
+  // }
 
   closeModal() {
     this.modalOpen = false;
+    this.modalOpenChange.emit(this.modalOpen);
+    // document.body.classList.remove('modal-open');
   }
 
   ngOnInit() {

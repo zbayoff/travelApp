@@ -1,9 +1,9 @@
-<button type="button" mat-raised-button color="accent" (click)="openModal()">{{isEmptyObject(chosenPhoto) ? 'Add Image' : 'Change Image'}}</button>
+<!-- <button type="button" mat-raised-button color="accent" (click)="openModal()">{{isEmptyObject(chosenPhoto) ? 'Add Image' : 'Change Image'}}</button>
 
 <button *ngIf="!isEmptyObject(chosenPhoto)" type="button" mat-raised-button (click)="removePresavedImg()">Remove Image</button>
-<span *ngIf="isEmptyObject(chosenPhoto)">&nbsp; &nbsp; No Image Selected</span>
+<span *ngIf="isEmptyObject(chosenPhoto)">&nbsp; &nbsp; No Image Selected</span> -->
 
-<mat-card *ngIf="modalOpen" class="modal">
+<mat-card class="modal">
   <div class="modal-column">
     <div class="modal-content">
       <div class="modal-header">

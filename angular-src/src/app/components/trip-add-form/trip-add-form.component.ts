@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
@@ -40,7 +40,8 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   @Input() image: Image;
   tripAddForm: FormGroup;
   formState: string;
-  photo: any;
+  photo: {};
+  modalOpen: boolean;
   @ViewChild(FormGroupDirective) addForm;
 
   constructor(
@@ -120,7 +121,8 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     // console.log(photo);
 
     if (Object.keys(photo).length === 0 && photo.constructor === Object) {
-      this.photo = null;
+      // this.photo = null;
+      console.log('photo object is empty');
       this.tripAddForm.patchValue({
         image: {
           url: '',
@@ -140,6 +142,25 @@ export class TripAddFormComponent implements OnInit, OnChanges {
         }
       });
     }
+  }
+
+  removePresavedImg() {
+    console.log(this.photo);
+    this.photo = {};
+    this.tripAddForm.patchValue({
+      image: {
+        url: '',
+        user: '',
+        userUrl: ''
+      }
+    });
+    // this.imgChange.emit(this.chosenPhoto);
+    // this.rebuildGallery();
+  }
+
+  isEmptyObject(obj) {
+    // console.log(obj);
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
   }
 
   onSubmit() {
@@ -167,8 +188,32 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     // console.log(this.tripAddForm);
   }
 
+  toggleModal() {
+    console.log(this.modalOpen);
+    this.modalOpen = !this.modalOpen;
+
+    // document.body.classList.toggle('modal-open');
+
+  }
+
+  // openModal() {
+  //   this.modalOpen = true;
+  //   document.body.classList.add('modal-open');
+  // }
+
+  // closeModal() {
+  //   this.modalOpen = false;
+  // }
+
+
+
+
+
+
   ngOnInit() {
     this.createForm();
+    this.modalOpen = false;
+    this.photo = {};
   }
 
   ngOnChanges() {
