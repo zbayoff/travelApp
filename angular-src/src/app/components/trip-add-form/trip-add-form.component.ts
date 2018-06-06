@@ -6,6 +6,7 @@ import { MaterialModule } from '../../material.module';
 
 import { Trip, Cost, Image } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
+import { PhotosService } from '../../service/photos.service';
 
 import smoothscroll from 'smoothscroll-polyfill';
 
@@ -40,13 +41,14 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   @Input() image: Image;
   tripAddForm: FormGroup;
   formState: string;
-  photo: {};
+  photo: any;
   modalOpen: boolean;
   @ViewChild(FormGroupDirective) addForm;
 
   constructor(
     private fb: FormBuilder,
-    private tripService: TripService
+    private tripService: TripService,
+    private photosService: PhotosService
   ) {
     this.formState = 'hide';
     smoothscroll.polyfill();
@@ -165,7 +167,17 @@ export class TripAddFormComponent implements OnInit, OnChanges {
 
   onSubmit() {
 
-    // console.log(this.tripAddForm.value);
+
+    if (this.tripAddForm.value.image.url !== '') {
+      console.log('image was added');
+      this.photosService.triggerDownload(this.photo.links.download_location).subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+
+    }
+
     this.tripService.addTrip(this.tripAddForm.value).subscribe(
       res => {
         this.trips.push(res.json());
@@ -176,6 +188,12 @@ export class TripAddFormComponent implements OnInit, OnChanges {
       },
       err => console.log(err)
     );
+
+    // if image was added, trigger download endpoint from photo service
+    // console.log(this.trip.image.url);
+
+
+
   }
 
   rebuildForm() {
@@ -189,7 +207,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   toggleModal() {
-    console.log(this.modalOpen);
+    // console.log(this.modalOpen);
     this.modalOpen = !this.modalOpen;
 
     // document.body.classList.toggle('modal-open');

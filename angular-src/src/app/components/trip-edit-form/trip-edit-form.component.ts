@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators, FormGroupDirective } fro
 
 import { Trip, Cost, Image } from '../../models/trip';
 import { TripService } from '../../service/trip.service';
+import { PhotosService } from '../../service/photos.service';
 
 @Component({
   selector: 'app-trip-edit-form',
@@ -16,13 +17,15 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   @Input() image: Image;
   tripEditForm: FormGroup;
   photo: any;
+  modalOpen: boolean;
 
   @Output() tripSaveSubmit = new EventEmitter<any>();
   @ViewChild(FormGroupDirective) editForm;
 
   constructor(
     private fb: FormBuilder,
-    private tripService: TripService
+    private tripService: TripService,
+    private photosService: PhotosService
   ) {
 
   }
@@ -65,6 +68,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     console.log(photo);
 
     if (Object.keys(photo).length === 0 && photo.constructor === Object) {
+      console.log('photo object empty');
       this.photo = null;
       this.tripEditForm.patchValue({
         image: {
@@ -76,7 +80,6 @@ export class TripEditFormComponent implements OnInit, OnChanges {
 
     } else {
       this.photo = photo;
-      // console.log('about to patch value');
       this.tripEditForm.patchValue({
         image: {
           url: photo.urls.regular,
@@ -87,9 +90,44 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     }
   }
 
-  rebuildForm() {
+  // check if image is saved in database, if yes, delete, and if no, remove presaved image.
+  removePresavedImg() {
 
-    console.log(this.trip.image.url);
+    this.photo = {};
+    this.trip.image = {
+      url: '',
+      user: '',
+      userUrl: ''
+    };
+
+    this.tripEditForm.patchValue({
+      image: {
+        url: '',
+        user: '',
+        userUrl: ''
+      }
+    });
+
+  }
+
+  isImageAdded() {
+
+    if (this.trip.image.url === '' && this.isEmptyObject(this.photo)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isEmptyObject(obj) {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+  }
+
+  toggleModal() {
+    this.modalOpen = !this.modalOpen;
+  }
+
+  rebuildForm() {
 
     this.tripEditForm.reset({
       destination: this.trip.destination,
@@ -101,10 +139,6 @@ export class TripEditFormComponent implements OnInit, OnChanges {
         userUrl: this.trip.image.userUrl
       }
     });
-
-    // this.displayImg(this.trip.image);
-
-
 
     this.setCosts(this.trip.costs);
 
@@ -136,6 +170,16 @@ export class TripEditFormComponent implements OnInit, OnChanges {
 
   prepareSaveTrip() {
     const formModel = this.tripEditForm.value;
+
+    if (!this.isEmptyObject(this.photo)) {
+
+      this.photosService.triggerDownload(this.photo.links.download_location).subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+    }
+
     const costsDeepCopy: Cost[] = formModel.costs.map((cost: Cost) => {
       return Object.assign({}, cost);
     });
@@ -153,11 +197,13 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
   }
 
   ngOnChanges() {
     this.createForm();
     this.rebuildForm();
+    this.photo = {};
   }
 
 

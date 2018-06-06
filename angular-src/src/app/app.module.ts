@@ -4,6 +4,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+
 import { AppComponent } from './app.component';
 
 import { TripsComponent } from './components/trips/trips.component';
@@ -18,6 +20,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { PhotoGalleryComponent } from './components/photo-gallery/photo-gallery.component';
+
+
 
 
 
@@ -39,7 +43,8 @@ import { PhotoGalleryComponent } from './components/photo-gallery/photo-gallery.
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

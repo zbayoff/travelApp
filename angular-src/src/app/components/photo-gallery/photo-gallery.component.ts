@@ -11,7 +11,9 @@ export class PhotoGalleryComponent implements OnInit {
 
   // chosenPhoto: any;
   // modalOpen: boolean;
-  photos: any;
+  photos = [];
+  photosExist: boolean;
+  page = 0;
 
   @Input() searchTerm: '';
   @Input() chosenPhoto: {};
@@ -30,21 +32,63 @@ export class PhotoGalleryComponent implements OnInit {
   }
 
   searchPhotos(searchTerm) {
-    this.photosService.searchPhotos(searchTerm)
+
+
+    // console.log(searchTerm);
+    this.page += 1;
+
+    this.photosService.searchPhotos(searchTerm, this.page)
       .subscribe(
         data => {
-          // console.log(data);
+          console.log(data);
+
+          this.photos = [];
+
+          if (data.results.length === 0) {
+            this.photos = [];
+            this.photosExist = false;
+          }
+
+          // if (data.results.length === 0 && this.searchTerm !== '' ) {
+          //   this.photosExist = false;
+          // }
+
+
+          console.log(this.photosExist);
 
           // if returns a results array
-          this.photos = data.results;
+          for (const img of Object.values(data.results)) {
+            this.photos.push(img);
+          }
+          // this.photos = [...data.results];
+          console.log(this.photos);
+
+          // if (this.photos.length === 0) {
+          //   console.log('empty array of photos');
+          //   this.photosExist = false;
+          // }
+
 
           // set first image as the selected image
           this.selectImage(this.photos[0]);
-          console.log(this.photos);
+          // console.log(this.photos);
+
+
+          // this.photosExist = this.ifPhotosFound();
+          // console.log(this.photosExist);
+
         },
-        err => console.log(err)
+        err => {
+          console.log(err);
+        }
       );
   }
+
+  // ifPhotosFound() {
+  //   if (this.photos.length === 0 && this.searchTerm !== '') {
+  //     return true;
+  //   }
+  // }
 
   selectImage(photo) {
     this.chosenPhoto = photo;
@@ -62,14 +106,14 @@ export class PhotoGalleryComponent implements OnInit {
   //   this.rebuildGallery();
   // }
 
-  rebuildGallery () {
+  rebuildGallery() {
     this.photos = null;
     this.searchTerm = '';
   }
 
-  onScroll(event) {
-    // console.log(event);
-    // event.preventDefault();
+  addMoreImages() {
+    console.log('added images');
+    this.searchPhotos(this.searchTerm);
   }
 
   // openModal() {
@@ -85,6 +129,8 @@ export class PhotoGalleryComponent implements OnInit {
 
   ngOnInit() {
     this.chosenPhoto = {};
+    this.photos = [];
+    this.searchTerm = '';
     // console.log('chosen img is: ');
     // console.log(this.chosenPhoto);
   }

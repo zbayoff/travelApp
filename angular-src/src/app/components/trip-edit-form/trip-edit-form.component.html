@@ -59,57 +59,70 @@
     <h2 class="">Edit Trip</h2>
   </mat-card-header>
   <form class="editTripForm" [formGroup]="tripEditForm" (ngSubmit)="saveTrip()">
-  <div class="trip-details-field">
-    <mat-form-field class="trip-destination-field">
-      <mat-label>Destination</mat-label>
-      <input matInput class="form-control" type="text" formControlName="destination" placeholder="Destination">
-    </mat-form-field>
-    <mat-form-field class="trip-start-date-field">
-      <mat-label>Start Date</mat-label>
-      <input matInput class="form-control" type="date" formControlName="startdate" placeholder="Start Date">
-    </mat-form-field>
-    <mat-form-field class="trip-leave-date-field">
-      <mat-label>Leave Date</mat-label>
-      <input matInput class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date">
-    </mat-form-field>
-  </div>
+    <div class="trip-details-field">
+      <mat-form-field class="trip-destination-field">
+        <mat-label>Destination</mat-label>
+        <input matInput class="form-control" type="text" formControlName="destination" placeholder="Destination">
+      </mat-form-field>
+      <mat-form-field class="trip-start-date-field">
+        <mat-label>Start Date</mat-label>
+        <input matInput class="form-control" type="date" formControlName="startdate" placeholder="Start Date">
+      </mat-form-field>
+      <mat-form-field class="trip-leave-date-field">
+        <mat-label>Leave Date</mat-label>
+        <input matInput class="form-control" type="date" formControlName="leavedate" placeholder="Leave Date">
+      </mat-form-field>
+    </div>
 
-  <app-photo-gallery (imgChange)="displayImg($event)"></app-photo-gallery>
+    <!-- <button type="button" mat-raised-button color="accent" (click)="toggleModal()">Add Image</button> -->
 
-  <div *ngIf="trip.image" class="presaved-img">
+    <button class="change-image-btn" type="button" mat-raised-button color="accent" (click)="toggleModal()">{{isImageAdded() ? 'Change Image' : 'Add Image'}}</button>
+    <button *ngIf="isImageAdded()" type="button" color="warn" mat-raised-button (click)="removePresavedImg()">Remove Image</button>
+    <span *ngIf="!isImageAdded()">&nbsp; &nbsp; No Image Selected</span>
+    <!-- <span *ngIf="!isEmptyObject(photo)">&nbsp; &nbsp; No Image Selected</span> -->
+
+    <div *ngIf="modalOpen">
+      <app-photo-gallery [(modalOpen)]="modalOpen" (imgChange)="displayImg($event)"></app-photo-gallery>
+    </div>
+
+    <div *ngIf="!isEmptyObject(photo)" class="presaved-img">
+      <img src="{{photo.urls.thumb}}" alt="">
+    </div>
+
+    <div *ngIf="isEmptyObject(photo)" class="presaved-img">
       <img src="{{trip.image.url}}" alt="">
-  </div>
-
-  <div *ngIf="photo" class="presaved-img">
-    <img src="{{photo.urls.thumb}}" alt="">
-  </div>
-  <div>
-    <h2>Costs</h2>
-    <p>Add some costs you're likely to incur on your trip. Plane tickets, hotels, car rentals, for example.</p>
-    <div formArrayName="costs">
-      <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
-        <div class="trip-editCosts">
-          <mat-form-field class="trip-cost-label">
-            <mat-label>Cost {{idx + 1}}</mat-label>
-            <input matInput type="text" formControlName="costLabel" placeholder="Cost Label ex. 'Plane Ticket'">
-          </mat-form-field>
-          <mat-form-field class="trip-cost-field">
-            <span matPrefix>$ </span>
-            <input matInput type="number" formControlName="costAmt">
-          </mat-form-field>
-          <i class="material-icons" (click)="removeCost(idx)">
-            clear
-          </i>
+    </div>
+    <!-- 
+    <div *ngIf="photo" class="presaved-img">
+      <img src="{{photo.urls.thumb}}" alt="">
+    </div> -->
+    <div>
+      <h2>Costs</h2>
+      <p>Add some costs you're likely to incur on your trip. Plane tickets, hotels, car rentals, for example.</p>
+      <div formArrayName="costs">
+        <div *ngFor="let cost of costsFormArray.controls; let idx = index" [formGroupName]="idx">
+          <div class="trip-editCosts">
+            <mat-form-field class="trip-cost-label">
+              <mat-label>Cost {{idx + 1}}</mat-label>
+              <input matInput type="text" formControlName="costLabel" placeholder="Cost Label ex. 'Plane Ticket'">
+            </mat-form-field>
+            <mat-form-field class="trip-cost-field">
+              <span matPrefix>$ </span>
+              <input matInput type="number" formControlName="costAmt">
+            </mat-form-field>
+            <i class="material-icons" (click)="removeCost(idx)">
+              clear
+            </i>
+          </div>
         </div>
       </div>
+      <div class="editCost-btn">
+        <button mat-raised-button type="button" (click)="addCost()">Add Cost</button>
+      </div>
     </div>
-    <div class="editCost-btn">
-      <button mat-raised-button type="button" (click)="addCost()">Add'l Cost</button>
+    <mat-divider></mat-divider>
+    <div class="tripEdit-submit-btn">
+      <button mat-raised-button color="accent" type="submit" [disabled]="!tripEditForm.valid">Save Trip</button>
     </div>
-  </div>
-  <mat-divider></mat-divider>
-  <div class="tripEdit-submit-btn">
-    <button mat-raised-button color="accent" type="submit" [disabled]="!tripEditForm.valid">Save Trip</button>
-  </div>
   </form>
 </mat-card>

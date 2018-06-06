@@ -28,9 +28,9 @@
 
     
 
-    <button type="button" mat-raised-button color="accent" (click)="toggleModal()">Add Image</button>
+    <button type="button" mat-raised-button color="accent" (click)="toggleModal()">{{isEmptyObject(photo) ? 'Add Image' : 'Change Image'}}</button>
     <button *ngIf="!isEmptyObject(photo)" type="button" mat-raised-button (click)="removePresavedImg()">Remove Image</button>
-    <span *ngIf="!isEmptyObject(photo)">&nbsp; &nbsp; No Image Selected</span>
+    <span *ngIf="isEmptyObject(photo)">&nbsp; &nbsp; No Image Selected</span>
 
     <div *ngIf="modalOpen">
       <app-photo-gallery [(modalOpen)]="modalOpen" (imgChange)="displayImg($event)"></app-photo-gallery>
