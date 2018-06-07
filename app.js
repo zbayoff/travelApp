@@ -31,13 +31,13 @@ const tripModels = require('./src/trip.model');
 const routes = require('./src/trip.routes');
 const appRoutes = routes(app);
 
-app.get('/', function (req, res) {
-    res.send('api is up');
-});
-
-// app.get('*', function (req, res) {
-//     res.sendFile(path.join(__dirname, 'public/index.html'));
+// app.get('/', function (req, res) {
+//     res.send('api is up');
 // });
+
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 app.listen(port);
 console.log(`Server running at http://localhost:${port}/`);

@@ -15,21 +15,25 @@
           <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a> Gallery. Choose one that will encourage you to go to your destination.</p>
         <mat-form-field class="search-field">
           <mat-label>Search for an Image</mat-label>
-          <input matInput type="text" [(ngModel)]="searchTerm" (keyup)="searchPhotos(searchTerm)" placeholder="Image Keyword">
+          <input matInput type="text" name="query" [(ngModel)]="query" (ngModelChange)="submitQuery(query)" placeholder="Image Keyword">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="button" (click)="searchPhotos(searchTerm)">Search</button>
+        <!-- <button mat-raised-button color="primary" type="button" (click)="searchPhotos(searchTerm)">Search</button> -->
         <!-- <button mat-raised-button color="primary" type="button" (click)="searchPhotos(searchTerm)">Search</button> -->
 
-        <div *ngIf="!photosExist" class="">
-          <p>No images found. Try another keyword.</p>
+        <div *ngIf="errorMessage !== ''" class="">
+          <p>{{errorMessage}}</p>
         </div>
 
         <div *ngIf="photos.length !== 0" class="search-img-results-container">
           <!-- <div class="search-img-results-container"> -->
-          <ul infiniteScroll
-          [infiniteScrollDistance]="2"
-          [infiniteScrollThrottle]="150" [scrollWindow]="false" [horizontal]="true"
-          (scrolled)="addMoreImages()">
+
+
+          <div *ngIf="loading">
+            <mat-spinner></mat-spinner>
+          </div>
+
+          <ul infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="150" [scrollWindow]="false" [horizontal]="true"
+            (scrolled)="addMoreImages()">
             <!-- <li>
               <img src="../../../assets/images/geneva.png">
               <img src="../../../assets/images/geneva.png">
@@ -47,12 +51,16 @@
             </li>
           </ul>
         </div>
+        <div *ngIf="loading" class="loading-spinner">
+            <mat-spinner></mat-spinner>
+        </div>
         <div *ngIf="photos.length !== 0" class="chosen-img-container">
           <h3>Chosen Image</h3>
           <div class="chosen-img">
             <img src="{{chosenPhoto.urls.regular}}">
             <p class="unsplash-attr">Photo By:
-              <a href="{{chosenPhoto.user.links.html}}?utm_source=zb-travel-app&utm_medium=referral" target="_blank">{{chosenPhoto.user.name}}</a> on <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a>
+              <a href="{{chosenPhoto.user.links.html}}?utm_source=zb-travel-app&utm_medium=referral" target="_blank">{{chosenPhoto.user.name}}</a> on
+              <a class="unsplash-link" href="https://unsplash.com/" target="_blank">Unsplash</a>
             </p>
           </div>
         </div>

@@ -69,7 +69,7 @@
           <div *ngIf="trip.costs.length === 0">
             <p>No Costs Added.</p>
           </div>
-          <p>Travel Dates: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
+          <p>Travel Dates: {{trip.startdate | date:'mediumDate':'+0500'}} - {{trip.leavedate | date:'mediumDate':'+0500'}}</p>
         </div>
         <mat-divider></mat-divider>
       </li>

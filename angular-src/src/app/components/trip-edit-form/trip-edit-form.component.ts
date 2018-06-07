@@ -27,7 +27,6 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     private tripService: TripService,
     private photosService: PhotosService
   ) {
-
   }
 
   createForm() {
@@ -64,11 +63,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   }
 
   displayImg(photo) {
-    console.log('display img photo: ');
-    console.log(photo);
-
     if (Object.keys(photo).length === 0 && photo.constructor === Object) {
-      console.log('photo object empty');
       this.photo = null;
       this.tripEditForm.patchValue({
         image: {
@@ -90,9 +85,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     }
   }
 
-  // check if image is saved in database, if yes, delete, and if no, remove presaved image.
   removePresavedImg() {
-
     this.photo = {};
     this.trip.image = {
       url: '',
@@ -107,11 +100,9 @@ export class TripEditFormComponent implements OnInit, OnChanges {
         userUrl: ''
       }
     });
-
   }
 
   isImageAdded() {
-
     if (this.trip.image.url === '' && this.isEmptyObject(this.photo)) {
       return false;
     } else {
@@ -128,7 +119,6 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   }
 
   rebuildForm() {
-
     this.tripEditForm.reset({
       destination: this.trip.destination,
       startdate: this.convertDates(this.trip.startdate),
@@ -139,9 +129,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
         userUrl: this.trip.image.userUrl
       }
     });
-
     this.setCosts(this.trip.costs);
-
   }
 
   setCosts(costs: Cost[]) {
@@ -156,9 +144,7 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   }
 
   saveTrip() {
-
     this.trip = this.prepareSaveTrip();
-
     this.tripService.putTrip(this.trip).subscribe(
       data => {
         this.tripSaveSubmit.emit(this.trip);
@@ -170,12 +156,9 @@ export class TripEditFormComponent implements OnInit, OnChanges {
 
   prepareSaveTrip() {
     const formModel = this.tripEditForm.value;
-
     if (!this.isEmptyObject(this.photo)) {
-
       this.photosService.triggerDownload(this.photo.links.download_location).subscribe(
         res => {
-          console.log(res);
         }
       );
     }
@@ -205,6 +188,5 @@ export class TripEditFormComponent implements OnInit, OnChanges {
     this.rebuildForm();
     this.photo = {};
   }
-
 
 }

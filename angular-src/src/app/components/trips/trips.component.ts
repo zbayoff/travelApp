@@ -52,18 +52,12 @@ export class TripsComponent implements OnInit {
       this.hasCosts = true;
       for (const cost of trip.costs) {
         i += 1;
-        // console.log(i);
         this.hasCosts = true;
-        // console.log(cost);
         totalCost += cost.costAmt;
         if (cost.costAmt === null) {
           this.hasCosts = false;
-          // console.log('has costs:' + this.hasCosts);
-        } else {
-          // console.log('has costs:' + this.hasCosts);
         }
       }
-      //
       trip.totalCost = totalCost;
     }
   }
@@ -73,14 +67,9 @@ export class TripsComponent implements OnInit {
       data => {
         this.trips = data.json();
         this.addCosts();
-        // console.log(this.trips);
       },
       err => console.log(err)
     );
-  }
-
-  ngOnInit() {
-    this.getTrips();
   }
 
   deleteTrip(trip: Trip) {
@@ -92,4 +81,11 @@ export class TripsComponent implements OnInit {
     );
 
   }
+
+  ngOnInit() {
+    this.getTrips();
+  }
+
 }
+
+

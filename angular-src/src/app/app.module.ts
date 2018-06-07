@@ -21,10 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { PhotoGalleryComponent } from './components/photo-gallery/photo-gallery.component';
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

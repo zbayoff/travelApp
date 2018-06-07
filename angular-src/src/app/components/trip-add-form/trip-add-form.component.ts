@@ -40,7 +40,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   @Input() costs: Cost;
   @Input() image: Image;
   tripAddForm: FormGroup;
-  formState: string;
+  formState = 'hide';
   photo: any;
   modalOpen: boolean;
   @ViewChild(FormGroupDirective) addForm;
@@ -50,7 +50,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
     private tripService: TripService,
     private photosService: PhotosService
   ) {
-    this.formState = 'hide';
     smoothscroll.polyfill();
   }
 
@@ -62,7 +61,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   toggleAddTripForm() {
-    // const viewportOffset = document.querySelector('.addTrip-header').getBoundingClientRect();
     const documentOffset = this.offset(document.querySelector('.addTrip-header'));
     const top = documentOffset.top;
     const topScrollPos = window.scrollY;
@@ -79,7 +77,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   createForm() {
-    // console.log('create form');
     this.tripAddForm = this.fb.group({
       destination: ['', Validators.required],
       startdate: ['', Validators.required],
@@ -119,12 +116,7 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   displayImg(photo) {
-    // console.log('display img photo: ');
-    // console.log(photo);
-
     if (Object.keys(photo).length === 0 && photo.constructor === Object) {
-      // this.photo = null;
-      console.log('photo object is empty');
       this.tripAddForm.patchValue({
         image: {
           url: '',
@@ -132,10 +124,8 @@ export class TripAddFormComponent implements OnInit, OnChanges {
           userUrl: ''
         }
       });
-
     } else {
       this.photo = photo;
-      // console.log('about to patch value');
       this.tripAddForm.patchValue({
         image: {
           url: photo.urls.regular,
@@ -147,7 +137,6 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   }
 
   removePresavedImg() {
-    console.log(this.photo);
     this.photo = {};
     this.tripAddForm.patchValue({
       image: {
@@ -156,26 +145,17 @@ export class TripAddFormComponent implements OnInit, OnChanges {
         userUrl: ''
       }
     });
-    // this.imgChange.emit(this.chosenPhoto);
-    // this.rebuildGallery();
   }
 
   isEmptyObject(obj) {
-    // console.log(obj);
     return Object.keys(obj).length === 0 && obj.constructor === Object;
   }
 
   onSubmit() {
-
-
     if (this.tripAddForm.value.image.url !== '') {
-      console.log('image was added');
       this.photosService.triggerDownload(this.photo.links.download_location).subscribe(
-        res => {
-          console.log(res);
-        }
+        res => { }
       );
-
     }
 
     this.tripService.addTrip(this.tripAddForm.value).subscribe(
@@ -184,49 +164,21 @@ export class TripAddFormComponent implements OnInit, OnChanges {
         this.addCosts();
         this.rebuildForm();
         this.formState = 'hide';
-        // this.tripSaveSubmit.emit(this.trip);
       },
       err => console.log(err)
     );
-
-    // if image was added, trigger download endpoint from photo service
-    // console.log(this.trip.image.url);
-
-
-
   }
 
   rebuildForm() {
-
     this.addForm.resetForm();
-
     for (let i = 0; i < this.costsFormArray.length; i += 1) {
       this.costsFormArray.removeAt(i);
     }
-    // console.log(this.tripAddForm);
   }
 
   toggleModal() {
-    // console.log(this.modalOpen);
     this.modalOpen = !this.modalOpen;
-
-    // document.body.classList.toggle('modal-open');
-
   }
-
-  // openModal() {
-  //   this.modalOpen = true;
-  //   document.body.classList.add('modal-open');
-  // }
-
-  // closeModal() {
-  //   this.modalOpen = false;
-  // }
-
-
-
-
-
 
   ngOnInit() {
     this.createForm();
@@ -237,7 +189,5 @@ export class TripAddFormComponent implements OnInit, OnChanges {
   ngOnChanges() {
 
   }
-
-
 
 }

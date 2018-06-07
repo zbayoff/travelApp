@@ -17,18 +17,16 @@ export class TripDetailComponent implements OnInit {
   formEnabled: boolean;
   editable: boolean;
 
-  back() {
-    window.history.back();
-  }
-
   constructor(
     private route: ActivatedRoute,
     private tripService: TripService,
     private location: Location
   ) {
-
   }
 
+  isEmptyObject(obj) {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+  }
 
   toggleForm() {
     this.formEnabled = !this.formEnabled;
@@ -47,6 +45,7 @@ export class TripDetailComponent implements OnInit {
   cancel() {
     this.formEnabled = !this.formEnabled;
     this.editable = !this.editable;
+    this.getTrip();
   }
 
   editTrip() {
@@ -60,7 +59,6 @@ export class TripDetailComponent implements OnInit {
       data => {
         this.trip = data.json();
         this.addCosts();
-        // console.log(this.trip);
       },
       err => console.log(err)
     );

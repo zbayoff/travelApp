@@ -29,7 +29,7 @@
               <span class="trip-cost-msg">&nbsp; (Total Trip Cost)</span>
             </p>
           </div>
-          <p>From: {{trip.startdate | date}} - {{trip.leavedate | date}}</p>
+          <p>Travel Dates: {{trip.startdate | date:'mediumDate':'+0500'}} - {{trip.leavedate | date:'mediumDate':'+0500'}}</p>
           <h4>Costs</h4>
           <div *ngIf="trip.costs.length === 0">
             <p>No Costs Added.</p>
