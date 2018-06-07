@@ -14,7 +14,7 @@ const config = require('./config/database');
 // const mongoUri = 'mongodb://devereld:dd2345@ds015730.mlab.com:15730/recipes-dd';
 mongoose.connect(config.database, { useMongoClient: true } );
 
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // make sure this line always appears before any routes
 app.use(bodyParser.json());
