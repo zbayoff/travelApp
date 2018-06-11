@@ -18,6 +18,8 @@ export class TripEditFormComponent implements OnInit, OnChanges {
   tripEditForm: FormGroup;
   photo: any;
   modalOpen: boolean;
+  displayPresavedPhoto: boolean;
+  displayStoredPhoto: boolean;
 
   @Output() tripSaveSubmit = new EventEmitter<any>();
   @ViewChild(FormGroupDirective) editForm;
@@ -41,6 +43,10 @@ export class TripEditFormComponent implements OnInit, OnChanges {
       }),
       costs: this.fb.array([]),
     });
+
+    if (this.trip.image) {
+      this.displayStoredPhoto = true;
+    }
   }
 
   get costsFormArray(): FormArray {
@@ -82,6 +88,8 @@ export class TripEditFormComponent implements OnInit, OnChanges {
           userUrl: photo.user.links.html
         }
       });
+      this.displayPresavedPhoto = true;
+      this.displayStoredPhoto = false;
     }
   }
 
@@ -100,9 +108,13 @@ export class TripEditFormComponent implements OnInit, OnChanges {
         userUrl: ''
       }
     });
+
+    this.displayPresavedPhoto = false;
+    this.displayStoredPhoto = false;
   }
 
   isImageAdded() {
+
     if (this.trip.image.url === '' && this.isEmptyObject(this.photo)) {
       return false;
     } else {

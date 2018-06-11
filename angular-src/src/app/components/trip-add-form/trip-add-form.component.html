@@ -21,15 +21,8 @@
       </mat-form-field>
     </div>
 
-    <!-- <button type="button" mat-raised-button color="accent" (click)="openModal()">{{isEmptyObject(chosenPhoto) ? 'Add Image' : 'Change Image'}}</button> -->
-
-    <!-- <button *ngIf="!isEmptyObject(chosenPhoto)" type="button" mat-raised-button (click)="removePresavedImg()">Remove Image</button>
-    <span *ngIf="isEmptyObject(chosenPhoto)">&nbsp; &nbsp; No Image Selected</span> -->
-
-    
-
-    <button type="button" mat-raised-button color="accent" (click)="toggleModal()">{{isEmptyObject(photo) ? 'Add Image' : 'Change Image'}}</button>
-    <button *ngIf="!isEmptyObject(photo)" type="button" mat-raised-button (click)="removePresavedImg()">Remove Image</button>
+    <button type="button" class="change-image-btn" mat-raised-button color="accent" (click)="toggleModal()">{{isEmptyObject(photo) ? 'Add Image' : 'Change Image'}}</button>
+    <button *ngIf="!isEmptyObject(photo)" type="button" color="warn" mat-raised-button (click)="removePresavedImg()">Remove Image</button>
     <span *ngIf="isEmptyObject(photo)">&nbsp; &nbsp; No Image Selected</span>
 
     <div *ngIf="modalOpen">
@@ -48,7 +41,7 @@
           <div class="trip-addCosts-field">
             <mat-form-field class="trip-cost-label">
               <mat-label>Cost {{idx + 1}}</mat-label>
-              <input matInput type="text" formControlName="costLabel" placeholder="Cost Label ex. 'Plane Ticket'">
+              <input matInput type="text" formControlName="costLabel" placeholder="Cost Label ex. 'Flight'">
             </mat-form-field>
             <mat-form-field class="trip-cost-field">
               <span matPrefix>$ </span>
